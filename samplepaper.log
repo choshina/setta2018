@@ -1,0 +1,536 @@
+This is e-pTeX, Version 3.14159265-p3.7.1-161114-2.6 (utf8.euc) (TeX Live 2017) (preloaded format=platex 2017.12.1)  7 MAY 2018 16:28
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**samplepaper.tex
+(./samplepaper.tex
+pLaTeX2e <2017/05/05> (based on LaTeX2e <2017-04-15>)
+Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
+(./llncs.cls
+Document Class: llncs 2018/03/10 v2.20 
+ LaTeX document class for Lecture Notes in Computer Science
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen118
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
+\c@tracingmulticols=\count90
+\mult@box=\box42
+\multicol@leftmargin=\dimen119
+\c@unbalance=\count91
+\c@collectmore=\count92
+\doublecol@number=\count93
+\multicoltolerance=\count94
+\multicolpretolerance=\count95
+\full@width=\dimen120
+\page@free=\dimen121
+\premulticols=\dimen122
+\postmulticols=\dimen123
+\multicolsep=\skip43
+\multicolbaselineskip=\skip44
+\partial@page=\box43
+\last@line=\box44
+\maxbalancingoverflow=\dimen124
+\mult@rightbox=\box45
+\mult@grightbox=\box46
+\mult@gfirstbox=\box47
+\mult@firstbox=\box48
+\@tempa=\box49
+\@tempa=\box50
+\@tempa=\box51
+\@tempa=\box52
+\@tempa=\box53
+\@tempa=\box54
+\@tempa=\box55
+\@tempa=\box56
+\@tempa=\box57
+\@tempa=\box58
+\@tempa=\box59
+\@tempa=\box60
+\@tempa=\box61
+\@tempa=\box62
+\@tempa=\box63
+\@tempa=\box64
+\@tempa=\box65
+\c@columnbadness=\count96
+\c@finalcolumnbadness=\count97
+\last@try=\dimen125
+\multicolovershoot=\dimen126
+\multicolundershoot=\dimen127
+\mult@nat@firstbox=\box66
+\colbreak@box=\box67
+\mc@col@check@num=\count98
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/aliascnt.sty
+Package: aliascnt 2016/05/16 v1.4 Alias counters (HO)
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/carlisle/remreset.sty))
+\c@chapter=\count99
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 362.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 363.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 364.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 365.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 366.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 367.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 368.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 369.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 370.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 371.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 372.
+\tocchpnum=\dimen128
+\tocsecnum=\dimen129
+\tocsectotal=\dimen130
+\tocsubsecnum=\dimen131
+\tocsubsectotal=\dimen132
+\tocsubsubsecnum=\dimen133
+\tocsubsubsectotal=\dimen134
+\tocparanum=\dimen135
+\tocparatotal=\dimen136
+\tocsubparanum=\dimen137
+\@tempcntc=\count100
+\fnindent=\dimen138
+\c@@inst=\count101
+\c@@auth=\count102
+\c@auco=\count103
+\instindent=\dimen139
+\authrun=\box68
+\authorrunning=\toks15
+\tocauthor=\toks16
+\titrun=\box69
+\titlerunning=\toks17
+\toctitle=\toks18
+\c@theorem=\count104
+\c@case=\count105
+\c@conjecture=\count106
+\c@corollary=\count107
+\c@definition=\count108
+\c@example=\count109
+\c@exercise=\count110
+\c@lemma=\count111
+\c@note=\count112
+\c@problem=\count113
+\c@property=\count114
+\c@proposition=\count115
+\c@question=\count116
+\c@solution=\count117
+\c@remark=\count118
+\headlineindent=\dimen140
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvips.def on input line 99.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2016/07/10 v3.1a Driver-dependent file (DPC,SPQR)
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count119
+\float@exts=\toks20
+\float@box=\box70
+\@float@everytoks=\toks21
+\@floatcapt=\box71
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\@float@every@algorithm=\toks22
+\c@algorithm=\count120
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count121
+\c@ALG@rem=\count122
+\c@ALG@nested=\count123
+\ALG@tlm=\skip45
+\ALG@thistlm=\skip46
+\c@ALG@Lnr=\count124
+\c@ALG@blocknr=\count125
+\c@ALG@storecount=\count126
+\c@ALG@tmpcounter=\count127
+\ALG@tmplength=\skip47
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+) (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks23
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks24
+\ex@=\dimen143
+))
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: dvips.def on input line 147.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+))
+\c@myTheo=\count128
+\c@myDef=\count129
+
+(./samplepaper.aux)
+\openout1 = `samplepaper.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 74.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 74.
+LaTeX Font Info:    Try loading font information for U+msa on input line 74.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 74.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 76.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <9> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 76.
+
+
+LaTeX Font Warning: Font shape `JT1/mc/m/it' undefined
+(Font)              using `JT1/mc/m/n' instead on input line 77.
+
+
+LaTeX Font Warning: Font shape `JY1/mc/m/it' undefined
+(Font)              using `JY1/mc/m/n' instead on input line 77.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 79.
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 79.
+ (./fgvt.tex
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 13.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 13.
+
+
+LaTeX Warning: Citation `Choi2000Deterministic' on page 1 undefined on input li
+ne 13.
+
+
+LaTeX Warning: Citation `DBLP:journals/concurrency/EdelsteinFGNRU03' on page 1 
+undefined on input line 13.
+
+
+LaTeX Warning: Citation `DBLP:journals/entcs/Stoller02' on page 1 undefined on 
+input line 13.
+
+
+LaTeX Warning: Citation `DBLP:conf/issta/KhoshnoodKW15' on page 1 undefined on 
+input line 17.
+
+
+LaTeX Warning: Citation `Ben2003Heuristics' on page 1 undefined on input line 2
+1.
+
+
+LaTeX Warning: Citation `DBLP:conf/pldi/MusuvathiQ07' on page 1 undefined on in
+put line 21.
+
+[1
+
+]
+
+LaTeX Warning: Citation `DBLP:journals/toplas/HerlihyW90' on page 2 undefined o
+n input line 24.
+
+
+LaTeX Warning: Citation `DBLP:conf/popl/BouajjaniEEH15' on page 2 undefined on 
+input line 30.
+
+
+LaTeX Warning: Citation ` DBLP:conf/pldi/BurckhardtDMT10' on page 2 undefined o
+n input line 30.
+
+
+LaTeX Warning: Citation ` DBLP:conf/popl/BouajjaniEEH15' on page 2 undefined on
+ input line 30.
+
+
+LaTeX Warning: Citation ` DBLP:conf/forte/HornK15a' on page 2 undefined on inpu
+t line 30.
+
+
+LaTeX Warning: Citation ` DBLP:conf/sac/LongZ16' on page 2 undefined on input l
+ine 30.
+
+
+LaTeX Warning: Citation ` DBLP:journals/concurrency/Lowe17' on page 2 undefined
+ on input line 30.
+
+
+LaTeX Warning: Citation `DBLP:conf/seke/ZhangWZ17' on page 2 undefined on input
+ line 54.
+
+
+LaTeX Warning: Citation `DBLP:journals/concurrency/Lowe17' on page 2 undefined 
+on input line 58.
+
+
+LaTeX Warning: Citation `DBLP:conf/seke/ZhangWZ17' on page 2 undefined on input
+ line 58.
+
+
+LaTeX Warning: Reference `fig:liucheng' on page 2 undefined on input line 58.
+
+
+Underfull \vbox (badness 2158) has occurred while \output is active []
+
+ [2]
+File: liucheng.eps Graphic file (type eps)
+
+<liucheng.eps>
+
+LaTeX Font Warning: Font shape `JT1/mc/bx/it' undefined
+(Font)              using `JT1/mc/bx/n' instead on input line 66.
+
+
+LaTeX Font Warning: Font shape `JY1/mc/bx/it' undefined
+(Font)              using `JY1/mc/bx/n' instead on input line 66.
+
+LaTeX Font Info:    Font shape `JT1/mc/bx/it' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 75.
+LaTeX Font Info:    Font shape `JY1/mc/bx/it' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 75.
+
+LaTeX Warning: Citation `DBLP:conf/pldi/BurckhardtDMT10' on page 3 undefined on
+ input line 75.
+
+
+LaTeX Warning: Citation `DBLP:journals/jpdc/WingG93' on page 3 undefined on inp
+ut line 75.
+
+
+LaTeX Warning: Citation `DBLP:journals/jpdc/WingG93' on page 3 undefined on inp
+ut line 75.
+
+
+LaTeX Warning: Citation `DBLP:journals/concurrency/Lowe17' on page 3 undefined 
+on input line 75.
+
+
+LaTeX Warning: Citation `DBLP:conf/forte/HornK15a' on page 3 undefined on input
+ line 75.
+
+
+LaTeX Warning: Citation `DBLP:conf/popl/BouajjaniEEH15' on page 3 undefined on 
+input line 75.
+
+
+LaTeX Warning: Citation `DBLP:conf/pldi/EmmiEH15' on page 3 undefined on input 
+line 75.
+
+
+LaTeX Warning: Citation `DBLP:conf/sac/LongZ16' on page 3 undefined on input li
+ne 75.
+
+
+LaTeX Warning: Citation `DBLP:conf/asplos/LuPSZ08' on page 3 undefined on input
+ line 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/ipps/FarchiNU03' on page 3 undefined on inpu
+t line 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/icse/ParkVH10' on page 3 undefined on input 
+line 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/icst/ParkVH12' on page 3 undefined on input 
+line 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/icsm/LiuQWM14' on page 3 undefined on input 
+line 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/icse/Park04' on page 3 undefined on input li
+ne 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/oopsla/ShiPYLZCZ10' on page 3 undefined on i
+nput line 77.
+
+
+LaTeX Warning: Citation `DBLP:conf/issta/KhoshnoodKW15' on page 3 undefined on 
+input line 77.
+
+[3]
+
+LaTeX Warning: Citation `DBLP:conf/IEEEpact/GottschlichPPW13' on page 4 undefin
+ed on input line 79.
+
+
+LaTeX Warning: Citation `DBLP:conf/ppopp/ParkS12' on page 4 undefined on input 
+line 79.
+
+
+LaTeX Warning: Citation `Choi2000Deterministic' on page 4 undefined on input li
+ne 81.
+
+
+LaTeX Warning: Citation `DBLP:journals/concurrency/EdelsteinFGNRU03' on page 4 
+undefined on input line 81.
+
+
+LaTeX Warning: Citation `DBLP:journals/entcs/Stoller02' on page 4 undefined on 
+input line 81.
+
+
+LaTeX Warning: Citation `Ben2003Heuristics' on page 4 undefined on input line 8
+1.
+
+
+LaTeX Warning: Reference `sec:motivatingeg' on page 4 undefined on input line 8
+3.
+
+
+LaTeX Warning: Reference `sec:fgtracemodel' on page 4 undefined on input line 8
+3.
+
+
+LaTeX Warning: Reference `sec:criticaldataraces' on page 4 undefined on input l
+ine 83.
+
+
+LaTeX Warning: Reference `sec:intertree' on page 4 undefined on input line 83.
+
+
+LaTeX Warning: Reference `sec:implementation' on page 4 undefined on input line
+ 83.
+
+
+LaTeX Warning: Reference `sec:conclusion' on page 4 undefined on input line 83.
+
+
+(./motiveg.tex
+
+LaTeX Warning: Citation `DBLP:conf/sac/LongZ16' on page 4 undefined on input li
+ne 2.
+
+
+LaTeX Warning: Reference `fig:pairsnapshot' on page 4 undefined on input line 5
+.
+
+
+LaTeX Warning: Reference `fig:psscoarsetrace' on page 4 undefined on input line
+ 8.
+
+
+LaTeX Warning: Reference `fig:psscoarsetrace' on page 4 undefined on input line
+ 9.
+
+
+LaTeX Warning: Reference `fig:psscoarsetrace' on page 4 undefined on input line
+ 199.
+
+
+LaTeX Warning: Reference `fig:psscoarsetrace' on page 4 undefined on input line
+ 199.
+
+)
+
+LaTeX Warning: Citation `DBLP:conf/popl/BouajjaniEEH15' on page 4 undefined on 
+input line 91.
+
+
+LaTeX Warning: Reference `sec:coarsegraintm' on page 4 undefined on input line 
+91.
+
+
+LaTeX Warning: Reference `sec:finegraintm' on page 4 undefined on input line 91
+.
+
+[4] [5]
+
+LaTeX Warning: Reference `fig:psscoarsetrace' on page 6 undefined on input line
+ 110.
+
+
+Overfull \hbox (34.32411pt too wide) in paragraph at lines 110--114
+[]\OT1/cmr/m/n/10 Fig. [] shows such a well-formed trace: $\OML/cmm/m/

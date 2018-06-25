@@ -1,0 +1,52 @@
+This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+White space in argument---line 12 of file main.aux
+ : \citation{DBLP:conf/popl/BouajjaniEEH15,
+ :                                          DBLP:conf/pldi/BurckhardtDMT10, DBLP:conf/popl/BouajjaniEEH15, DBLP:conf/forte/HornK15a, DBLP:conf/sac/LongZ16, DBLP:journals/concurrency/Lowe17}
+I'm skipping whatever remains of this command
+The style file: splncs04.bst
+Database file #1: bare_conf.bib
+You've used 25 entries,
+            2850 wiz_defined-function locations,
+            764 strings with 11807 characters,
+and the built_in function-call counts, 15930 in all, are:
+= -- 1424
+> -- 420
+< -- 30
++ -- 174
+- -- 148
+* -- 933
+:= -- 1958
+add.period$ -- 43
+call.type$ -- 25
+change.case$ -- 185
+chr.to.int$ -- 0
+cite$ -- 25
+duplicate$ -- 1392
+empty$ -- 1446
+format.name$ -- 170
+if$ -- 3595
+int.to.chr$ -- 0
+int.to.str$ -- 25
+missing$ -- 254
+newline$ -- 81
+num.names$ -- 50
+pop$ -- 515
+preamble$ -- 1
+purify$ -- 124
+quote$ -- 0
+skip$ -- 525
+stack$ -- 0
+substring$ -- 1064
+swap$ -- 767
+text.length$ -- 30
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 100
+warning$ -- 0
+while$ -- 144
+width$ -- 27
+write$ -- 255
+is.kanji.str$ -- 0
+(There was 1 error message)

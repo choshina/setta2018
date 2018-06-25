@@ -1,0 +1,100 @@
+% This is samplepaper.tex, a sample chapter demonstrating the
+% LLNCS macro package for Springer Computer Science proceedings;
+% Version 2.20 of 2017/10/04
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{graphicx}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{graphicx}
+%\usepackage{subfigure}
+%\usepackage{subcaption}
+\usepackage{color}
+%\usepackage{times}
+%\captionsetup{compatibility=false}
+
+
+
+\newcommand{\ecall}{\mathsf{C}}
+\newcommand{\eresp}{\mathsf{R}}
+\newcommand{\ewrite}{\mathsf{Wr}}
+\newcommand{\eread}{\mathsf{Rd}}
+\newcommand{\ecas}{\mathsf{CAS}}
+\newcommand{\trace}{\mathit{Tr}}
+\newcommand{\pair}[1]{{\langle{#1}\rangle}}
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+
+\newcommand{\p}{\mathbb{P} }
+\newcommand{\ft}{S_f}
+\newcommand{\ct}{S_c}
+\newcommand{\se}{\mathit{SE}}
+\newcommand{\var}{\mathit{Var}}
+\newcommand{\ce}{\mathit{CE}}
+\newcommand{\dr}{\mathsf{D}}
+
+\newtheorem{myTheo}{Theorem}
+\newtheorem{myDef}{Definition}
+
+%\newenvironment{example}[1][Example]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\wri}{\mathtt{write}}
+\newcommand{\rea}{\mathtt{read}}
+\newcommand{\hb}{\textit{happen-before }}
+
+\usepackage{wrapfig}
+\usepackage{subfigure}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+%
+\title{Automatic Localization of Linearizability Faults}
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Yang Chen \and
+Zhenya Zhang \and
+Peng Wu\and
+Yu Zhang}
+%
+\authorrunning{Y. Chen et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{{State Key Laboratory of Computer Science\\Institute of Software, Chinese Academy of Sciences}\and
+University of Chinese Academy of Sciences
+}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+Linearizability is an important correctness criterion for concurrent objects. Existing work mainly focuses on linearizability verification of coarse-grained traces with operation invocations and responses only. However, when linearizability is violated, such coarse-grained traces do not provide sufficient information for reasoning about the underlying concurrent program faults. In this paper, we propose a notion of \textit{critical data race sequence} (\textit{CDRS}), based on our fine-grained trace model, to characterize concurrent program faults that cause violation of linearizability. We then develop a labeled tree model of interleaved program executions and show how to identify \textit{CDRS}es and localize concurrent program faults automatically with a specific node-labeling mechanism. We also implemented a prototype tool, FGVT, for real-world Java concurrent programs. Experiments show that our localization technique is effective, i.e., all the \textit{CDRS}es reported by FGVT indeed reveal the root causes of linearizability faults.
+
+\keywords{Linearizability  \and Bug localization \and Concurrency \and Testing}
+\end{abstract}
+%
+%
+%
+\input{fgvt}
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+ \bibliographystyle{splncs04}
+ \bibliography{bare_conf}
+%
+
+\end{document}
