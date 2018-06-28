@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.9)  17 JUN 2018 14:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.9)  28 JUN 2018 20:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -359,23 +359,13 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 Underfull \vbox (badness 2158) has occurred while \output is active []
 
  [2]
-Package epstopdf Info: Source file: <liucheng.eps>
-(epstopdf)                    date: 2017-07-01 22:25:02
-(epstopdf)                    size: 19161440 bytes
-(epstopdf)             Output file: <liucheng-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-06-17 14:29:11
-(epstopdf)                    size: 46714 bytes
-(epstopdf)             Command: <repstopdf --outfile=liucheng-eps-converted-to.
-pdf liucheng.eps>
-(epstopdf)             \includegraphics on input line 63.
-Package epstopdf Info: Output file is already uptodate.
-<liucheng-eps-converted-to.pdf, id=17, 359.3425pt x 133.49875pt>
-File: liucheng-eps-converted-to.pdf Graphic file (type pdf)
-<use liucheng-eps-converted-to.pdf>
-Package pdftex.def Info: liucheng-eps-converted-to.pdf  used on input line 63.
-(pdftex.def)             Requested size: 252.94499pt x 93.97401pt.
+<liucheng.pdf, id=17, 343.25224pt x 125.04103pt>
+File: liucheng.pdf Graphic file (type pdf)
+<use liucheng.pdf>
+Package pdftex.def Info: liucheng.pdf  used on input line 63.
+(pdftex.def)             Requested size: 252.94499pt x 92.1435pt.
 
-[3 <./liucheng-eps-converted-to.pdf>] (./motiveg.tex
+[3 <./liucheng.pdf>] (./motiveg.tex
 Underfull \hbox (badness 7379) in paragraph at lines 32--40
 []\OT1/cmr/m/n/10 A cor-rect-ness cri-te-rion of
  []
@@ -399,64 +389,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 333--335
  []
 
 [9] [10]
-Package epstopdf Info: Source file: <pssinttree.eps>
-(epstopdf)                    date: 2017-07-02 14:02:30
-(epstopdf)                    size: 18704673 bytes
-(epstopdf)             Output file: <pssinttree-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-06-17 14:29:12
-(epstopdf)                    size: 57420 bytes
-(epstopdf)             Command: <repstopdf --outfile=pssinttree-eps-converted-t
-o.pdf pssinttree.eps>
-(epstopdf)             \includegraphics on input line 389.
-Package epstopdf Info: Output file is already uptodate.
-<pssinttree-eps-converted-to.pdf, id=105, 703.62875pt x 621.32124pt>
-File: pssinttree-eps-converted-to.pdf Graphic file (type pdf)
-<use pssinttree-eps-converted-to.pdf>
-Package pdftex.def Info: pssinttree-eps-converted-to.pdf  used on input line 38
-9.
-(pdftex.def)             Requested size: 166.2117pt x 144.54102pt.
+<pssinttree.pdf, id=103, 665.47221pt x 597.50786pt>
+File: pssinttree.pdf Graphic file (type pdf)
+<use pssinttree.pdf>
+Package pdftex.def Info: pssinttree.pdf  used on input line 389.
+(pdftex.def)             Requested size: 166.21533pt x 144.53534pt.
 
 
 Package wrapfig Warning: Stationary wrapfigure forced to float on input line 39
 7.
 
-[11 <./pssinttree-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <label.eps>
-(epstopdf)                    date: 2017-04-05 00:12:58
-(epstopdf)                    size: 8444251 bytes
-(epstopdf)             Output file: <label-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-06-17 14:29:13
-(epstopdf)                    size: 33957 bytes
-(epstopdf)             Command: <repstopdf --outfile=label-eps-converted-to.pdf
- label.eps>
-(epstopdf)             \includegraphics on input line 431.
-Package epstopdf Info: Output file is already uptodate.
-<label-eps-converted-to.pdf, id=191, 1311.90125pt x 217.81375pt>
-File: label-eps-converted-to.pdf Graphic file (type pdf)
-<use label-eps-converted-to.pdf>
-Package pdftex.def Info: label-eps-converted-to.pdf  used on input line 431.
-(pdftex.def)             Requested size: 325.215pt x 53.99464pt.
+[11 <./pssinttree.pdf, page is rotated 270 degrees>]
+<label.pdf, id=258, 843.97676pt x 140.02885pt>
+File: label.pdf Graphic file (type pdf)
+<use label.pdf>
+Package pdftex.def Info: label.pdf  used on input line 431.
+(pdftex.def)             Requested size: 325.215pt x 53.9572pt.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 436.
- [12 <./label-eps-converted-to.pdf>]
-Package epstopdf Info: Source file: <psslabeltree.eps>
-(epstopdf)                    date: 2017-07-02 14:06:38
-(epstopdf)                    size: 11742589 bytes
-(epstopdf)             Output file: <psslabeltree-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-06-17 14:29:13
-(epstopdf)                    size: 58404 bytes
-(epstopdf)             Command: <repstopdf --outfile=psslabeltree-eps-converted
--to.pdf psslabeltree.eps>
-(epstopdf)             \includegraphics on input line 546.
-Package epstopdf Info: Output file is already uptodate.
-<psslabeltree-eps-converted-to.pdf, id=244, 694.595pt x 621.32124pt>
-File: psslabeltree-eps-converted-to.pdf Graphic file (type pdf)
-<use psslabeltree-eps-converted-to.pdf>
-Package pdftex.def Info: psslabeltree-eps-converted-to.pdf  used on input line 
-546.
-(pdftex.def)             Requested size: 180.67523pt x 166.22311pt.
+ [12 <./label.pdf, page is rotated 270 degrees>]
+<psslabeltree.pdf, id=353, 664.64381pt x 597.50786pt>
+File: psslabeltree.pdf Graphic file (type pdf)
+<use psslabeltree.pdf>
+Package pdftex.def Info: psslabeltree.pdf  used on input line 546.
+(pdftex.def)             Requested size: 180.67322pt x 166.21611pt.
 
-Overfull \hbox (7.11346pt too wide) in paragraph at lines 546--548
+Overfull \hbox (7.11145pt too wide) in paragraph at lines 546--548
  [][] 
  []
 
@@ -469,12 +427,16 @@ Underfull \hbox (badness 1142) in paragraph at lines 560--561
 []\OT1/cmr/m/n/10 We have in-te-grated what we pre-
  []
 
-[14 <./psslabeltree-eps-converted-to.pdf>]) (./main.bbl [15]) [16] (./main.aux)
+[14 <./psslabeltree.pdf, page is rotated 270 degrees>]) (./main.bbl [15])
+[16] (./main.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3255 strings out of 492649
- 45479 string characters out of 6129623
- 127045 words of memory out of 5000000
+ 3254 strings out of 492649
+ 45203 string characters out of 6129623
+ 127046 words of memory out of 5000000
  7047 multiletter control sequences out of 15000+600000
  15316 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -510,10 +472,10 @@ pe1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
 public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
 pe1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 555993 bytes).
+Output written on main.pdf (16 pages, 556435 bytes).
 PDF statistics:
- 436 PDF objects out of 1000 (max. 8388607)
- 346 compressed objects within 4 object streams
+ 613 PDF objects out of 1000 (max. 8388607)
+ 453 compressed objects within 5 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
