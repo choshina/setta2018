@@ -17,6 +17,6 @@ S. Doherty et al: DCAS is not a silver bullet for nonblocking algorithm design. 
 
 Review 2
 
--My only issue is that I wanted to know a little bit more about the subjects of empirical evaluation, mostly to get the sense of scalability. Table 1 does not contain much details of the subject themselves, nor the number of threads used for each program. As such, it is difficult to see how the scalability trend will look like, when either the size of the program or the number of threads increases. If authors can include these details for the camera ready version, I believe the paper will be much stronger.
+- My only issue is that I wanted to know a little bit more about the subjects of empirical evaluation, mostly to get the sense of scalability. Table 1 does not contain much details of the subject themselves, nor the number of threads used for each program. As such, it is difficult to see how the scalability trend will look like, when either the size of the program or the number of threads increases. If authors can include these details for the camera ready version, I believe the paper will be much stronger.
 
 
