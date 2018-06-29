@@ -15,6 +15,7 @@
 %\usepackage{subcaption}
 \usepackage{color}
 \usepackage{todonotes}
+\usepackage{braket}
 %\usepackage{times}
 %\captionsetup{compatibility=false}
 
@@ -27,7 +28,7 @@
 \newcommand{\ecas}{\mathsf{CAS}}
 \newcommand{\trace}{\mathit{Tr}}
 \newcommand{\pair}[1]{{\langle{#1}\rangle}}
-\newcommand{\set}[1]{\left\{{#1}\right\}}
+\newcommand{\sset}[1]{\left\{{#1}\right\}}
 
 \newcommand{\p}{\mathbb{P} }
 \newcommand{\ft}{S_f}
@@ -567,7 +568,7 @@ If $S_c$ is sequential, then we say the program $\p$ w.r.t. $\ct$ is sequential.
 And, if there exists a non-linearizable fine-grained trace in a program $\p$, we say that $\p$ is non-linearizable.
 
 \begin{myDef}[Linearizability fault]
-Let $\p$ be a non-linearizable concurrent program. A \textit{linearizability fault} $\mathcal{F}$ is defined as a non-linearizable fine-grained trace $S_f$ in $\p$.
+Let $\p$ be a non-linearizable concurrent program. A \textit{linearizability fault} $\mathfrak{F}$ is defined as a non-linearizable fine-grained trace $S_f$ in $\p$.
 \end{myDef}
 
 %Since a fine-grained trace is a total order of events, we can define a prefix relation $\subseteq_{pre}$ between two fine-grained traces, 
@@ -627,16 +628,17 @@ Therefore, the $\mathbb{P}$ that satisfies this condition corresponds to a seque
 
 
 \begin{myDef}[Critical data race sequence]\label{def:cdrs}
-    Let  $\mathbb{P}$ be a concurrent program, $\mathcal{F}$ be a linearizability fault. A \textit{Critical Data Race Sequence} (\textit{CDRS}) with respect to
- $\mathcal{F}$ is a total order set of data races $\{\mathsf{D}_1,\mathsf{D}_2,\cdots,\mathsf{D}_n\}$
- \[
-\begin{array}{ccc}
-   \{& \langle\mathit{Var}_1, \se_1, \ce_1 = \set{e_{11},e_{12},\cdots,e_{1m_1}}\rangle, & \\
-   & \langle\mathit{Var}_2, \se_2, \ce_2 = \set{e_{21},e_{22},\cdots,e_{2m_2}}\rangle, &\\
+    Let  $\mathbb{P}$ be a concurrent program, $\mathfrak{F}$ be a linearizability fault. A \textit{Critical Data Race Sequence} (\textit{CDRS}) with respect to
+ $\mathfrak{F}$ is a total order set of data races $\{\mathsf{D}_1,\mathsf{D}_2,\cdots,\mathsf{D}_n\}$
+
+
+$\Set{\begin{array}{ccc}
+   & \langle\mathit{Var}_1, \se_1, \ce_1 = \sset{e_{11},e_{12},\cdots,e_{1m_1}}\rangle, & \\
+   & \langle\mathit{Var}_2, \se_2, \ce_2 = \sset{e_{21},e_{22},\cdots,e_{2m_2}}\rangle, &\\
    & \vdots& \\
-   &\langle \mathit{Var}_n, \se_n, \ce_n = \set{e_{n1},e_{n2},\cdots,e_{nm_n}} \rangle&\}
-\end{array}
-\]
+   &\langle \mathit{Var}_n, \se_n, \ce_n = \sset{e_{n1},e_{n2},\cdots,e_{nm_n}} \rangle&
+   \end{array}}$
+
 
 \noindent where the relation $<_{dr}$ exists as $\mathsf{D}_1 <_{dr} \dr_2 <_{dr} \cdots  <_{dr} \mathsf{D}_n$.
 A CDRS satisfies that there exist two events $e_{i1}, e_{i2}\in \ce_i$ ($i\in{1,\dots,n}$)   that $e_{i1}$'s win and
@@ -654,7 +656,7 @@ Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the li
 
 \begin{example} 
 
-Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$  in \textit{PairSnapShot} in which $\ce = \{$\texttt{\#1,\#2}$\}$. If \texttt{\#1} wins, then a non-linearizable trace will never occur; but if \texttt{\#2} like Fig.~\ref{fig:pssfinetrace}, there exists at least such a fine-grained trace that is non-linearizable. In this sense,  $\mathsf{D}$ is included in a CDRS with respect to the linearizability fault $\mathcal{F}$ shown in Fig.~\ref{fig:pssfinetrace}.
+Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$  in \textit{PairSnapShot} in which $\ce = \{$\texttt{\#1,\#2}$\}$. If \texttt{\#1} wins, then a non-linearizable trace will never occur; but if \texttt{\#2} like Fig.~\ref{fig:pssfinetrace}, there exists at least such a fine-grained trace that is non-linearizable. In this sense,  $\mathsf{D}$ is included in a CDRS with respect to the linearizability fault $\mathfrak{F}$ shown in Fig.~\ref{fig:pssfinetrace}.
 
 \end{example}
 
@@ -662,7 +664,8 @@ Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \
 From Section \ref{sec:criticaldataraces}, we know that it is the competitions happening in \textit{CDRS}es that trigger the linearizability faults. In order to identify \textit{CDRS}, we propose an approach based on a model called labeled interleaving tree in this section. Firstly, we represent the fine-grained traces in an interleaving tree, and then we label the nodes of the tree with a symbol system. We will show that all \textit{CDRS}es follow a certain pattern and thus we can identify them based on the characteristics of nodes. 
 \subsection{Interleaving tree}
 
-Firstly, we define a projection $\mathcal{F}_M$ mapping a fine-grained trace $S_f$ to a trace $S^M_f$ composed of only memory access events in $S_f$, i.e., $\mathcal{F}_M(S_f) = S_f|_{\mathsf{M}}$. The linearizability of $S^M_f$ is decided by that of $S_f$, i.e., $\mathcal{L}_n(S^M_f)  = \mathcal{L}_n(S_f)$. We define a state of an object to be a map from a memory locations to its value, which is written as $\mathcal{S}_t$,.
+Firstly, we define a projection $\mathcal{F}_M$ mapping a fine-grained trace $S_f$ to a trace $S^M_f$ composed of only memory access events in $S_f$, i.e., $\mathcal{F}_M(S_f) = S_f|_{\mathsf{M}}$. The linearizability of $S^M_f$ is decided by that of $S_f$, i.e., $\mathcal{L}_n(S^M_f)  = \mathcal{L}_n(S_f)$. We define a state $\mathcal{S}_t$ of an object to be a map from a memory locations to its value, e.g., in 
+Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_t(\mathtt{d}[1]) = 1$ at $\mathtt{t}_1$.
 
 \begin{myDef}[Interleaving Tree]
     An \textit{Interleaving Tree} of $\mathbb{P}$ is a tree, where each node corresponds to a state, and each edge corresponds to a memory access event. A subtree rooted at node $N_d$ is represented as $\mathcal{T}ree(N_d)$. The set of the leaves of the tree is represented as $N_{lf}$.
@@ -682,7 +685,7 @@ Firstly, we define a projection $\mathcal{F}_M$ mapping a fine-grained trace $S_
             \For{$e(addr,v_n)^{\pair{o,t}} \leftarrow \mathit{enS}$}
                 \State \Call{New Edge}{$e$}
                 \State $\mathcal{S}_t \gets \mathit{State[v_n/addr]}$
-                \State $\mathit{enS} \gets \mathit{enS}\setminus \set{e} \cup \set{e'}$
+                \State $\mathit{enS} \gets \mathit{enS}\setminus \sset{e} \cup \sset{e'}$
                 \State \Call{BuildTree}{$\mathcal{S}_t,\mathit{enS}$}
             \EndFor
         \EndFunction
@@ -761,7 +764,7 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
     \centering
     \caption{Labeling Interleaving Tree}\label{algo:labelinttree}
     \begin{algorithmic}[1]
-        \State $\mathit{Label} = \set{W, B, G, GG, WG, BG}$
+        \State $\mathit{Label} = \sset{W, B, G, GG, WG, BG}$
         \Function {LabelNode}{$N_d$}
             \If{$!\mathtt{Left}(N_d)  \& !\mathtt{Right}(N_d)$}
                 \State \textbf{if} {$\mathcal{L}_n(N_d)$} \textbf{then} \Return $\mathit{W}$
@@ -829,7 +832,7 @@ data races described in the Definition~\ref{def:cdrs}.
 
 \item Then we show that a CDRS appears as $(W_g|B_g)^*(B_g|G)$ in an interleaving tree.
 According to Definition \ref{def:cdrs}, the two different cases for ``inverse'' consequences correspond to 
-the $W_g$-node and $B_g$-node. Furthermore, since CDRS implies a linearizability fault $\mathcal{F}$, the ending of a CDRS 
+the $W_g$-node and $B_g$-node. Furthermore, since CDRS implies a linearizability fault $\mathfrak{F}$, the ending of a CDRS 
 should be that there exists an event whose win can lead all fine-grained trace non-linearizable, and that is just the case of $BG$-node 
 and $G$-node, which corresponds to the expression in the theorem.
 \end{itemize}
@@ -913,6 +916,19 @@ Our tool FGVT is based on the framework of JavaPathFinder (JPF), which encapsula
 %  \item SimpleList \cite{DBLP:conf/pldi/VechevY08} --- It is a concurrent Set and the bug is typical. The $\mathtt{Add}$ function inserts a node by modifying the $\mathtt{next}$ pointer of its predecessor, but without protection, $\mathtt{next}$ may be modified by other threads leading the node removed from the list unexpectedly.
 %  \item Operation $\mathtt{size}$ of Linked List --- As we know, $\mathtt{size}$ is used for counting the number of nodes in a list. However, if there is no synchronization, a situation that violates linearizability happens when $\mathtt{size}$ traverses the list, another thread preempts the execution and deletes a node which has been accessed and inserts a node at a position that has not been accessed, so $\mathtt{size}$ will return a value that is larger than the expected length.
 %\end{itemize}
+\subsection{Benchmark}\label{sec:benchmarks}
+In this section, we will introduce some concurrent objects in our experiment. 
+In addition to PairSnapShot, we also do experiments on many other concurrent objects, which have been proved to be non-linearizable by other tools.
+
+\begin{itemize}
+  \item LockFreeList \cite{herlihy2012art} --- It is a concurrent Set that violates linearizability when two $\mathtt{remove}$s compete to mark a bit without synchronization protection.
+  \item OptimisticQueue \cite{DBLP:conf/wdag/Ladan-MozesS04} --- It is a concurrent Queue that violates linearizability when two $\mathtt{poll}$ operations compete to get the head of the queue. Without proper synchronization between reading $\mathtt{head}$ pointer and modifying it, two $\mathtt{poll}$s may return the same value.
+
+  \item Snark \cite{DBLP:conf/spaa/DohertyDGFLMMSS04} --- It is a Deque with the use of DCAS (\textit{double-compare-and-swap}), and violates linearizability when the object has few elements and operations originally accessing different ends compete for the same memory location.
+
+  \item SimpleList \cite{DBLP:conf/pldi/VechevY08} --- It is a concurrent Set and the bug is typical. The $\mathtt{Add}$ function inserts a node by modifying the $\mathtt{next}$ pointer of its predecessor, but without protection, $\mathtt{next}$ may be modified by other threads leading the node removed from the list unexpectedly.
+  \item Operation $\mathtt{size}$ of Linked List --- As we know, $\mathtt{size}$ is used for counting the number of nodes in a list. However, if there is no synchronization, a situation that violates linearizability happens when $\mathtt{size}$ traverses the list, another thread preempts the execution and deletes a node which has been accessed and inserts a node at a position that has not been accessed, so $\mathtt{size}$ will return a value that is larger than the expected length.
+\end{itemize}
 
 
 
