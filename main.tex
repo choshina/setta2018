@@ -127,7 +127,7 @@ where each node corresponds to a data race, and each path from the root to a lea
 We label each node with a pre-defined symbol, depending on the linearizability of all the paths passing through the node. 
 Then, the existence of a CDRS can be determined based on certain pattern of the node sequences in the labeled interleaving tree.
  
-In order to overcome the state space explosion problem, we divide the localization process into the two levels: the coarse-grained level and the fine-grained level.  On the coarse-grained level, a \textit{minimal} test case is to be synthesized that contains a sufficiently small number of operations to trigger a linearizability fault  \cite{DBLP:conf/seke/ZhangWZ17}. 
+In order to overcome the state space explosion problem, we divide the localization process into the two levels: the coarse-grained level and the fine-grained level.  On the coarse-grained level, a \textit{minimum} test case is to be synthesized that contains a sufficiently small number of operations to trigger a linearizability fault  \cite{DBLP:conf/seke/ZhangWZ17}. 
 With such a small test case, the number of memory access instructions examined at the fine-grained level is greatly reduced.
 Together with the linearizability checking technique \cite{DBLP:journals/concurrency/Lowe17} and the coarse-grained linearizability fault localization technique \cite{DBLP:conf/seke/ZhangWZ17}, the overall localization process is shown in Fig.\ref{fig:liucheng}, where stage C is concerned by this paper.
 \begin{figure}[ht]
@@ -146,15 +146,6 @@ For the brevity of presentation, Table~\ref{tab:abbreviation} lists the abbrevia
 \hline
  CDRS & HLDR & CAS&FGVT\\
  \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence& \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace  & \textbf{C}ompare \textbf{A}nd \textbf{S}wap& \textbf{F}ine-\textbf{G}rained \textbf{V}eri\textbf{T}race\\\hline
-   
- 
-\begin{tabular}{l|l}
-\hline
- CDRS & \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence \\
- HLDR & \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace \\
- CAS & \textbf{C}ompare \textbf{A}nd \textbf{S}wap \\
- FGVT & \textbf{F}ine-\textbf{G}rained \textbf{V}eri\textbf{T}race \\
-\hline
 \end{tabular}}
 \end{table}
 
@@ -163,7 +154,7 @@ The main contributions of this paper are as follows:
 \begin{itemize}
   \item We extend the traditional coarse-grained trace model to a \textit{fine-grained trace} model by including memory access events. We also extend the notion of linearizability onto fine-grained traces.
   \item We propose the notion of \textit{Critical Data Race Sequence} (CDRS), which plays a key role in characterizing the data races that can decisively result in linearizability faults.
-  \item We develop a labeled \textit{interleaving tree} model that contains all the possible fine-grained traces of a concurrent execution. Each node is labeled automatically in a way that can reflect the existence of a CDRS through certain pattern.
+  \item We develop a labeled \textit{interleaving tree} model that contains all the possible fine-grained traces of a concurrent execution. Each node is marked automatically in a way that can reflect the existence of a CDRS through certain pattern.
   \item We implement a prototype tool, \textit{FGVT}, for real-world Java concurrent programs. Experiments show that FGVT is rather effective in that all the CDRSes reported by FGVT indeed reveal the root causes of linearizability faults.
 \end{itemize}
 

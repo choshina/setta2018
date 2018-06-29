@@ -25,10 +25,6 @@ Burckhardt, S., Dern, C., Musuvathi, M., Tan, R.: Line-up: a complete and
   Proceedings of the 2010 {ACM} {SIGPLAN} Conference on Programming Language
   Design and Implementation, {PLDI} 2010, Toronto, Ontario, Canada, June 5-10,
   2010. pp. 330--340. {ACM} (2010)
-  automatic linearizability checker. In: %Proceedings of the 2010 {ACM}
-  {SIGPLAN} Conference on Programming %Language Design and Implementation,
-  {PLDI} 2010, Toronto, Ontario, %Canada, June 5-10, 2010 Proc. PLDI 2010. pp.
-  330--340 (2010)
 
 \bibitem{Choi2000Deterministic}
 Choi, J.D., Srinivasan, H.: Deterministic replay of java multithreaded
@@ -42,9 +38,6 @@ Doherty, S., Detlefs, D., Groves, L., Flood, C.H., Luchangco, V., Martin, P.A.,
   2004: Proceedings of the Sixteenth Annual {ACM} Symposium on Parallelism in
   Algorithms and Architectures, June 27-30, 2004, Barcelona, Spain. pp.
   216--224. {ACM} (2004)
-  nonblocking algorithm design. In: %{SPAA} 2004: Proceedings of the Sixteenth
-  Annual {ACM} Symposium on %Parallelism in Algorithms and Architectures, June
-  27-30, 2004, Barcelona, %Spain Proc. SPAA 2004. pp. 216--224 (2004)
 
 \bibitem{DBLP:journals/concurrency/EdelsteinFGNRU03}
 Edelstein, O., Farchi, E., Goldin, E., Nir, Y., Ratsaby, G., Ur, S.: Framework
@@ -59,7 +52,6 @@ Emmi, M., Enea, C., Hamza, J.: Monitoring refinement via symbolic reasoning.
 
 \bibitem{DBLP:conf/ipps/FarchiNU03}
 Farchi, E., Nir, Y., Ur, S.: Concurrent bug patterns and how to test them. In:
-<<<<<<< HEAD
   17th International Parallel and Distributed Processing Symposium {(IPDPS}
   2003), 22-26 April 2003, Nice, France, CD-ROM/Abstracts Proceedings. p.~286.
   {IEEE} Computer Society (2003)
@@ -71,19 +63,6 @@ Gottschlich, J.E., Pokam, G., Pereira, C., Wu, Y.: Concurrent predicates: {A}
   Conference on Parallel Architectures and Compilation Techniques, Edinburgh,
   United Kingdom, September 7-11, 2013. pp. 331--340. {IEEE} Computer Society
   (2013)
-
-\bibitem{herlihy2012art}
-Herlihy, M., Shavit, N.: The Art of Multiprocessor Programming. Elsevier (2012)
-  %17th International Parallel and Distributed Processing Symposium {(IPDPS} %
-  2003), 22-26 April 2003, Nice, France, CD-ROM/Abstracts Proceedings Proc.
-  IPDPS 2003. p.~286 (2003)
-
-\bibitem{DBLP:conf/IEEEpact/GottschlichPPW13}
-Gottschlich, J.E., Pokam, G., Pereira, C., Wu, Y.: Concurrent predicates: {A}
-  debugging technique for every parallel programmer. In: %Proceedings of the
-  22nd International Conference on Parallel Architectures %and Compilation
-  Techniques, Edinburgh, United Kingdom, September 7-11, % 2013 Proc. IEEEPACT
-  2013. pp. 331--340 (2013)
 
 \bibitem{herlihy2012art}
 Herlihy, M., Shavit, N.: The Art of Multiprocessor Programming. Elsevier (2012)
@@ -126,34 +105,6 @@ Liu, B., Qi, Z., Wang, B., Ma, R.: Pinso: Precise isolation of concurrency bugs
 Long, Z., Zhang, Y.: Checking linearizability with fine-grained traces. In:
   Ossowski, S. (ed.) Proceedings of the 31st Annual {ACM} Symposium on Applied
   Computing, Pisa, Italy, April 4-8, 2016. pp. 1394--1400. {ACM} (2016)
-  In: %Formal Techniques for Distributed Objects, Components, and Systems -%
-  35th {IFIP} {WG} 6.1 International Conference, {FORTE} 2015, Held %as Part of
-  the 10th International Federated Conference on Distributed %Computing
-  Techniques, DisCoTec 2015, Grenoble, France, June 2-4, 2015, %Proceedings
-  Proc. FORTE 2015. pp. 50--65 (2015)
-
-\bibitem{DBLP:conf/issta/KhoshnoodKW15}
-Khoshnood, S., Kusano, M., Wang, C.: Concbugassist: constraint solving for
-  diagnosis and repair of concurrency bugs. In: %Proceedings of the 2015
-  International Symposium on Software Testing % and Analysis, {ISSTA} 2015,
-  Baltimore, MD, USA, July 12-17, 2015 Proc. ISSTA 2015. pp. 165--176 (2015)
-
-\bibitem{DBLP:conf/wdag/Ladan-MozesS04}
-Ladan{-}Mozes, E., Shavit, N.: An optimistic approach to lock-free {FIFO}
-  queues. In: %Distributed Computing, 18th International Conference, {DISC}
-  2004, %Amsterdam, The Netherlands, October 4-7, 2004, Proceedings Proc. DISC
-  2004. pp. 117--131 (2004)
-
-\bibitem{DBLP:conf/icsm/LiuQWM14}
-Liu, B., Qi, Z., Wang, B., Ma, R.: Pinso: Precise isolation of concurrency bugs
-  via delta triaging. In: %30th {IEEE} International Conference on Software
-  Maintenance and Evolution, % Victoria, BC, Canada, September 29 - October 3,
-  2014 Proc. ICSM 2014. pp. 201--210 (2014)
-
-\bibitem{DBLP:conf/sac/LongZ16}
-Long, Z., Zhang, Y.: Checking linearizability with fine-grained traces. In:
-  %Proceedings of the 31st Annual {ACM} Symposium on Applied Computing, %Pisa,
-  Italy, April 4-8, 2016 Proc. SAC 2016. pp. 1394--1400 (2016)
 
 \bibitem{DBLP:journals/concurrency/Lowe17}
 Lowe, G.: Testing for linearizability. Concurrency and Computation: Practice
@@ -198,40 +149,6 @@ Park, S., Vuduc, R.W., Harrold, M.J.: A unified approach for localizing
   (eds.) Fifth {IEEE} International Conference on Software Testing,
   Verification and Validation, {ICST} 2012, Montreal, QC, Canada, April 17-21,
   2012. pp. 51--60. {IEEE} Computer Society (2012)
-  study on real world concurrency bug characteristics. In: %Proceedings of the
-  13th International Conference on Architectural %Support for Programming
-  Languages and Operating Systems, {ASPLOS} %2008, Seattle, WA, USA, March 1-5,
-  2008 Proc. ASPLOS 2008. pp. 329--339 (2008)
-
-\bibitem{DBLP:conf/pldi/MusuvathiQ07}
-Musuvathi, M., Qadeer, S.: Iterative context bounding for systematic testing of
-  multithreaded programs. In: %Proceedings of the {ACM} {SIGPLAN} 2007
-  Conference on Programming % Language Design and Implementation, San Diego,
-  California, USA, June % 10-13, 2007 Proc. PLDI 2007. pp. 446--455 (2007)
-
-\bibitem{DBLP:conf/ppopp/ParkS12}
-Park, C., Sen, K.: Concurrent breakpoints. In: %Proceedings of the 17th {ACM}
-  {SIGPLAN} Symposium on Principles and %Practice of Parallel Programming,
-  {PPOPP} 2012, New Orleans, LA, USA, %February 25-29, 2012 Proc. PPOPP 2012.
-  pp. 331--332 (2012)
-
-\bibitem{DBLP:conf/icse/Park04}
-Park, S.: Fault comprehension for concurrent programs. In: %35th International
-  Conference on Software Engineering, {ICSE} '13, %San Francisco, CA, USA, May
-  18-26, 2013 Proc. ICSE 2013. pp. 1444--1446 (2013)
-
-\bibitem{DBLP:conf/icse/ParkVH10}
-Park, S., Vuduc, R.W., Harrold, M.J.: Falcon: fault localization in concurrent
-  programs. In: %Proceedings of the 32nd {ACM/IEEE} International Conference on
-  Software %Engineering - Volume 1, {ICSE} 2010, Cape Town, South Africa, 1-8
-  %May 2010 Proc. ICSE 2010. pp. 245--254 (2010)
-
-\bibitem{DBLP:conf/icst/ParkVH12}
-Park, S., Vuduc, R.W., Harrold, M.J.: A unified approach for localizing
-  non-deadlock concurrency bugs. In: %Fifth {IEEE} International Conference on
-  Software Testing, Verification %and Validation, {ICST} 2012, Montreal, QC,
-  Canada, April 17-21, 2012 Proc. ICST 2012. pp. 51--60 (2012)
->>>>>>> 21d2bc01e578b84f03616aaee0994f8606e902be
 
 \bibitem{DBLP:conf/oopsla/ShiPYLZCZ10}
 Shi, Y., Park, S., Yin, Z., Lu, S., Zhou, Y., Chen, W., Zheng, W.: Do {I} use
@@ -241,10 +158,6 @@ Shi, Y., Park, S., Yin, Z., Lu, S., Zhou, Y., Chen, W., Zheng, W.: Do {I} use
   Object-Oriented Programming, Systems, Languages, and Applications, {OOPSLA}
   2010, October 17-21, 2010, Reno/Tahoe, Nevada, {USA}. pp. 160--174. {ACM}
   (2010)
-  concurrency and sequential bugs. In: %Proceedings of the 25th Annual {ACM}
-  {SIGPLAN} Conference on Object-Oriented %Programming, Systems, Languages, and
-  Applications, {OOPSLA} 2010, % October 17-21, 2010, Reno/Tahoe, Nevada, {USA}
-  Proc. OOPSLA 2010. pp. 160--174 (2010)
 
 \bibitem{DBLP:journals/entcs/Stoller02}
 Stoller, S.D.: Testing concurrent java programs using randomized scheduling.
@@ -255,9 +168,6 @@ Vechev, M.T., Yahav, E.: Deriving linearizable fine-grained concurrent objects.
   In: Gupta, R., Amarasinghe, S.P. (eds.) Proceedings of the {ACM} {SIGPLAN}
   2008 Conference on Programming Language Design and Implementation, Tucson,
   AZ, USA, June 7-13, 2008. pp. 125--135. {ACM} (2008)
-  In: %Proceedings of the {ACM} {SIGPLAN} 2008 Conference on Programming
-  %Language Design and Implementation, Tucson, AZ, USA, June 7-13, 2008 Proc.
-  PLDI 2008. pp. 125--135 (2008)
 
 \bibitem{DBLP:journals/jpdc/WingG93}
 Wing, J.M., Gong, C.: Testing and verifying concurrent objects. J. Parallel
@@ -269,8 +179,5 @@ Zhang, Z., Wu, P., Zhang, Y.: Localization of linearizability faults on the
   Software Engineering and Knowledge Engineering, Wyndham Pittsburgh University
   Center, Pittsburgh, PA, USA, July 5-7, 2017. pp. 272--277. {KSI} Research
   Inc. and Knowledge Systems Institute Graduate School (2017)
-  coarse-grained level. In: %The 29th International Conference on Software
-  Engineering and Knowledge %Engineering, Wyndham Pittsburgh University Center,
-  Pittsburgh, PA, %USA, July 5-7, 2017. Proc. SEKE 2017. pp. 272--277 (2017)
 
 \end{thebibliography}
