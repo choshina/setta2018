@@ -127,7 +127,7 @@ where each node corresponds to a data race, and each path from the root to a lea
 We label each node with a pre-defined symbol, depending on the linearizability of all the paths passing through the node. 
 Then, the existence of a CDRS can be determined based on certain pattern of the node sequences in the labeled interleaving tree.
  
-In order to overcome the state space explosion problem, we divide the localization process into the two levels: the coarse-grained level and the fine-grained level.  On the coarse-grained level, a \textit{minimum} test case is to be synthesized that contains a sufficiently small number of operations to trigger a linearizability fault  \cite{DBLP:conf/seke/ZhangWZ17}. 
+In order to overcome the state space explosion problem, we divide the localization process into two levels: the coarse-grained level and the fine-grained level.  On the coarse-grained level, a \textit{minimum} test case is to be synthesized that contains a sufficiently small number of operations to trigger a linearizability fault  \cite{DBLP:conf/seke/ZhangWZ17}. 
 With such a small test case, the number of memory access instructions examined at the fine-grained level is greatly reduced.
 Together with the linearizability checking technique \cite{DBLP:journals/concurrency/Lowe17} and the coarse-grained linearizability fault localization technique \cite{DBLP:conf/seke/ZhangWZ17}, the overall localization process is shown in Fig.\ref{fig:liucheng}, where stage C is concerned by this paper.
 \begin{figure}[ht]
@@ -190,7 +190,7 @@ Fig.~\ref{fig:psscoarsetrace} shows a concurrent execution in which the return v
 In Fig.~\ref{fig:psscoarsetrace}, time moves from left to right; dark lines indicate the time intervals of operations and  
 the short vertical lines at the both ends of a dark line represent the moment when an operation is invoked and returned, respectively.
 A label ${t:(v_0,v_1)}$ indicates that at the moment $t$,  \texttt{d[0]} is $v_0$ and \texttt{d[1]} is $v_1$.
-  The operation \texttt{read()} on Thread 2 returns a value $\mathtt{\pair{1,2}}$,
+  The operation \texttt{read} on Thread 2 returns a value $\mathtt{\pair{1,2}}$,
   which is not consistent with value of any moment. 
   
     \begin{wrapfigure}[14]{r}{0.4\textwidth}
