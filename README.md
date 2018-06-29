@@ -19,4 +19,12 @@ Review 2
 
 - My only issue is that I wanted to know a little bit more about the subjects of empirical evaluation, mostly to get the sense of scalability. Table 1 does not contain much details of the subject themselves, nor the number of threads used for each program. As such, it is difficult to see how the scalability trend will look like, when either the size of the program or the number of threads increases. If authors can include these details for the camera ready version, I believe the paper will be much stronger.
 
+Review 3
 
+-
+
+Review 4
+
+- I think it is better to give a symbol table to help readers follow the definitions.
+- I think before presenting the concrete definition of their method, the authors should present the intuitive idea of their method and explain why such intuitive idea would work.
+- They should also present some basic information of the programs, such as the size, where is each test case from. Since some test cases are from prior work, it is better to compare this method to some previous studies. I note that there also exist other situations where the authors’ method cannot point out exactly. What is the reason for that? I think the authors should explain more about the failure of their method and discuss what are the advantages and disadvantages in using this method in real scenarios.
