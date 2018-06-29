@@ -15,7 +15,6 @@ Review 3
 - Example 4: what do you mean by “#1 wins”? According to you definition before, you only say “e1 wins e2 **with respect to ... Sf **”. Here which sf are you referring to?
 - Algorithm 1 is unreadable: what is supposed to be the input to the algorithm? The < relation cannot exist itself without mentioning a trace.
 Which trace are you referring to? What is e’? I see some natural language explanation of e’ (which also referring to some trace), but you have to formalize it in your algorithm.
-- Fonts in Figs. 6-8 are too small, which make the figures unreadable.
 
 Review 4
 
