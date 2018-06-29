@@ -13,7 +13,6 @@ Review 3
 
 - In Def. 6, what is SE? When you say “A CDRS satisfies that ...”, do you actually mean “A CDRS SE satisfies that ...”? Otherwise SE comes from nowhere. In the two bullets in the definition, what is the trace following \subset_pre ? Is anything missing here? This is supposed to be one of the most important definitions in the paper. Why is it presented in such a sloppy way?
 
-- Example 4: what do you mean by “#1 wins”? According to you definition before, you only say “e1 wins e2 **with respect to ... Sf **”. Here which sf are you referring to?
 
 - Algorithm 1 is unreadable: what is supposed to be the input to the algorithm? The < relation cannot exist itself without mentioning a trace.
 Which trace are you referring to? What is e’? I see some natural language explanation of e’ (which also referring to some trace), but you have to formalize it in your algorithm.
