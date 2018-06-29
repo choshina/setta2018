@@ -671,7 +671,7 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
 \caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
 \end{wrapfigure}
 
-    Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $\mathcal{S}_t$ is initiated to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $\mathcal{S}_t$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
+    Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $\mathcal{S}_t$ is initialized to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $\mathcal{S}_t$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
 
 \vspace{-0.5cm}
 
@@ -679,15 +679,15 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
 \begin{algorithm}
     \caption{Building of Interleaving Tree}\label{algo:forminttree}
     \begin{algorithmic}[1]
-        \State $\mathcal{S}_t = \mathcal{S}_t^{init}$
-        \State $\mathit{enS} = \left\{ e | \forall \epsilon\in \mathsf{M} .(\mathtt{td}(\epsilon)=\mathtt{td}(e)\longrightarrow e\prec \epsilon)\right\}$
+        \State $\mathcal{S}_t = \mathcal{S}_t^{init}$ \Comment{$\mathcal{S}_t$ is initialized}
+        \State $\mathit{enS} = \left\{ e | \forall \epsilon\in \mathsf{M} .(\mathtt{td}(\epsilon)=\mathtt{td}(e)\longrightarrow e\prec \epsilon)\right\}$ \Comment{Foremost events of each thread}
         \Function{BuildTree}{$\mathcal{S}_t,\mathit{enS}$}
             \State \Call{New Node}{$\mathcal{S}_t$}
             \For{$e(addr,v_n)^{\pair{o,t}} \leftarrow \mathit{enS}$}
                 \State \Call{New Edge}{$e$}
-                \State $\mathcal{S}_t \gets \mathit{State[v_n/addr]}$
-                \State $\mathit{enS} \gets \mathit{enS}\setminus \sset{e} \cup \sset{e'}$
-                \State \Call{BuildTree}{$\mathcal{S}_t,\mathit{enS}$}
+                \State $\mathcal{S}_t \gets \mathit{\mathcal{S}_t[v_n/addr]}$ \Comment{Update state}
+                \State $\mathit{enS} \gets \mathit{enS}\setminus \sset{e} \cup \sset{e'}$ \Comment{Update $\mathit{enS}$}
+                \State \Call{BuildTree}{$\mathcal{S}_t,\mathit{enS}$} \Comment{Recursively build the tree}
             \EndFor
         \EndFunction
     \end{algorithmic}
