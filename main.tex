@@ -90,7 +90,7 @@ Linearizability is an important correctness criterion for concurrent objects. Ex
 %\input{fgvt}
 %
 \section{Introduction}\label{sec:introduction}
-Localization of concurrency faults has been a hot-spotted topic for long time.
+Localization of concurrency faults has been a hot topic for long time.
 Multiple trials for the same concurrent programs with the same inputs usually result in different outputs.
 This nature of concurrent program executions is known as nondeterminism. Due to it, 
 it is non-trivial to decide whether a concurrent program is potential to go wrong.
@@ -117,7 +117,7 @@ Intuitively, it means that every operation on a shared object appears to take ef
 between the invocation and response of the operation, and the behavior exposed by the sequence of operations serialized at their linearization points must conform to the sequential specification of the shared object.
 
 
-Linearizability verification is a hot-spotted topic in the recent years' research of concurrency. There are large numbers of works and tools such as
+Linearizability verification is a hot topic in the recent years' research of concurrency. There are large numbers of works and tools such as
 \cite{DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/pldi/BurckhardtDMT10,DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/forte/HornK15a,DBLP:conf/sac/LongZ16,DBLP:journals/concurrency/Lowe17}, 
 focusing on the linearizability verification of the given traces based on a coarse-grained trace model.
 Usually the traces in such works are described as a partial order set of object methods, and the basic approach 
@@ -148,13 +148,11 @@ for the fine-grained level localization, the number of memory access instruction
 can be hugely reduced.
 Together with a linearizability checking technique \cite{DBLP:journals/concurrency/Lowe17} and coarse-grained localization \cite{DBLP:conf/seke/ZhangWZ17}, the overall process is illustrated as in Fig.\ref{fig:liucheng}, in which C is the main contribution of this work.
 
-\vspace{-0.5cm}
 \begin{figure}[!ht]
 \centering
 \includegraphics[width = 3.5in]{liucheng.pdf}
 \caption{Labels of nodes}\label{fig:liucheng}
 \end{figure}
-\vspace{-0.5cm}
 
 \noindent\textbf{\textit{Contributions.}}
 The contributions of this paper are as follows:
@@ -167,7 +165,7 @@ The contributions of this paper are as follows:
 
 \noindent\textbf{\textit{Related work.}} Automated linearizability checking algorithms were presented in \cite{DBLP:conf/pldi/BurckhardtDMT10,DBLP:journals/jpdc/WingG93}, but suffered from a bottleneck of performance. Based on \cite{DBLP:journals/jpdc/WingG93}, optimized algorithms were proposed in \cite{DBLP:journals/concurrency/Lowe17} and \cite{DBLP:conf/forte/HornK15a} through partial order reduction and compositional reasoning, respectively. Model checking was applied in \cite{DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/pldi/EmmiEH15} for linearizability checking, with simplified first-order formulas that can help improve efficiency. Fine-grained traces were introduced in \cite{DBLP:conf/sac/LongZ16} to accelerate linearizability checking. All these work lays a firm foundation for the localization of linearizability faults.
 
-Efforts have been devoted on concurrency bug localization, e.g., through an active-testing approach based on bug patterns. The potential bug locations can then be ranked with the suspicious bug patterns gathered. The characteristics of bug patterns were discussed in \cite{DBLP:conf/asplos/LuPSZ08,DBLP:conf/ipps/FarchiNU03} in details. Memory access patterns were proposed in \cite{DBLP:conf/icse/ParkVH10,DBLP:conf/icst/ParkVH12,DBLP:conf/icsm/LiuQWM14} for ranking bug locations. A fault comprehension technique was further presented in \cite{DBLP:conf/icse/Park04} for bug patterns. Definition-use invariants were presented in \cite{DBLP:conf/oopsla/ShiPYLZCZ10} for detecting concurrency bugs with pruning and ranking methods. A constraint-based symbolic analysis method was proposed in \cite{DBLP:conf/issta/KhoshnoodKW15} to diagnose concurrency bugs.
+Efforts have been devoted to concurrency bug localization, e.g., through an active-testing approach based on bug patterns. The potential bug locations can then be ranked with the suspicious bug patterns gathered. The characteristics of bug patterns were discussed in \cite{DBLP:conf/asplos/LuPSZ08,DBLP:conf/ipps/FarchiNU03} in details. Memory access patterns were proposed in \cite{DBLP:conf/icse/ParkVH10,DBLP:conf/icst/ParkVH12,DBLP:conf/icsm/LiuQWM14} for ranking bug locations. A fault comprehension technique was further presented in \cite{DBLP:conf/icse/Park04} for bug patterns. Definition-use invariants were presented in \cite{DBLP:conf/oopsla/ShiPYLZCZ10} for detecting concurrency bugs with pruning and ranking methods. A constraint-based symbolic analysis method was proposed in \cite{DBLP:conf/issta/KhoshnoodKW15} to diagnose concurrency bugs.
 
 Some other concurrency bug localizations techniques were based on the bug localization techniques for sequential programs. In \cite{DBLP:conf/IEEEpact/GottschlichPPW13}, concurrent predicates were derived from an assertion mechanism to determine whether a data race causes a concurrency bug. Concurrent breakpoints, an adaption of a breakpoint mechanism, were proposed in \cite{DBLP:conf/ppopp/ParkS12} for concurrent program debugging.
 
@@ -180,7 +178,6 @@ existing tree search techniques such as partial-order reduction but we emphasize
 \section{Motivating Example}\label{sec:motivatingeg}
 \input{motiveg}
 
-\vspace{-0.5cm}
 
 \section{Preliminary}\label{sec:fgtracemodel}
 
@@ -211,7 +208,7 @@ $c_r$ and $r_r$ represent the invocation and response events of the $\mathtt{rea
 
 It is obvious that \begin{small}$\wri(0,2)\prec \wri(1,2)\prec \wri(1,1)\prec \wri(0,1)$\end{small}, 
 but there is no \hb  
-relation between the $\rea$ operation and anyone of the $\wri$ operations.
+relation between the $\rea$ operation and any of the $\wri$ operations.
 
 \end{example}
 
@@ -222,24 +219,20 @@ A coarse-grained trace $S$ is \textit{sequential} if $\sqsubset_S$ is a total or
 We define that a \textit{specification} of an object is the set of all sequential traces that satisfy the correctness criteria of that object. 
 Note that here correctness criterion is specified by concurrent data structures, such as \textit{first-in-first-out} for \textit{FIFO-Queue}, \textit{first-in-last-out} for \textit{Stack}.
 
-\vspace{-0.2cm}
 \begin{myDef}[Linearizability]\label{def:linearizability}
 A coarse-grained trace $S$ of an object is linearizable if there exists a sequential trace $S'$ in the specification of the object such that:
 \begin{enumerate}
-  \item $S$ and $S'$ are composed of the same operations;
-  \item $\sqsubset_S \subseteq \sqsubset_S'$, i.e., if $O_1\sqsubset_S O_2$, then $O_1\sqsubset_{S'} O_2$.
+  \item $S = S'$, i.e., operations in $S$ and $S'$ are the same;
+  \item $\sqsubset_S \subseteq \sqsubset_{S'}$, i.e., given two operations $O_1$, $O_2$ in $S$, $S'$, if $O_1\sqsubset_S O_2$, then $O_1\sqsubset_{S'} O_2$.
 \end{enumerate}
 \end{myDef}
-\vspace{-0.2cm}
 
 Note that this definition speaks only complete traces, neglecting the existence of pending operations, that is, the operations without response events. Since this paper focuses on analysis of linearizability faults rather than detection, we consider complete traces only.
 
-\vspace{-0.1cm}
 \begin{example}
 Fig.~\ref{fig:accounttwoseqtraces} shows five sequential traces that satisfy requirements 1) and 2) in Definition \ref{def:linearizability} with respect to the coarse-grained trace shown in Fig~\ref{fig:psscoarsetrace}. However, neither of them satisfies the correctness criteria of \textit{PairSnapShot}, which means that neither of them belongs to the specification set of \textit{PairSnapShot}, so we can say that the coarse-grained trace in Fig.~\ref{fig:psscoarsetrace} is non-linearizable.
 
 \end{example}
-\vspace{-0.7cm}
 
 \begin{figure}
 \centering
@@ -257,11 +250,9 @@ Fig.~\ref{fig:accounttwoseqtraces} shows five sequential traces that satisfy req
 	\put(0,0.5){$5: \mathtt{write(0,2)}$ $\mathtt{write(1,2)}$ $\mathtt{write(1,1)}$ $\mathtt{write(0,1)}$ $\mathtt{read\to \pair{1,2}}$}
 	\end{footnotesize}
     \end{picture}
-    \vspace{-0.5cm}
 
     \caption{Five possible sequential traces}\label{fig:accounttwoseqtraces}
 \end{figure}
-\vspace{-0.5cm}
 
 \subsection{Fine-grained trace model}\label{sec:finegraintm}
 
@@ -331,18 +322,18 @@ The concurrent program $\p$
 Each fine-grained trace $\ft \in \p$ can be mapped to a coarse-grained trace $S'_c$, which satisfies that: 
  %such that each coarse-grained trace $S'_c=\mathtt{F_c}(S_f)$ mapped from each fine-grained trace $S_f\in \mathbb{P}$ satisfies that:
 \begin{itemize}
-  \item $S'_c$ and $S_c$ are composed of the same operations;
+  \item $S'_c = S_c$, i.e., operations in $S'_c$ and $S_c$ are the same;
   \item $\sqsubset_{S_c}\subseteq \sqsubset_{S'_c}$, i.e., $S'_c$ preserves the \textit{happen-before} relation in $S_c$.
 \end{itemize}
 \end{myDef}
 
 %\noindent \textbf{Example}
 %Fig.1(c) can be considered as a $\mathbb{P}$ derived from Fig.1(a), and all fine-grained traces $S_f$ such that $\mathtt{F}_c(S_f)$ results in sequential trace $O_1O_2$, $O_2O_1$ or concurrent trace in Fig.1(a) are maintained in this $\mathbb{P}$. It can also be considered as a program whose executions can result in those fine-grained traces.
-Intuitively, a $\mathbb{P}$ maintains all %possible 
+Intuitively, a program $\mathbb{P}$ maintains all %possible 
 fine-grained traces that preserve the \textit{happen-before} relation of $S_c$.
 %after an application of $\mathtt{F_c}$. 
 If there is a \textit{happen-before} relation between each pair of operations in $S_c$, we say that the program $\p$ resulting in $S_c$ is a sequential program.
-And, if there exists a fine-grained trace that is not linearizable in a $\p$, we say that the program $\p$ is non-linearizable.
+And, if there exists a fine-grained trace that is not linearizable in a program $\p$, we say that the program $\p$ is non-linearizable.
 
 \begin{myDef}[Linearizability fault]
 Let $\p$ be a non-linearizable concurrent program. Each non-linearizable fine-grained trace $S_f$ in $\p$ defines a \textit{linearizability fault} $\mathcal{F}$.
@@ -386,12 +377,11 @@ Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \mathit{SE}, \mathit{CE}\
 
 
 
-\vspace{-0.3cm}
+
 \begin{myTheo}\label{theo:datarace}
-    \textit{High-level data race} is necessary for the existence of \textit{linearizability fault}.
+   If there is a linearizability fault, then there is a high-level data race.
 \end{myTheo}
-\vspace{-0.3cm}
-\vspace{-0.3cm}
+
 \begin{proof}
 To prove Theorem \ref{theo:datarace}, it suffices to prove the contrapositive proposition that if there is no high-level data race, 
 then there is no linearizability fault. According to Definition \ref{def:datarace}, the premise, no high-level data race, means that in $\mathit{CE}$:
@@ -426,7 +416,7 @@ $\mathit{SE_i}\bullet e_{i2}$ that are linearizable.\\
 \end{itemize}
 \end{myDef}
 
-\vspace{-0.5cm}
+
 Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a $\mathbb{P}$ may lead to different linearizability faults, what we focus on is just the linearizability of the trace and thus we consider all linearizability faults identical in terms of the aspect to lead the trace non-linearizable.
 
 \begin{example} 
@@ -447,7 +437,7 @@ Firstly, we define a projection $\mathtt{F_M}$ mapping a fine-grained trace $S_f
 
     Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $State$ is initiated to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $State$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathit{State}$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
 
-\vspace{-0.5cm}
+
 
 \begin{algorithm}
     \caption{Building of Interleaving Tree}\label{algo:forminttree}
@@ -466,7 +456,6 @@ Firstly, we define a projection $\mathtt{F_M}$ mapping a fine-grained trace $S_f
     \end{algorithmic}
 \end{algorithm}
 
-\vspace{-0.5cm}
 \begin{example} 
 According to Algorithm \ref{algo:forminttree}, we build the interleaving tree of the concurrent program $\mathbb{P}$ corresponding to Fig.\ref{fig:psscoarsetrace} and present it in Fig.\ref{fig:interleavingtreeofpairsnapshot}. Each node represents a state, and each edge represents a memory access event.
 
@@ -476,9 +465,7 @@ the non-linearizability situation in Fig.\ref{fig:pssfinetrace}.
 
 \begin{wrapfigure}[14]{c}{0.5\textwidth}
 \centering
-\vspace{-0.7cm}
 \includegraphics[height = 2in, width = 2.3in]{pssinttree.pdf}
-\vspace{-0.2cm}
 \caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
 \end{wrapfigure}
 
@@ -516,13 +503,11 @@ Based on the categories of subtrees, a node $N_d$ can be labeled as one of the f
 \noindent where \textit{W} represents \textit{white}, \textit{B} represents \textit{black} and \textit{G} represents \textit{grey} actually. Fig. \ref{fig:labellabelnodes} illustrates this labeling rule.
 \end{myDef}
 
-\vspace{-0.5cm}
 \begin{figure}[!ht]
 \centering
 \includegraphics[width = 4.5in]{label.pdf}
 \caption{Labels of nodes}\label{fig:labellabelnodes}
 \end{figure}
-\vspace{-0.5cm}
 
 The algorithm of labeling an interleaving tree is presented in Algorithm \ref{algo:labelinttree}. The function \textsc{LabelNode} recursively labels the nodes of a tree. Firstly, it checks whether the node being labeled has left or right child in line \{3,6,8,10\}, where $\mathtt{Left}(N_d)$ gets the left child of $N_d$, and $\mathtt{Right}(N_d)$ gets the right child. $!\mathtt{Left}(N_d)$ means that $N_d$ has no left child, and $!\mathtt{Right}(N_d)$ is in a similar way. So if both $!\mathtt{Left}(N_d)$ and $!\mathtt{Right}(N_d)$ are true, it means $N_d$ is a leaf and thus it is labeled depending on the linearizability of itself as line 3-5 shows. Otherwise, the node is labeled depending its left and right child as line 6-27 shows.
 
@@ -585,7 +570,6 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
     \end{algorithmic}
 
 \end{algorithm}
-\vspace{-0.3cm}
 
 Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \mathit{SE},\mathit{CE}}$. The set $\mathit{Var}$ is a subset of the domain of $\mathit{State}$, where $\mathit{State}$ is represented by the value in a node $N_d$, $\mathit{SE}$ is a prefix composed of events represented by edges from the root to $N_d$, and $\mathit{CE}$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
 
@@ -625,7 +609,7 @@ and $G$-node, which corresponds to the expression in the theorem.
 
 
 \begin{example}
-Take a loot at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree according to Definition \ref{def:nodelabel}, resulting in a labeled tree presented in Fig. \ref{fig:labeledinterleavingtreepss}.  As we can see, the thickened path with a red leaf is non-linearizable, the nodes on which include a CDRS. The CDRS is shown by the sequence of yellow nodes, in the form of $\mathit{W_gW_gW_gW_gW_gG}$, which is accepted by the regular expression in Theorem \ref{theo:idenfycdrs}.
+Take a look at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree according to Definition \ref{def:nodelabel}, resulting in a labeled tree presented in Fig. \ref{fig:labeledinterleavingtreepss}.  As we can see, the thickened path with a red leaf is non-linearizable, the nodes on which include a CDRS. The CDRS is shown by the sequence of yellow nodes, in the form of $\mathit{W_gW_gW_gW_gW_gG}$, which is accepted by the regular expression in Theorem \ref{theo:idenfycdrs}.
 
 \end{example}
 
@@ -633,9 +617,7 @@ Take a loot at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree
 %Note that since the object considers its two memory locations (\texttt{d[0]} and \texttt{d[1]}) as a whole, $\mathit{Var}$ of each data race is composed of the two memory locations rather than one separately. That is reasonable, because an access to any memory location is actually an access to the array \texttt{d} as a whole, during which competitions between two threads exist.
 \begin{wrapfigure}[13]{r}{0.5\textwidth}
 \centering
-\vspace{-0.7cm}
 \includegraphics[height = 2.3in, width = 2.5in]{psslabeltree.pdf}
-\vspace{-0.6cm}
 \caption{Labeled interleaving tree}\label{fig:labeledinterleavingtreepss}
 \end{wrapfigure}
 
@@ -679,7 +661,6 @@ LinkedList &\{1,5\}  &\tabincell{c}{thd1:$\mathtt{remove(1),}$\\ $\mathtt{add(9)
 
 \end{table*}
 
-\vspace{-0.3cm}
 \subsection{Implementation}
 Our tool FGVT is based on the framework of JavaPathFinder (JPF), which encapsulates a Java virtual machine and can be customized for use of model checking of Java programs. JPF is employed to generate interleaving trees, and it applies a dynamic reduction mechanism to eliminate duplicated program states and simplify the interleaving tree. Then, we label the tree based on Algorithm \ref{algo:labelinttree}, and report the CDRSes which cause linearizability faults. %Our tool is available on \textit{http://github.com/choshina/FGVT}.
 
