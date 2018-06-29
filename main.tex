@@ -236,9 +236,9 @@ A label ${t:(v_0,v_1)}$ indicates that at the moment $t$,  \texttt{d[0]} is $v_0
   %The `\texttt{x}' labels in Fig.\ref{fig:pairsnapshot} mark the moments when each instruction takes effects, which explains exactly the cause of the linearizability fault.
 
 The reason of this violation can be found out by enumerating the possible executing orders of memory access events which is labeled by \texttt{\#} in Fig.~\ref{fig:pairsnapshot}. 
-One possible order that can trigger the violation is illustrated in Fig.~\ref{fig:psscoarsetrace}, in which ``\texttt{x}'' indicate the executing moments of the corresponding memory access events. 
+One possible order that can trigger the violation is illustrated in Fig.~\ref{fig:pssfinetrace}, in which ``\texttt{x}'' indicate the executing moments of the corresponding memory access events. 
 Actually, this model checking approach is the most common way to locate the root cause of concurrency bugs, and has been studied in many existing literatures.
-Here, our focus is not on how to find this fine-grained executing order, but to study how the thread execution order, in which data race exists, influences the final result of linearizability.
+Here, our focus is not on how to find this fine-grained executing order, but to study how the thread execution order, which causes data race, influences the final result of linearizability.
 
 %The fine-grained root cause can be explained by the temporal order of instructions labeled by ``\texttt{x}''. Since \texttt{d[0]} and \texttt{d[1]} should be considered as a whole (a pair), instructions in \texttt{write} and \texttt{read} should accordingly be considered accessing the whole pair, and thus data races exist there. In this execution, all data races between instructions of \texttt{write} and \texttt{read} together result in the linearizability fault, and all ones are necessary to trigger the linearizability fault.
 
