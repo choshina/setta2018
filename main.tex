@@ -14,6 +14,7 @@
 %\usepackage{subfigure}
 %\usepackage{subcaption}
 \usepackage{color}
+\usepackage{todonotes}
 %\usepackage{times}
 %\captionsetup{compatibility=false}
 
@@ -485,7 +486,7 @@ Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requir
 \subsection{Fine-grained trace model}\label{sec:finegraintm}
 
 
-In addition to $\ecall$ and $\eresp$, the symbol set $E$ has other subsets of events in our fine-grained trace model:
+In the fine-grained trace model,  the symbol set $E$ has other subsets of events in addition to $\ecall$ and $\eresp$:
 
 \begin{itemize}
   \item $\ewrite$ contains symbols that represent the \textit{memory writing} events. An event of memory writing is represented as $wr(addr,v)^{\left\langle o,t\right\rangle}$ $(wr \in \ewrite)$, where $addr$ is the memory location to be modified to a value $v$;
@@ -493,16 +494,19 @@ In addition to $\ecall$ and $\eresp$, the symbol set $E$ has other subsets of ev
   \item $\ecas$ contains symbols that represent the \textit{atomic primitive}, such as \textit{compare-and-swap} (\textit{CAS}) in modern architecture. A \textit{CAS} event can be represented as $cas(addr, v_e, v_n)^{\left\langle o,t\right\rangle}$ $(cas \in \ecas)$, where $addr$ represents a memory location, $v_e$ and $v_n$ are two values. The function of this atomic primitive is that if the value at $addr$ equals to $v_e$, it will be updated to $v_n$ and return $\mathtt{true}$, otherwise it would not do anything but return $\mathtt{false}$.
   %\item $\mathsf{OAI}$ contains symbols that represent other atomic instructions, such as \textit{double-compare-and-swap} (\textit{DCAS}). All these events can be represented as $oai(Arg)^{\left\langle o,t\right\rangle}$ $oai\in \mathsf{OAI}$
 \end{itemize}
-\noindent Similarly, $\ewrite, \eread, \ecas$ represent the corresponding sets of events. Let $\mathsf{M} = \ewrite\cup\eread\cup\ecas$, events $e$ such that $e\in \mathsf{M}$ are called \textit{memory access events}.
+\noindent Similarly, in this paper $\ewrite, \eread, \ecas$ also represent the corresponding sets of events. Let $\mathsf{M} = \ewrite\cup\eread\cup\ecas$, events $e$ such that $e\in \mathsf{M}$ are called \textit{memory access events}.
 
 
 A fine-grained trace $S_f$ is a total order set $\pair{S_f,\prec}$ of events over set $E= \ecall\cup \eresp\cup \ewrite\cup \eread\cup \ecas $.
 %We define a prefix of a fine-grained trace $S_f$ ending with an event $e'$ as the subset of $S_f$ containing all events $e$ such that $(e\prec e')\vee (e=e')$, written as $\mathtt{P}_{S_f}(e')$.
-We define a projection $\mathtt{F}_{c}$ that maps a fine-grained trace $S_f$ to a coarse-grained trace $S_c$ by dropping all memory access events, i.e., $ \mathtt{F}_c(S_f) = S_f|_{\{\ecall,\eresp\} }$. A fine-grained trace $S_f$ is \textit{well-formed} if it satisfies that:
+We define a projection $\mathcal{F}_{c}$ that maps a fine-grained trace $S_f$ to a coarse-grained trace $S_c$ by dropping all memory access events in $S_f$, i.e., $ \mathcal{F}_c(S_f) = S_f|_{\{\ecall,\eresp\} }$. A fine-grained trace $S_f$ is \textit{well-formed} if it satisfies that:
+
+\todo{this definition is not clear}
+
 \begin{itemize}
-  \item $\mathtt{F}_c(S_f)$ is well-formed;
+  \item $\mathcal{F}_c(S_f)$ is well-formed;
   \item The operation identifier of any memory access event in $S_f$ is consistent with that of one pair of  matching invocation/response events  in $S_f$, i.e.,
-  %For any memory access event in $S_f$, its operation identifier is one that occurs in an invocation/response event in $\mathtt{F}_c(S_f)$, i.e., 
+  %For any memory access event in $S_f$, its operation identifier is one that occurs in an invocation/response event in $\mathcal{F}_c(S_f)$, i.e., 
       $\forall e_m\exists e_o.(\mathtt{op}(e_m)= \mathtt{op}(e_o))$, where $e_m$ is a memory access event and $e_o$ is either of a pair of matching invocation/response events in $S_f$.
   \item All memory access events with operation identifier $o$ lie between the consistent matching invocation/response event pair with the operation identifier $o$, i.e.,
       $\forall e.((\mathtt{op}(e)=o)\to(c\prec e\prec r))$, where $e$ is a memory access event in $S_f$, and $c,r$ are matching invocation and response events with thread identifier $o$.
@@ -516,14 +520,14 @@ We define a projection $\mathtt{F}_{c}$ that maps a fine-grained trace $S_f$ to 
 \begin{example}
 Fig.\ref{fig:pssfinetrace} presents a well-formed fine-grained trace:\\
  \quad\quad\quad\quad$S_f = c_{w1}c_r$\texttt{\#2\#1}$r_{w1}c_{w2}$\texttt{\#1\#3}$r_{w2}c_{w3}$\texttt{\#1}$r_{w3}c_{w4}$\texttt{\#1\#4}$r_{r}r_{w4}$\\
-and the $\prec$ relation is shown in an obvious manner in the figure. 
-Application of $\mathtt{F}_{c}$ to this fine-grained trace results in the coarse-grained trace in Fig.\ref{fig:psscoarsetrace}.
+and the $\prec$ relations between events are obvious. 
+Application of $\mathcal{F}_{c}$ to this fine-grained trace results in the coarse-grained trace in Fig.\ref{fig:psscoarsetrace}.
 \end{example}
 
 \begin{myDef}
-The linearizability of $S_f$ depends on the linearizability of $\mathtt{F}_c(S_f)$, i.e., if $\mathtt{F}_c(S_f)$ is linearizable, then $S_f$ is linearizable. \end{myDef}
+The linearizability of $S_f$ depends on the linearizability of $\mathcal{F}_c(S_f)$, i.e., if $\mathcal{F}_c(S_f)$ is linearizable, then $S_f$ is linearizable. \end{myDef}
 
-We define a predicate $\mathtt{L_n}$ to denote the linearizability of $S_f$, i.e., if $S_f$ is linearizable, then $\mathtt{L_n}(S_f)$ is true.
+We define a predicate $\mathcal{L}_n$ to denote the linearizability of $S_f$, i.e., if $S_f$ is linearizable, then $\mathcal{L}_n(S_f)$ is true.
 
 
 \section{Critical Data Race Sequence}\label{sec:criticaldataraces}
@@ -534,7 +538,7 @@ In this section, we will analyze linearizability faults on the fine-grained leve
 
 
 
-%Given a coarse-grained trace $S_c$, we define a set $\mathbb{U}$ of fine-grained traces such that all fine-grained traces $S_f$ in $\mathbb{U}$ can be mapped by $\mathtt{F}_c$ to a coarse-grained trace $S'_c$ satisfying that:
+%Given a coarse-grained trace $S_c$, we define a set $\mathbb{U}$ of fine-grained traces such that all fine-grained traces $S_f$ in $\mathbb{U}$ can be mapped by $\mathcal{F}_c$ to a coarse-grained trace $S'_c$ satisfying that:
 %\begin{itemize}
 %  \item $S'_c$ and $S_c$ have the same elements;
 %  \item $\sqsubset_{S_c}\subseteq \sqsubset_{S'_c}$, i.e., $S'_c$ holds the \textit{happen-before} relation in $S_c$.
@@ -556,7 +560,7 @@ Each fine-grained trace $\ft \in \p$ can be mapped to a coarse-grained trace $S'
 \end{myDef}
 
 %\noindent \textbf{Example}
-%Fig.1(c) can be considered as a $\mathbb{P}$ derived from Fig.1(a), and all fine-grained traces $S_f$ such that $\mathtt{F}_c(S_f)$ results in sequential trace $O_1O_2$, $O_2O_1$ or concurrent trace in Fig.1(a) are maintained in this $\mathbb{P}$. It can also be considered as a program whose executions can result in those fine-grained traces.
+%Fig.1(c) can be considered as a $\mathbb{P}$ derived from Fig.1(a), and all fine-grained traces $S_f$ such that $\mathcal{F}_c(S_f)$ results in sequential trace $O_1O_2$, $O_2O_1$ or concurrent trace in Fig.1(a) are maintained in this $\mathbb{P}$. It can also be considered as a program whose executions can result in those fine-grained traces.
 Intuitively, a program $\mathbb{P}$ maintains all %possible 
 fine-grained traces that preserve the \textit{happen-before} relation of $S_c$.
 %after an application of $\mathtt{F_c}$. 
@@ -701,7 +705,7 @@ After building an interleaving tree, we design a symbol system to label the tree
 
 
 
-Since each leaf $l_f\in N_{lf}$ corresponds to a fine-grained trace from root to itself, we directly apply $\mathtt{L_n}$ to $l_f$ to check the linearizability of the corresponding fine-grained trace. Here, we take a binary interleaving tree built by traces with two threads to illustrate our symbol system.
+Since each leaf $l_f\in N_{lf}$ corresponds to a fine-grained trace from root to itself, we directly apply $\mathcal{L}_n$ to $l_f$ to check the linearizability of the corresponding fine-grained trace. Here, we take a binary interleaving tree built by traces with two threads to illustrate our symbol system.
 
 \begin{wrapfigure}[18]{c}{0.6\textwidth}
 \centering
@@ -712,11 +716,11 @@ Since each leaf $l_f\in N_{lf}$ corresponds to a fine-grained trace from root to
 In our system, a subtree $\mathcal{T}ree(N_{d})$ rooted at $N_d$ and holding a leaf set $N_{lf}$ can be grouped into one of the following categories:
 \begin{itemize}
   \item \textit{OK}-tree --- all fine-grained traces are linearizable,\\
-  $\forall l_f \left( l_f\in N_{lf} \rightarrow \mathtt{L_n}(l_f)\right)$
+  $\forall l_f \left( l_f\in N_{lf} \rightarrow \mathcal{L}_n(l_f)\right)$
   \item \textit{ERR}-tree --- all fine-grained traces are non-linearizable,\\
-  $\forall l_f \left(  l_f\in N_{lf} \rightarrow \neg \mathtt{L_n}(l_f)\right)$
+  $\forall l_f \left(  l_f\in N_{lf} \rightarrow \neg \mathcal{L}_n(l_f)\right)$
   \item \textit{MIX}-tree --- both linearizable and non-linearizable fine-grained traces exist,\\
-  $\exists l_{f1} ( l_{f1}\in N_{lf} \wedge \mathtt{L_n}(l_{f1})) \wedge  \exists l_{f2} (l_{f2}\in N_{lf} \wedge \neg \mathtt{L_n}(l_{f2}))$
+  $\exists l_{f1} ( l_{f1}\in N_{lf} \wedge \mathcal{L}_n(l_{f1})) \wedge  \exists l_{f2} (l_{f2}\in N_{lf} \wedge \neg \mathcal{L}_n(l_{f2}))$
 
 \end{itemize}
 
@@ -759,7 +763,7 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
         \State $\mathit{Label} = \set{W, B, G, GG, WG, BG}$
         \Function {LabelNode}{$N_d$}
             \If{$!\mathtt{Left}(N_d)  \& !\mathtt{Right}(N_d)$}
-                \State \textbf{if} {$\mathtt{L_n}(N_d)$} \textbf{then} \Return $\mathit{W}$
+                \State \textbf{if} {$\mathcal{L}_n(N_d)$} \textbf{then} \Return $\mathit{W}$
                     %\State \Return $\mathit{W}$
                 \State \textbf{else} \Return $\mathit{B}$
                     %\State \Return $\mathit{B}$
