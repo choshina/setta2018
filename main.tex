@@ -437,7 +437,7 @@ Note that here correctness criterion is specified by concurrent data structures,
 A coarse-grained trace $S$ of an object is linearizable if there exists a sequential trace $S'$ in the specification of the object such that:
 \begin{enumerate}
   \item $S = S'$, i.e., operations in $S$ and $S'$ are the same;
-  \item $\sqsubset_S \subseteq \sqsubset_{S'}$, i.e., given two operations $O_1$, $O_2$ in $S$, $S'$, if $O_1\sqsubset_S O_2$, then $O_1\sqsubset_{S'} O_2$.
+  \item $\sqsubset_S \subseteq \sqsubset_{S'}$, i.e., given two operations $O_1$ and $O_2$ respectively in $S$ and $S'$, if $O_1\sqsubset_S O_2$, then $O_1\sqsubset_{S'} O_2$.
 \end{enumerate}
 \end{myDef}
 
@@ -497,7 +497,7 @@ We define a projection $\mathcal{F}_{c}$ that maps a fine-grained trace $S_f$ to
   \item The operation identifier of any memory access event in $S_f$ is consistent with that of one pair of  matching invocation/response events  in $S_f$, i.e.,
   %For any memory access event in $S_f$, its operation identifier is one that occurs in an invocation/response event in $\mathcal{F}_c(S_f)$, i.e., 
       $\forall e_m\exists e_o.(\mathtt{op}(e_m)= \mathtt{op}(e_o))$, where $e_m$ is a memory access event and $e_o$ is either of a pair of matching invocation/response events in $S_f$.
-  \item All memory access events with operation identifier $o$ lie between the consistent matching invocation/response event pair with the operation identifier $o$, i.e.,
+  \item All the memory access events with operation identifier $o$ lie between the consistent matching invocation/response event pair with the operation identifier $o$, i.e.,
       $\forall e.((\mathtt{op}(e)=o)\to(c\prec e\prec r))$, where $e$ is a memory access event in $S_f$, and $c,r$ are matching invocation and response events with thread identifier $o$.
   %For any matching events $c\in \ecall$ and $r\in \eresp$ such that $\mathtt{op}(c)=\mathtt{op}(r)=o$, then: \\ $\forall e\in \mathsf{M}.( \mathtt{op}(e) = o \longrightarrow c\prec e \prec r)$.
 \end{itemize}
