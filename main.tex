@@ -176,7 +176,215 @@ existing tree search techniques such as partial-order reduction but we emphasize
 \noindent\textbf{\textit{Organization.}} The rest of the paper is organized as follows. Section \ref{sec:motivatingeg} presents an example to illustrate our motivation. Section \ref{sec:fgtracemodel} introduces our fine-grained trace model. Section \ref{sec:criticaldataraces} presents the key notion of CDRS based on our fine-grained trace model. Section \ref{sec:intertree} shows the labeled interleaving tree model, and the pattern of CDRSes. Section \ref{sec:implementation} reports the implementation and experiments about our prototype tool FGVT. Section \ref{sec:conclusion} concludes the paper.
 
 \section{Motivating Example}\label{sec:motivatingeg}
-\input{motiveg}
+
+In this section, we illustrate the motivation of this work through a buggy concurrent data structure \textit{PairSnapShot} \cite{DBLP:conf/sac/LongZ16}.
+
+\begin{wrapfigure}[15]{r}{0.55\textwidth}
+\centering
+    \begin{small}
+ \vspace{-0.8cm}
+        \begin{verbatim}
+    PairSnapShot:
+        int d[2];
+        write(i,v){
+            d[i] = v;                #1
+        }
+        Pair read(){
+            while(true){
+                int x = d[0];        #2
+                int y = d[1];        #3
+                if(x == d[0])        #4
+                    return <x,y>;
+            }
+        }
+        \end{verbatim}
+        \vspace{-1cm}
+        \end{small}
+        \caption{A concurrent data structure: PairSnapShot}
+        \label{fig:pairsnapshot}
+\end{wrapfigure}
+
+
+Fig.\ref{fig:pairsnapshot} shows a simplified version of PairSnapShot, where it holds an array \texttt{d} of size 2. A \texttt{write(i,v)} operation writes \texttt{v} to \texttt{d[i]}, while a \texttt{read} \texttt{$\to \langle v_0,v_1\rangle$} operation reads the values of \texttt{d[0]} and \texttt{d[1]}, which are $v_0$ and $v_1$, respectively.
+
+ A correctness criterion of PairSnapShot is that \texttt{read} should always return the values of the same moment. However, 
+Fig.~\ref{fig:psscoarsetrace} shows a concurrent execution in which the return values of \texttt{read} do not exist at any moment of the execution. 
+In Fig.~\ref{fig:psscoarsetrace}, time moves from left to right; dark lines indicate the time intervals of operations and  
+the short vertical lines at the both ends of a dark line represent the moment when an operation is invoked and returned, respectively.
+A label ${t:(v_0,v_1)}$ indicates that at the moment $t$,  \texttt{d[0]} is $v_0$ and \texttt{d[1]} is $v_1$.
+  The operation \texttt{read()} on Thread 2 returns a value $\mathtt{\pair{1,2}}$,
+  which is not consistent with value of any moment. 
+  %The `\texttt{x}' labels in Fig.\ref{fig:pairsnapshot} mark the moments when each instruction takes effects, which explains exactly the cause of the linearizability fault.
+
+The reason of this violation can be found out by enumerating the possible executing orders of memory access events which is labeled by \texttt{\#} in Fig.~\ref{fig:pairsnapshot}. 
+One possible order that can trigger the violation is illustrated in Fig.~\ref{fig:psscoarsetrace}, in which ``\texttt{x}'' indicate the executing moments of the corresponding memory access events. 
+Actually, this model checking approach is the most common way to locate the root cause of concurrency bugs, and has been studied in many existing literatures.
+Here, our focus is not on how to find this fine-grained executing order, but to study how the thread execution order, in which data race exists, influences the final result of linearizability.
+
+%The fine-grained root cause can be explained by the temporal order of instructions labeled by ``\texttt{x}''. Since \texttt{d[0]} and \texttt{d[1]} should be considered as a whole (a pair), instructions in \texttt{write} and \texttt{read} should accordingly be considered accessing the whole pair, and thus data races exist there. In this execution, all data races between instructions of \texttt{write} and \texttt{read} together result in the linearizability fault, and all ones are necessary to trigger the linearizability fault.
+
+
+
+\begin{figure}[!ht]
+\centering
+\setlength{\unitlength}{0.8cm}
+\begin{picture}(10,2.5)
+\thinlines
+
+\multiput(1.7,1.5)(0.2,0){44}{\line(1,0){0.1}}
+\thicklines
+\put(2.0,1.5){\line(1,0){1.7}}
+\put(4.1,1.5){\line(1,0){1.7}}
+\put(6.2,1.5){\line(1,0){1.7}}
+\put(8.3,1.5){\line(1,0){1.7}}
+\begin{small}
+\put(0,1.4){Thread 1}
+\put(1.9,1.7){$\mathtt{write(0,2)}$}
+\put(4.0,1.7){$\mathtt{write(1,2)}$}
+\put(6.1,1.7){$\mathtt{write(1,1)}$}
+\put(8.2,1.7){$\mathtt{write(0,1)}$}
+\put(0,0.4){Thread 2}
+
+\put(1.0,2.3){$t_1:\pair{1,1}$}
+\put(3.0,2.3){$t_2:\pair{2,1}$}
+\put(5.0,2.3){$t_3:\pair{2,2}$}
+\put(7.1,2.3){$t_4:\pair{2,1}$}
+\put(9.2,2.3){$t_5:\pair{1,1}$}
+
+\thinlines
+
+\multiput(1.7,0.5)(0.2,0){44}{\line(1,0){0.1}}
+\thicklines
+\put(2.3,0.5){\line(1,0){7.5}}
+\put(4.6,0.7){\color{red}{$\mathtt{read\to \pair{1,2}}$}}
+
+\put(2.3,0.4){\line(0,1){0.2}}
+\put(9.8,0.4){\line(0,1){0.2}}
+
+\put(2.0,1.4){\line(0,1){0.2}}
+\put(4.1,1.4){\line(0,1){0.2}}
+\put(6.2,1.4){\line(0,1){0.2}}
+\put(8.3,1.4){\line(0,1){0.2}}
+
+\put(3.7,1.4){\line(0,1){0.2}}
+\put(5.8,1.4){\line(0,1){0.2}}
+\put(7.9,1.4){\line(0,1){0.2}}
+\put(10,1.4){\line(0,1){0.2}}
+
+\thinlines
+\multiput(1.8,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(3.9,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(6.0,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(8.1,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(10.2,0.3)(0,0.2){10}{\line(0,1){0.1}}
+
+
+
+
+
+\end{small}
+\end{picture}
+\caption{A buggy trace of PairSnapShot}
+\label{fig:psscoarsetrace}
+\end{figure}
+
+
+\vspace{-1cm}
+
+\begin{figure}[!ht]
+\centering
+\setlength{\unitlength}{0.8cm}
+\begin{picture}(10,2.5)
+\thinlines
+
+\multiput(1.7,1.5)(0.2,0){44}{\line(1,0){0.1}}
+
+\begin{small}
+\put(0,1.4){Thread 1}
+
+\put(0,0.4){Thread 2}
+
+\put(1.0,2.3){$t_1:\pair{1,1}$}
+\put(3.0,2.3){$t_2:\pair{2,1}$}
+\put(5.0,2.3){$t_3:\pair{2,2}$}
+\put(7.1,2.3){$t_4:\pair{2,1}$}
+\put(9.2,2.3){$t_5:\pair{1,1}$}
+
+\thinlines
+
+\multiput(1.7,0.5)(0.2,0){44}{\line(1,0){0.1}}
+
+
+
+
+
+\thinlines
+\multiput(1.8,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(3.9,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(6.0,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(8.1,0.3)(0,0.2){10}{\line(0,1){0.1}}
+\multiput(10.2,0.3)(0,0.2){10}{\line(0,1){0.1}}
+
+
+
+
+\put(3.0,1.4){\texttt{x}}
+\put(4.6,1.4){\texttt{x}}
+\put(6.6,1.4){\texttt{x}}
+\put(8.8,1.4){\texttt{x}}
+
+\put(2.7,0.4){\texttt{x}}
+\put(5.4,0.4){\texttt{x}}
+\put(9.3,0.4){\texttt{x}}
+
+
+
+\put(2.3,0.4){\line(0,1){0.2}}
+\put(9.8,0.4){\line(0,1){0.2}}
+
+\put(2.0,1.4){\line(0,1){0.2}}
+\put(4.1,1.4){\line(0,1){0.2}}
+\put(6.2,1.4){\line(0,1){0.2}}
+\put(8.3,1.4){\line(0,1){0.2}}
+
+\put(3.7,1.4){\line(0,1){0.2}}
+\put(5.8,1.4){\line(0,1){0.2}}
+\put(7.9,1.4){\line(0,1){0.2}}
+\put(10,1.4){\line(0,1){0.2}}
+
+\put(2.1,0.1){$c_r$}
+\put(9.8,0.1){$r_r$}
+
+\end{small}
+\begin{scriptsize}
+
+\put(2.9,1.1){\texttt{\#1}}
+\put(4.6,1.1){\texttt{\#1}}
+\put(6.6,1.1){\texttt{\#1}}
+\put(8.8,1.1){\texttt{\#1}}
+
+\put(2.7,0.1){\texttt{\#2}}
+\put(5.4,0.1){\texttt{\#3}}
+\put(9.3,0.1){\texttt{\#4}}
+
+\put(2.0,1.1){$c_{w1}$}
+\put(4.0,1.1){$c_{w2}$}
+\put(6.0,1.1){$c_{w3}$}
+\put(8.1,1.1){$c_{w4}$}
+
+\put(3.4,1.1){$r_{w1}$}
+\put(5.4,1.1){$r_{w2}$}
+\put(7.5,1.1){$r_{w3}$}
+\put(9.6,1.1){$r_{w4}$}
+\end{scriptsize}
+
+\end{picture}
+\caption{An executing order of memory access events triggering the violation in Fig.~{\ref{fig:psscoarsetrace}}}
+\label{fig:pssfinetrace}
+\end{figure}
+
+
+
 
 
 \section{Preliminary}\label{sec:fgtracemodel}
@@ -417,7 +625,7 @@ $\mathit{SE_i}\bullet e_{i2}$ that are linearizable.\\
 \end{myDef}
 
 
-Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a $\mathbb{P}$ may lead to different linearizability faults, what we focus on is just the linearizability of the trace and thus we consider all linearizability faults identical in terms of the aspect to lead the trace non-linearizable.
+Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a program $\mathbb{P}$ may lead to different linearizability faults, what we focus on is just the linearizability of the trace and thus we consider all linearizability faults identical in terms of the aspect to lead the trace non-linearizable.
 
 \begin{example} 
 
