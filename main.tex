@@ -427,7 +427,7 @@ A \textit{trace} $S$ is a finite sequence of events $e(\mathit{Arg})^{\left\lang
   \item Each operation identifier is used in at most one invocation/response:\\
   $\mathtt{op}(e_i)=\mathtt{op}(e_j)$ and $i<j$ implies $e_i \diamond e_j$
 \end{itemize}
- A well-formed trace $S$ can also be treated as a partial order set $\pair{S,\sqsubset_S}$ of operations on \textit{happen-before} relation $\sqsubset_S$ between operations, where $S$ is called a \textit{coarse-grained trace} (or \textit{coarse-grained history}). The \textit{happen-before} relation $\sqsubset_S$ is defined as that: assuming two operations $O_1,O_2$ in $S$ are formed by $c_1,r_1$ and $c_2,r_2$ respectively, then $O_1\sqsubset_S O_2$ if and only if $r_1\prec c_2$.
+ A well-formed trace $S$ can also be treated as a partial order set $\pair{S,\sqsubset_S}$ of operations on \textit{happen-before}  relation $\sqsubset_S$ between operations, where $S$ is called a \textit{coarse-grained trace} (or \textit{coarse-grained history}). The \textit{happen-before} relation $\sqsubset_S$ is defined as that: assuming two operations $O_1,O_2$ in $S$ are formed by $c_1,r_1$ and $c_2,r_2$ respectively, then $O_1\sqsubset_S O_2$ if and only if $r_1\prec c_2$.
 
 \begin{example}
 Fig.~\ref{fig:psscoarsetrace} shows such a well-formed trace:
@@ -607,7 +607,7 @@ However, there also exist other situations, such as \textit{PairSnapShot} in Sec
 Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$ where $e_1, e_2\in \ce$, we say $e_1$ \textit{wins} $e_2$ with respect to a fine-grained trace $S_f$ if 
  $\se\cdot e_1e_2 \subseteq_{pre} S_f $.
  
- Given a $\mathbb{P}$, we define a partial order relation $<_{dr}$ between two HLDRs $\mathsf{D}_1=\left\langle \mathit{Var}_1, \se_1, \ce_1\right\rangle$ and $\mathsf{D}_2 = \left\langle \mathit{Var}_2, \se_2, \ce_2\right\rangle$, that is, if $\se_1\subseteq_{pre}\se_2$, then $\mathsf{D}_1<_{dr}\mathsf{D}_2$. 
+ Given a program $\mathbb{P}$, we define a partial order relation $<_{dr}$ between two HLDRs $\mathsf{D}_1=\left\langle \mathit{Var}_1, \se_1, \ce_1\right\rangle$ and $\mathsf{D}_2 = \left\langle \mathit{Var}_2, \se_2, \ce_2\right\rangle$ as that if $\se_1\subseteq_{pre}\se_2$, then $\mathsf{D}_1<_{dr}\mathsf{D}_2$. 
 
 
 
