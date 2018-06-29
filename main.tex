@@ -618,7 +618,7 @@ Therefore, the $\mathbb{P}$ that satisfies this condition corresponds to a seque
 
 \begin{myDef}[Critical data race sequence]\label{def:cdrs}
     Let  $\mathbb{P}$ be a concurrent program, $\mathfrak{F}$ be a linearizability fault. A \textit{Critical Data Race Sequence} (\textit{CDRS}) with respect to
- $\mathfrak{F}$ is a total order set of data races $\{\mathsf{D}_1,\mathsf{D}_2,\cdots,\mathsf{D}_n\}$
+ $\mathfrak{F}$ is a total order set of data races $\{\mathsf{D}_1,\mathsf{D}_2,\cdots,\mathsf{D}_n\} = $
 
 
 $\Set{\begin{array}{ccc}
@@ -631,12 +631,12 @@ $\Set{\begin{array}{ccc}
 
 \noindent where the relation $<_{dr}$ exists as $\mathsf{D}_1 <_{dr} \dr_2 <_{dr} \cdots  <_{dr} \mathsf{D}_n$.
 A CDRS satisfies that there exist two events $e_{i1}, e_{i2}\in \ce_i$ ($i\in{1,\dots,n}$)   that $e_{i1}$'s win and
-$e_{i2}$'s win lead the program to ``inverse'' consequences. Here the meaning of ``inverse'' includes that
+$e_{i2}$'s win lead the program to ``inverse'' consequences. Here, ``inverse'' includes two cases:
 \begin{itemize}
 \item If all the fine-grained traces $S_{f1}$ such that $\se\cdot e_{i1} \subseteq_{pre}$ are linearizable, then there exist fine-grained traces $S_{f2}$ such that 
-$\mathit{SE_i}\cdot e_{i2}$ that are non-linearizable;
+$\mathit{\se_i}\cdot e_{i2}$ that are non-linearizable;
 \item If all the fine-grained traces $S_{f1}$ such that $\se\cdot e_{i1} \subseteq_{pre}$ are non-linearizable, then there exist fine-grained traces $S_{f2}$ such that 
-$\mathit{SE_i}\cdot e_{i2}$ that are linearizable.\\
+$\mathit{\se_i}\cdot e_{i2}$ that are linearizable.\\
 \end{itemize}
 \end{myDef}
 
