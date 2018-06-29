@@ -598,9 +598,11 @@ $\ce$ is a set of two or more memory access events $e(\mathit{Arg})^{\left\langl
 
 \end{myDef}
 
-Note that here the decision of $\mathit{Var}$ depends on the algorithm of the shared object. The most common situation is that several events 
-simultaneously access the same memory location and do some read or modification. 
-However, there also exist other situations, such as \textit{PairSnapShot} in Section \ref{sec:motivatingeg}, in which case several memory locations should be considered as a whole.
+Note that here the elements of $\mathit{Var}$ depends on the algorithm of the object. The most common situation is that 
+$\mathit{Var}$ contains one shared variable which is accessed by 
+several events 
+simultaneously.
+However, there also exist other situations, such as \textit{PairSnapShot} in Section \ref{sec:motivatingeg}, in which several memory locations should be considered globally.
 
 Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$ where $e_1, e_2\in \ce$, we say $e_1$ \textit{wins} $e_2$ with respect to a fine-grained trace $S_f$ if 
  $\se\cdot e_1e_2 \subseteq_{pre} S_f $.
