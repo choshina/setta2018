@@ -103,7 +103,7 @@ exhaust the \textit{thread scheduling} space to replay and analyze the buggy exe
 Thread scheduling is usually described as a sequence of thread identifiers that reflects the order of thread executions and context switches.
  In \cite{Choi2000Deterministic,DBLP:journals/concurrency/EdelsteinFGNRU03,DBLP:journals/entcs/Stoller02}, 
  the thread schedule in one buggy execution is recorded and then used to reproduce the same bugs during the rerun. 
- In many literatures, there is also another notion called \textit{fine-grained trace} that is usually defined as a sequence of memory access instructions and 
+Another common notion in many literatures is called \textit{fine-grained trace} that is usually defined as a sequence of memory access instructions and 
  also corresponds to one specific thread schedule.
  In \cite{DBLP:conf/issta/KhoshnoodKW15}, 
  fine-grained traces and correctness criteria are encoded as logical formulas to diagnose and repair concurrency bugs through model checking. 
@@ -113,7 +113,7 @@ Thread scheduling is usually described as a sequence of thread identifiers that 
  However, the targets of most of the aforementioned works are general concurrency faults, without consideration towards the nature of some specific concurrency fault.
 
 In this paper, we consider the linearizability correctness criterion. Linearizability \cite{DBLP:journals/toplas/HerlihyW90} is a widely-accepted correctness criterion for concurrent data structures or concurrent objects. 
-Intuitively, it means that every operation on a shared object appears to take effect instantaneously at some point, called \textit{linearization point}, 
+Intuitively, it means that every operation on a shared object appears to take effect instantaneously at some point, known as \textit{linearization point}, 
 between the invocation and response of the operation, and the behavior exposed by the sequence of operations serialized at their linearization points must conform to the sequential specification of the shared object.
 
 
@@ -131,9 +131,10 @@ Generally, these techniques emphasize acceleration towards the state space explo
 
 
 
- This paper mainly addresses the issue of the relation between data race and linearizability faults. 
+ This paper makes clear the relation between data race and linearizability faults. 
+ The occurrence of linearizability faults is due to the existence of data races, however, not all the data races is critical to linearizability faults.
  We propose a notion called \textit{Critical Data Race Sequence} (\textit{CDRS}) based on a fine-grained trace model. 
- Intuitively, a CDRS contains a sequence of data races that decisively result in linearizability faults, 
+ Intuitively, a CDRS contains a sequence of data races that decisively causes a linearizability fault, 
  and thus the existence of CDRSes implies that the concurrent program is potential to produce non-linearizable traces. 
  Furthermore, in order to identify CDRSes, we model all the possible fine-grained traces of a concurrent execution as an \textit{interleaving tree}, 
  where each node corresponds to a data race and each path from the root to a leaf node corresponds to a fine-grained trace. 
