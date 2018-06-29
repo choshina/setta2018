@@ -586,7 +586,7 @@ $\ce$ is a set of two or more memory access events $e(\mathit{Arg})^{\left\langl
 \begin{itemize}
 \item each event $e$ has a distinct thread identifier $o$;
 \item each event $e$ accesses some shared variables in $\mathit{Var}$;
-\item no temporal relation between each pair of the events;
+%\item no temporal relation between each pair of the events;
 \item for any permutation $S_p$ of events in $\ce$, there exists a fine-grained trace $S\in \p$ such that $\se \cdot S_p \subseteq_{pre} S$.
 \end{itemize}
 %$\ce$ satisfies that:
@@ -603,7 +603,7 @@ simultaneously access the same memory location and do some read or modification.
 However, there also exist other situations, such as \textit{PairSnapShot} in Section \ref{sec:motivatingeg}, in which case several memory locations should be considered as a whole.
 
 Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$ where $e_1, e_2\in \ce$, we say $e_1$ \textit{wins} $e_2$ with respect to a fine-grained trace $S_f$ if 
- $\se\cdot e_1e_2 \subseteq S_f $.
+ $\se\cdot e_1e_2 \subseteq_{pre} S_f $.
  
  Given a $\mathbb{P}$, we define a partial order relation $<_{dr}$ between two HLDRs $\mathsf{D}_1=\left\langle \mathit{Var}_1, \se_1, \ce_1\right\rangle$ and $\mathsf{D}_2 = \left\langle \mathit{Var}_2, \se_2, \ce_2\right\rangle$, that is, if $\se_1\subseteq_{pre}\se_2$, then $\mathsf{D}_1<_{dr}\mathsf{D}_2$. 
 
