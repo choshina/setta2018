@@ -3,6 +3,8 @@ Major:
 Review 1
 - The method is incomplete: Programs that are fault-free (wrt linearizability) may also have a high-level data race. Thus, I would have expected some description of where false-positives could arise.
 
+有误报吗？
+
 - Timing information for the tools should have been presented. Since this is an incomplete method, I would have expected the search to be scale to more than two threads. Is this possible?
 
 
