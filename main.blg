@@ -1,52 +1,46 @@
-This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2017)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-White space in argument---line 12 of file main.aux
- : \citation{DBLP:conf/popl/BouajjaniEEH15,
- :                                          DBLP:conf/pldi/BurckhardtDMT10, DBLP:conf/popl/BouajjaniEEH15, DBLP:conf/forte/HornK15a, DBLP:conf/sac/LongZ16, DBLP:journals/concurrency/Lowe17}
-I'm skipping whatever remains of this command
 The style file: splncs04.bst
 Database file #1: bare_conf.bib
-You've used 25 entries,
+You've used 29 entries,
             2850 wiz_defined-function locations,
-            764 strings with 11807 characters,
-and the built_in function-call counts, 15930 in all, are:
-= -- 1424
-> -- 420
-< -- 30
-+ -- 174
-- -- 148
-* -- 933
-:= -- 1958
-add.period$ -- 43
-call.type$ -- 25
-change.case$ -- 185
+            786 strings with 12938 characters,
+and the built_in function-call counts, 18434 in all, are:
+= -- 1639
+> -- 503
+< -- 33
++ -- 210
+- -- 178
+* -- 1080
+:= -- 2274
+add.period$ -- 50
+call.type$ -- 29
+change.case$ -- 217
 chr.to.int$ -- 0
-cite$ -- 25
-duplicate$ -- 1392
-empty$ -- 1446
-format.name$ -- 170
-if$ -- 3595
+cite$ -- 29
+duplicate$ -- 1604
+empty$ -- 1673
+format.name$ -- 204
+if$ -- 4154
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 254
-newline$ -- 81
-num.names$ -- 50
-pop$ -- 515
+int.to.str$ -- 29
+missing$ -- 296
+newline$ -- 93
+num.names$ -- 58
+pop$ -- 607
 preamble$ -- 1
-purify$ -- 124
+purify$ -- 147
 quote$ -- 0
-skip$ -- 525
+skip$ -- 600
 stack$ -- 0
-substring$ -- 1064
-swap$ -- 767
-text.length$ -- 30
+substring$ -- 1214
+swap$ -- 875
+text.length$ -- 33
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 100
+type$ -- 114
 warning$ -- 0
-while$ -- 144
-width$ -- 27
-write$ -- 255
-is.kanji.str$ -- 0
-(There was 1 error message)
+while$ -- 165
+width$ -- 31
+write$ -- 294

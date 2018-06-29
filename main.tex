@@ -66,7 +66,7 @@
 % an abbreviated paper title here
 %
 \author{Yang Chen\inst{1,2} \and
-Zhenya Zhang\inst{3}\thanks{The work was partially done when the author was a student at Institute of Software, Chinese Academy of Sciences} \and
+Zhenya Zhang\inst{3}\thanks{The work was partially done when the author was a student at the Institute of Software, Chinese Academy of Sciences} \and
 Peng Wu\inst{1,2}\and
 Yu Zhang\inst{1,2}}
 %
@@ -93,71 +93,72 @@ Linearizability is an important correctness criterion for concurrent objects. Ex
 %
 \section{Introduction}\label{sec:introduction}
 Localization of concurrency faults has been a hot topic for a long time. 
-Multiple trials on a concurrent program with the same inputs may result in nondeterministic outputs. Hence, it is non-trivial to decide whether a concurrent program contains a bug. Moreover, even if a concurrent program is known buggy, it is difficult to reproduce the same bug or to determine the root cause.
+Multiple trials on a concurrent program with the same inputs may result in nondeterministic outputs. Hence, it is non-trivial to decide whether a concurrent program is buggy. Moreover, even if a concurrent program is known to contain a bug, it is difficult to reproduce the bug or to determine its root cause.
 
-Efforts have been devoted to addressing the problem of localization of concurrency faults. The very basic way is to exhaustively explore the \textit{thread schedule} space to replay and analyze the buggy executions.
+Efforts have been devoted to addressing the challenge of the localization of concurrency faults. The very basic way is to exhaustively explore the \textit{thread schedule} space to replay and analyze the buggy executions.
 %and these works mainly aim to replay and locate concurrency faults through recording and intervening \textit{thread scheduling}. 
 A thread schedule is usually described as a sequence of thread identifiers that reflects the order of thread executions and context switches. 
-In \cite{Choi2000Deterministic,DBLP:journals/concurrency/EdelsteinFGNRU03,DBLP:journals/entcs/Stoller02}, the thread schedule in a buggy execution is recorded and then replayed to reproduce the same bug. 
-An execution of a concurrent program is often represented as a \textit{fine-grained trace} that is defined as a sequence of memory access instructions with respect to a specific thread schedule. 
-In \cite{DBLP:conf/issta/KhoshnoodKW15}, fine-grained traces and correctness criteria are encoded as logical formulas to diagnose and repair concurrency bugs through model checking. Generally, such fine-grained diagnosis  suffers from the well-known state space explosion problem. Techniques have been presented to address this problem by accelerating the localization process, e.g., with heuristic rules \cite{Ben2003Heuristics} or iterative context bounding \cite{DBLP:conf/pldi/MusuvathiQ07}. However, most of the aforementioned works target at general concurrency faults, without cares about the nature of specific concurrency faults.
+In \cite{Choi2000Deterministic,DBLP:journals/entcs/Stoller02,DBLP:journals/concurrency/EdelsteinFGNRU03}, the thread schedule in a buggy execution is recorded and then replayed to reproduce the same bug. 
+An execution of a concurrent program can be represented as a \textit{fine-grained trace}, which is defined as a sequence of memory access instructions with respect to a specific thread schedule. 
+In \cite{DBLP:conf/issta/KhoshnoodKW15}, fine-grained traces and correctness criteria are encoded as logical formulas to diagnose and repair concurrency bugs through model checking. Generally speaking, such fine-grained analysis suffers from the well-known state space explosion problem. Acceleration techniques have been presented to address this problem with, e.g., heuristic rules \cite{Ben2003Heuristics} or iterative context bounding \cite{DBLP:conf/pldi/MusuvathiQ07}. However, most of these works aim at general concurrency faults, without cares about their nature or root causes.
 
-In this paper, we focus on linearizability faults. Linearizability \cite{DBLP:journals/toplas/HerlihyW90} is a widely-accepted correctness criterion for concurrent data structures or concurrent objects. 
+In this paper, we focus on linearizability faults. Linearizability \cite{DBLP:journals/toplas/HerlihyW90} is a widely accepted correctness criterion for concurrent data structures or concurrent objects. 
 Intuitively, it means that every operation on a shared object appears to take effect instantaneously at some point, known as a \textit{linearization point}, 
 between the invocation and response of the operation, and the behavior exposed by the sequence of operations serialized at their linearization points must conform to the sequential specification of the shared object.
 
-More attentions have been paid to linearizability verification recently \cite{DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/pldi/BurckhardtDMT10,DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/forte/HornK15a,DBLP:conf/sac/LongZ16,DBLP:journals/concurrency/Lowe17}.     
-In these works, an execution of a concurrent program is represented as a \textit{coarse-grained trace} that is defined as a partial order set of object methods. 
+More attentions have been paid on linearizability verification recently \cite{DBLP:conf/pldi/BurckhardtDMT10,DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/forte/HornK15a,DBLP:conf/sac/LongZ16,DBLP:journals/concurrency/Lowe17}.     
+In these works, an execution of a concurrent program is represented as a \textit{coarse-grained trace}, which is defined as a partial order set of object methods. 
 %focusing on the linearizability verification of the given traces based on a coarse-grained trace model.
 %Usually the traces in such works are described as a partial order set of object methods, and 
-The basic approach of linearizability checking is to examine whether all the possible topologically sorted sequential traces satisfy the correctness criteria of the shared object. This approach also suffers from the state space explosion problem. Acceleration strategies have been proposed in these works to address this problem.  
+The basic approach of linearizability checking is to examine whether all the possible topologically sorted sequential traces satisfy the correctness criterion of the shared object. This approach also suffers from the state space explosion problem. Acceleration strategies have been proposed in these works to address this problem, too.  
 %in the other level compared to the fine-grained localization work, and thus
 %most of the existing works propose acceleration strategies to address this problem.
 However, since the coarse-grained trace model concerns only method invocations and responses, 
-these techniques cannot provide a way to determine the root causes of linearizability faults.
+these techniques cannot determine the root causes of linearizability faults.
 %but still suffers from the state space explosion problem. Moreover, even when a violation of linearizability is detected, no clue to its root cause is provided by these techniques. A coarse-grained trace is composed only of operation invocations and responses, hence keeps the fine-grained memory access events away from being investigated in reasoning about linearizability faults.
 
-It is worth to mention that data race and linearizability faults are different but related concepts. 
+It is worth to mention that data races and linearizability faults are different but related concepts. 
 The occurrence of linearizability faults is due to the existence of data races. But not all the data races are critical to the linearizability faults. 
 In this paper, we propose a notion called \textit{Critical Data Race Sequence} (\textit{CDRS}) based on the fine-grained trace model. 
-Intuitively, a CDRS contains a sequence of data races that decisively causes a linearizability fault in a concurrent program. 
+Intuitively, a CDRS contains a sequence of data races that can decisively cause a linearizability fault in a concurrent program. 
 Thus, the existence of a CDRS implies that the concurrent program can potentially produce a non-linearizable trace. 
 In order to identify a CDRS, we model all the possible fine-grained traces of a concurrent execution as an \textit{interleaving tree}, 
 where each node corresponds to a data race, and each path from the root to a leaf node corresponds to a fine-grained trace. 
 We label each node with a pre-defined symbol, depending on the linearizability of all the paths passing through the node. 
-Then, the existence of a CDRS can be determined with certain pattern of the node sequences in the labeled interleaving tree.
+Then, the existence of a CDRS can be determined based on certain pattern of the node sequences in the labeled interleaving tree.
  
+In order to overcome the state space explosion problem, we divide the localization process into the two levels: the coarse-grained level and the fine-grained level.  On the coarse-grained level, a \textit{minimal} test case is to be synthesized that contains a sufficiently small number of operations to trigger a linearizability fault  \cite{DBLP:conf/seke/ZhangWZ17}. 
+With such a small test case, the number of memory access instructions examined at the fine-grained level is greatly reduced.
+Together with the linearizability checking technique \cite{DBLP:journals/concurrency/Lowe17} and the coarse-grained linearizability fault localization technique \cite{DBLP:conf/seke/ZhangWZ17}, the overall localization process is shown in Fig.\ref{fig:liucheng}, where stage C is concerned by this paper.
 \begin{figure}[ht]
 \centering
 \includegraphics[width = 3.5in]{liucheng.pdf}
 \caption{Labels of nodes}\label{fig:liucheng}
 \end{figure}
 
-In order to overcome the state space explosion problem, we divide the localization process into the two levels: the coarse-grained level and the fine-grained level.  At the coarse-grained level, a \textit{minimal} test case is to be generated that contains a sufficiently small number of operations to trigger a linearizability fault  \cite{DBLP:conf/seke/ZhangWZ17}. 
-With such a small test case, the number of memory access instructions examined at the fine-grained level is greatly reduced.
-Together with the linearizability checking technique \cite{DBLP:journals/concurrency/Lowe17} and the coarse-grained linearizability fault localization technique \cite{DBLP:conf/seke/ZhangWZ17}, the overall localization process is shown in Fig.\ref{fig:liucheng}, where stage C is concerned by this paper.
-
 For the brevity of presentation, Table~\ref{tab:abbreviation} lists the abbreviations used throughout the paper.
 \begin{table}[]
 \centering
-\caption{Abbreviations in this paper}
+\caption{Abbreviations}
 \label{tab:abbreviation}
 \scalebox{0.85}{
-\begin{tabular}{c|c|c|c}
- CDRS & HLDR & CAS&FGVT\\
- \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence& \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace  & \textbf{C}ompare \textbf{A}nd \textbf{S}wap& \textbf{F}ine-\textbf{G}rained \textbf{V}eri\textbf{T}race\\
-   
- 
+\begin{tabular}{l|l}
+\hline
+ CDRS & \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence \\
+ HLDR & \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace \\
+ CAS & \textbf{C}ompare \textbf{A}nd \textbf{S}wap \\
+ FGVT & \textbf{F}ine-\textbf{G}rained \textbf{V}eri\textbf{T}race \\
+\hline
 \end{tabular}}
 \end{table}
 
 \noindent\textbf{\textit{Contributions.}}
 The main contributions of this paper are as follows:
 \begin{itemize}
-  \item We extend the traditional coarse-grained trace model to a fine-grained trace model by adding memory access events. We also extend the notion of linearizability onto fine-grained traces.
-  \item We propose the key notion of \textit{Critical Data Race Sequence} (CDRS) for characterizing the data races that are decisive to linearizability faults.
-  \item We develop a labeled interleaving tree model that contains all the possible fine-grained traces of a concurrent execution. Each node corresponds to a data race and is labeled in a way that can reflect the existence of CDRS through a certain pattern.
-  \item We implement a prototype tool, \textit{FGVT}, for real-world Java concurrent programs. Experiments show that FGVT is effective, in that all the CDRSes reported by FGVT indeed reveal the root causes of linearizability faults.
+  \item We extend the traditional coarse-grained trace model to a \textit{fine-grained trace} model by including memory access events. We also extend the notion of linearizability onto fine-grained traces.
+  \item We propose the notion of \textit{Critical Data Race Sequence} (CDRS), which plays a key role in characterizing the data races that can decisively result in linearizability faults.
+  \item We develop a labeled \textit{interleaving tree} model that contains all the possible fine-grained traces of a concurrent execution. Each node is labeled automatically in a way that can reflect the existence of a CDRS through certain pattern.
+  \item We implement a prototype tool, \textit{FGVT}, for real-world Java concurrent programs. Experiments show that FGVT is rather effective in that all the CDRSes reported by FGVT indeed reveal the root causes of linearizability faults.
 \end{itemize}
 
 \noindent\textbf{\textit{Related work.}} Automated linearizability checking algorithms were presented in \cite{DBLP:conf/pldi/BurckhardtDMT10,DBLP:journals/jpdc/WingG93}, but suffered from a bottleneck of performance. Based on \cite{DBLP:journals/jpdc/WingG93}, optimized algorithms were proposed in \cite{DBLP:journals/concurrency/Lowe17} and \cite{DBLP:conf/forte/HornK15a} through partial order reduction and compositional reasoning, respectively. Model checking was applied in \cite{DBLP:conf/popl/BouajjaniEEH15,DBLP:conf/pldi/EmmiEH15} for linearizability checking, with simplified first-order formulas that can help improve efficiency. Fine-grained traces were introduced in \cite{DBLP:conf/sac/LongZ16} to accelerate linearizability checking. All these work lays a firm foundation for the localization of linearizability faults.
