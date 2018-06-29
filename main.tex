@@ -117,7 +117,7 @@ However, since the coarse-grained trace model concerns only method invocations a
 these techniques cannot determine the root causes of linearizability faults.
 %but still suffers from the state space explosion problem. Moreover, even when a violation of linearizability is detected, no clue to its root cause is provided by these techniques. A coarse-grained trace is composed only of operation invocations and responses, hence keeps the fine-grained memory access events away from being investigated in reasoning about linearizability faults.
 
-It is worth to mention that data races and linearizability faults are different but related concepts. 
+It is worth mentioning that data races and linearizability faults are different but related concepts. 
 The occurrence of linearizability faults is due to the existence of data races. But not all the data races are critical to the linearizability faults. 
 In this paper, we propose a notion called \textit{Critical Data Race Sequence} (\textit{CDRS}) based on the fine-grained trace model. 
 Intuitively, a CDRS contains a sequence of data races that can decisively cause a linearizability fault in a concurrent program. 
