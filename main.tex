@@ -169,8 +169,9 @@ Table~\ref{tab:abbreviation} lists the abbreviations that appear frequently thro
 \label{tab:abbreviation}
 \scalebox{0.85}{
 \begin{tabular}{c|c|c|c}
+\hline
  CDRS & HLDR & CAS&FGVT\\
- \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence& \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace  & \textbf{C}ompare \textbf{A}nd \textbf{S}wap& \textbf{F}ine-\textbf{G}rained \textbf{V}eri\textbf{T}race\\
+ \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence& \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace  & \textbf{C}ompare \textbf{A}nd \textbf{S}wap& \textbf{F}ine-\textbf{G}rained \textbf{V}eri\textbf{T}race\\\hline
    
  
 \end{tabular}}
@@ -197,34 +198,17 @@ existing tree search techniques such as partial-order reduction but we emphasize
 
 \noindent\textbf{\textit{Organization.}} The rest of the paper is organized as follows. Section \ref{sec:motivatingeg} presents an example to illustrate our motivation. Section \ref{sec:fgtracemodel} introduces our fine-grained trace model. Section \ref{sec:criticaldataraces} presents the key notion of CDRS based on our fine-grained trace model. Section \ref{sec:intertree} shows the labeled interleaving tree model, and the pattern of CDRSes. Section \ref{sec:implementation} reports the implementation and experiments about our prototype tool FGVT. Section \ref{sec:conclusion} concludes the paper.
 
+\vspace{-0.2cm}
+
 \section{Motivating Example}\label{sec:motivatingeg}
 
-In this section, we illustrate the motivation of this work through a buggy concurrent data structure \textit{PairSnapShot} \cite{DBLP:conf/sac/LongZ16}.
 
-\begin{wrapfigure}[15]{r}{0.55\textwidth}
-\centering
-    \begin{small}
- \vspace{-0.8cm}
-        \begin{verbatim}
-    PairSnapShot:
-        int d[2];
-        write(i,v){
-            d[i] = v;                #1
-        }
-        Pair read(){
-            while(true){
-                int x = d[0];        #2
-                int y = d[1];        #3
-                if(x == d[0])        #4
-                    return <x,y>;
-            }
-        }
-        \end{verbatim}
-        \vspace{-1cm}
-        \end{small}
-        \caption{A concurrent data structure: PairSnapShot}
-        \label{fig:pairsnapshot}
-\end{wrapfigure}
+
+
+
+
+
+In this section, we illustrate the motivation of this work through a buggy concurrent data structure \textit{PairSnapShot} \cite{DBLP:conf/sac/LongZ16}.
 
 
 Fig.\ref{fig:pairsnapshot} shows a simplified version of PairSnapShot, where it holds an array \texttt{d} of size 2. A \texttt{write(i,v)} operation writes \texttt{v} to \texttt{d[i]}, while a \texttt{read} \texttt{$\to \langle v_0,v_1\rangle$} operation reads the values of \texttt{d[0]} and \texttt{d[1]}, which are $v_0$ and $v_1$, respectively.
@@ -236,6 +220,34 @@ the short vertical lines at the both ends of a dark line represent the moment wh
 A label ${t:(v_0,v_1)}$ indicates that at the moment $t$,  \texttt{d[0]} is $v_0$ and \texttt{d[1]} is $v_1$.
   The operation \texttt{read()} on Thread 2 returns a value $\mathtt{\pair{1,2}}$,
   which is not consistent with value of any moment. 
+  
+    \begin{wrapfigure}[14]{r}{0.4\textwidth}
+\centering
+
+  %  \begin{small}
+% \vspace{-0.8cm}
+ %       \begin{verbatim}
+  %  PairSnapShot:
+  %      int d[2];
+   %     write(i,v){
+   %         d[i] = v;                #1
+    %    }
+    %    Pair read(){
+     %       while(true){
+     %           int x = d[0];        #2
+    %            int y = d[1];        #3
+   %             if(x == d[0])        #4
+   %                 return <x,y>;
+    %        }
+     %   }
+     %   \end{verbatim}
+      %  \vspace{-1cm}
+   %     \end{small}
+   \includegraphics[width = 2in]{pss.pdf}
+        \caption{A concurrent data structure: PairSnapShot}
+        \label{fig:pairsnapshot}
+\end{wrapfigure}
+
   %The `\texttt{x}' labels in Fig.\ref{fig:pairsnapshot} mark the moments when each instruction takes effects, which explains exactly the cause of the linearizability fault.
 
 The reason of this violation can be found out by enumerating the possible executing orders of memory access events which is labeled by \texttt{\#} in Fig.~\ref{fig:pairsnapshot}. 
@@ -406,8 +418,7 @@ Here, our focus is not on how to find this fine-grained executing order, but to 
 \end{figure}
 
 
-
-
+\vspace{-0.8cm}
 
 \section{Preliminary}\label{sec:fgtracemodel}
 
@@ -464,10 +475,13 @@ Note that this definition speaks only complete traces, neglecting the existence 
 Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requirements 1 and 2 in Definition \ref{def:linearizability} with respect to the coarse-grained trace shown in Fig~\ref{fig:psscoarsetrace}. However, neither of them satisfies the correctness criteria of \textit{PairSnapShot}, by which the $\mathtt{read}$ operation should not return $\pair{1,2}$, so that neither of them belongs to the specification set of \textit{PairSnapShot}. Therefore we can say that the coarse-grained trace in Fig.~\ref{fig:psscoarsetrace} is non-linearizable.
 \end{example}
 
+\vspace{-0.5cm}
+
 \begin{figure}
 \centering
 %\setlength{\unitlength}{0.5cm}
 \includegraphics[width = 3.5in]{5seqs.pdf}
+\vspace{-0.2cm}
   %  \begin{picture}(17.5,5)
    % \begin{footnotesize}
 %	\put(0,4.5){$1: \mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
@@ -483,6 +497,8 @@ Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requir
  %   \end{picture}
     \caption{Five possible sequential traces}\label{fig:accounttwoseqtraces}
 \end{figure}
+
+\vspace{-1cm}
 
 \subsection{Fine-grained trace model}\label{sec:finegraintm}
 
@@ -502,7 +518,7 @@ A fine-grained trace $S_f$ is a total order set $\pair{S_f,\prec}$ of events ove
 %We define a prefix of a fine-grained trace $S_f$ ending with an event $e'$ as the subset of $S_f$ containing all events $e$ such that $(e\prec e')\vee (e=e')$, written as $\mathtt{P}_{S_f}(e')$.
 We define a projection $\mathcal{F}_{c}$ that maps a fine-grained trace $S_f$ to a coarse-grained trace $S_c$ by dropping all memory access events in $S_f$, i.e., $ \mathcal{F}_c(S_f) = S_f|_{\{\ecall,\eresp\} }$. A fine-grained trace $S_f$ is \textit{well-formed} if it satisfies that:
 
-\todo{this definition is not clear}
+%\todo{this definition is not clear}
 
 \begin{itemize}
   \item $\mathcal{F}_c(S_f)$ is well-formed;
@@ -530,7 +546,7 @@ The linearizability of $S_f$ depends on the linearizability of $\mathcal{F}_c(S_
 
 We define a predicate $\mathcal{L}_n$ to denote the linearizability of $S_f$, i.e., if $S_f$ is linearizable, then $\mathcal{L}_n(S_f)$ is true.
 
-
+\vspace{-0.2cm}
 \section{Critical Data Race Sequence}\label{sec:criticaldataraces}
 
 
@@ -661,6 +677,9 @@ Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \
 
 \end{example}
 
+\vspace{-0.2cm}
+
+
 \section{Identify CDRS on Interleaving Tree}\label{sec:intertree}
 From Section \ref{sec:criticaldataraces}, we know that it is the competitions happening in \textit{CDRS}es that trigger the linearizability faults. In order to identify \textit{CDRS}, we propose an approach based on a model called labeled interleaving tree in this section. Firstly, we represent the fine-grained traces in an interleaving tree, and then we label the nodes of the tree with a symbol system. We will show that all \textit{CDRS}es follow a certain pattern and thus we can identify them based on the characteristics of nodes. 
 \subsection{Interleaving tree}
@@ -672,8 +691,17 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
     An \textit{Interleaving Tree} of $\mathbb{P}$ is a tree, where each node corresponds to a state, and each edge corresponds to a memory access event. A subtree rooted at node $N_d$ is represented as $\mathcal{T}ree(N_d)$. The set of the leaves of the tree is represented as $N_{lf}$.
 \end{myDef}
 
+\begin{wrapfigure}[15]{c}{0.6\textwidth}
+\centering
+\vspace{-0.2cm}
+\includegraphics[height = 2.2in, width = 2.8in]{pssinttree.pdf}
+\vspace{-0.2cm}
+\caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
+\end{wrapfigure}
+
     Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $State$ is initiated to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $State$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
 
+\vspace{-0.5cm}
 
 
 \begin{algorithm}
@@ -693,11 +721,16 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
     \end{algorithmic}
 \end{algorithm}
 
+\vspace{-0.8cm}
+
 \begin{example} 
 According to Algorithm \ref{algo:forminttree}, we build the interleaving tree of the concurrent program $\mathbb{P}$ corresponding to Fig.\ref{fig:psscoarsetrace} and present it in Fig.\ref{fig:interleavingtreeofpairsnapshot}. Each node represents a state, and each edge represents a memory access event.
 
 Although due to the limitation of space we have omitted many paths, we can still see that this tree maintains all the fine-grained traces in $\mathbb{P}$, and among these traces the one with bold paths corresponds to 
 the non-linearizability situation in Fig.\ref{fig:pssfinetrace}.
+
+
+
 \end{example}
 
 
@@ -712,11 +745,7 @@ After building an interleaving tree, we design a symbol system to label the tree
 
 Since each leaf $l_f\in N_{lf}$ corresponds to a fine-grained trace from root to itself, we directly apply $\mathcal{L}_n$ to $l_f$ to check the linearizability of the corresponding fine-grained trace. Here, we take a binary interleaving tree built by traces with two threads to illustrate our symbol system.
 
-\begin{wrapfigure}[18]{c}{0.6\textwidth}
-\centering
-\includegraphics[height = 2.5in, width = 3in]{pssinttree.pdf}
-\caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
-\end{wrapfigure}
+
 
 In our system, a subtree $\mathcal{T}ree(N_{d})$ rooted at $N_d$ and holding a leaf set $N_{lf}$ can be grouped into one of the following categories:
 \begin{itemize}
@@ -728,6 +757,10 @@ In our system, a subtree $\mathcal{T}ree(N_{d})$ rooted at $N_d$ and holding a l
   $\exists l_{f1} ( l_{f1}\in N_{lf} \wedge \mathcal{L}_n(l_{f1})) \wedge  \exists l_{f2} (l_{f2}\in N_{lf} \wedge \neg \mathcal{L}_n(l_{f2}))$
 
 \end{itemize}
+
+
+
+
 
 \begin{myDef}[Node Labeling]\label{def:nodelabel}
 Based on the categories of subtrees, a node $N_d$ can be labeled as one of the following symbols,
@@ -744,6 +777,7 @@ Based on the categories of subtrees, a node $N_d$ can be labeled as one of the f
 
 \begin{figure}[!ht]
 \centering
+\vspace{-0.5cm}
 \includegraphics[width = 4.7in]{label.pdf}
 \caption{Labels of nodes}\label{fig:labellabelnodes}
 \end{figure}
@@ -854,8 +888,9 @@ Take a look at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree
 
 
 %Note that since the object considers its two memory locations (\texttt{d[0]} and \texttt{d[1]}) as a whole, $\mathit{Var}$ of each data race is composed of the two memory locations rather than one separately. That is reasonable, because an access to any memory location is actually an access to the array \texttt{d} as a whole, during which competitions between two threads exist.
-\begin{wrapfigure}[18]{r}{0.6\textwidth}
+\begin{wrapfigure}[17]{r}{0.6\textwidth}
 \centering
+\vspace{-0.5cm}
 \includegraphics[height = 2.5in, width = 3in]{psslabeltree.pdf}
 \caption{Labeled interleaving tree}\label{fig:labeledinterleavingtreepss}
 \end{wrapfigure}

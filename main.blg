@@ -1,52 +1,287 @@
-This is pBibTeX, Version 0.99d-j0.33 (utf8.euc) (TeX Live 2017)
+This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
-White space in argument---line 12 of file main.aux
- : \citation{DBLP:conf/popl/BouajjaniEEH15,
- :                                          DBLP:conf/pldi/BurckhardtDMT10, DBLP:conf/popl/BouajjaniEEH15, DBLP:conf/forte/HornK15a, DBLP:conf/sac/LongZ16, DBLP:journals/concurrency/Lowe17}
-I'm skipping whatever remains of this command
 The style file: splncs04.bst
 Database file #1: bare_conf.bib
-You've used 25 entries,
+You're missing a field name---line 21 of file bare_conf.bib
+ :  
+ :  % url       = {http://doi.acm.org/10.1145/1806596.1806634},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 37 of file bare_conf.bib
+ :  
+ :  % biburl    = {http://dblp.org/rec/bib/conf/pldi/2010},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 50 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1006/jpdc.1993.1015},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 64 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1002/cpe.3 8},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 83 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1007/978-3-319-19195-9\_4},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 102 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1007/978-3-319-19195-9},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 122 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/2676726.2677002},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 136 of file bare_conf.bib
+ :  
+ :  % url       = {http://dl.acm.org/citation.cfm?id=2676726},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 155 of file bare_conf.bib
+ :   
+ :   %url       = {http://doi.acm.org/10.1145/2737924.2737983},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 169 of file bare_conf.bib
+ :  
+ :  % url       = {http://dl.acm.org/citation.cfm?id=2737924},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 184 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/2851613.2851774},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 196 of file bare_conf.bib
+ :  
+ :  % url       = {http://doi.acm.org/10.1145/2851613},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 216 of file bare_conf.bib
+ :  
+ :  % url       = {http://doi.acm.org/10.1145/1346281.1346323},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 232 of file bare_conf.bib
+ :  
+ :  % biburl    = {http://dblp.org/rec/bib/conf/asplos/2008},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 245 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1109/IPDPS.2003.1213511},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 256 of file bare_conf.bib
+ : 
+ : %  url       = {http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=8608},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 273 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/1806799.1806838},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 291 of file bare_conf.bib
+ :  
+ :  % biburl    = {http://dblp.org/rec/bib/conf/icse/2010-1},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 304 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1109/ICST.2012.85},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 318 of file bare_conf.bib
+ :  
+ :  % url       = {http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=6200016},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 335 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1109/ICSME.2014.42},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 346 of file bare_conf.bib
+ : 
+ : %  url       = {http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=6969845},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 360 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1109/ICSE.2013.6606739},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 374 of file bare_conf.bib
+ : 
+ : %  url       = {http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=6596173},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 396 of file bare_conf.bib
+ : 
+ : %%  url       = {http://doi.acm.org/10.1145/1869459.1869474},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 413 of file bare_conf.bib
+ :  
+ :  % biburl    = {http://dblp.org/rec/bib/conf/oopsla/2010},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 429 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1109/PACT.2013.6618829},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 445 of file bare_conf.bib
+ :  
+ :  % url       = {http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?punumber=6603429},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 461 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/2145816.2145880},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 475 of file bare_conf.bib
+ : 
+ : %  url       = {http://dl.acm.org/citation.cfm?id=2145816},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 496 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1002/cpe.654},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 510 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1016/S1571-0661(04)80582-6},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 534 of file bare_conf.bib
+ :  
+ :  % url       = {http://doi.acm.org/10.1145/2771783.2771798},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 547 of file bare_conf.bib
+ :  
+ :  % url       = {http://doi.acm.org/10.1145/2771783},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 566 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/1736020.1736040},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 582 of file bare_conf.bib
+ : 
+ : %  biburl    = {http://dblp.org/rec/bib/conf/asplos/2010},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 594 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/78969.78972},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 615 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/1375581.1375598},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 630 of file bare_conf.bib
+ : 
+ : %  biburl    = {http://dblp.org/rec/bib/conf/pldi/2008},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 650 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/1007912.1007945},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 666 of file bare_conf.bib
+ :  
+ :  % biburl    = {http://dblp.org/rec/bib/conf/spaa/2004},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 684 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1007/978-3-540-30186-8\_9},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 698 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.1007/b101206},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 716 of file bare_conf.bib
+ : 
+ : %  url       = {https://doi.org/10.18293/SEKE2017-145},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 731 of file bare_conf.bib
+ :  
+ :  % biburl    = {http://dblp.org/rec/bib/conf/seke/2017},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 745 of file bare_conf.bib
+ : 
+ : %  url       = {http://doi.acm.org/10.1145/1250734.1250785},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 761 of file bare_conf.bib
+ : 
+ : %  biburl    = {http://dblp.org/rec/bib/conf/pldi/2007},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 775 of file bare_conf.bib
+ :  
+ :  % url       = {https://doi.org/10.1002/stvr.281},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You've used 29 entries,
             2850 wiz_defined-function locations,
-            764 strings with 11807 characters,
-and the built_in function-call counts, 15930 in all, are:
-= -- 1424
-> -- 420
-< -- 30
-+ -- 174
-- -- 148
-* -- 933
-:= -- 1958
-add.period$ -- 43
-call.type$ -- 25
-change.case$ -- 185
+            852 strings with 14344 characters,
+and the built_in function-call counts, 20276 in all, are:
+= -- 1731
+> -- 641
+< -- 35
++ -- 250
+- -- 218
+* -- 1279
+:= -- 2526
+add.period$ -- 70
+call.type$ -- 29
+change.case$ -- 217
 chr.to.int$ -- 0
-cite$ -- 25
-duplicate$ -- 1392
-empty$ -- 1446
-format.name$ -- 170
-if$ -- 3595
+cite$ -- 29
+duplicate$ -- 1769
+empty$ -- 1797
+format.name$ -- 259
+if$ -- 4516
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 254
-newline$ -- 81
-num.names$ -- 50
-pop$ -- 515
+int.to.str$ -- 29
+missing$ -- 360
+newline$ -- 93
+num.names$ -- 94
+pop$ -- 686
 preamble$ -- 1
-purify$ -- 124
+purify$ -- 147
 quote$ -- 0
-skip$ -- 525
+skip$ -- 564
 stack$ -- 0
-substring$ -- 1064
-swap$ -- 767
-text.length$ -- 30
+substring$ -- 1214
+swap$ -- 1043
+text.length$ -- 35
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 100
+type$ -- 114
 warning$ -- 0
-while$ -- 144
-width$ -- 27
-write$ -- 255
-is.kanji.str$ -- 0
-(There was 1 error message)
+while$ -- 183
+width$ -- 31
+write$ -- 316
+(There were 48 error messages)
