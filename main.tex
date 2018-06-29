@@ -773,20 +773,20 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
     \begin{algorithmic}[1]
         \State $\mathit{Label} = \sset{W, B, G, GG, WG, BG}$
         \Function {LabelNode}{$N_d$}
-            \If{$!\mathtt{Left}(N_d)  \& !\mathtt{Right}(N_d)$}
+            \If{$!\mathtt{Left}(N_d)  \& !\mathtt{Right}(N_d)$} \Comment{$N_d$ is a leaf}
                 \State \textbf{if} {$\mathcal{L}_n(N_d)$} \textbf{then} \Return $\mathit{W}$
                     %\State \Return $\mathit{W}$
                 \State \textbf{else} \Return $\mathit{B}$
                     %\State \Return $\mathit{B}$
                 %\State \textbf{end if}
-            \ElsIf{$\mathtt{Left}(N_d)  \& !\mathtt{Right}(N_d)$}
+            \ElsIf{$\mathtt{Left}(N_d)  \& !\mathtt{Right}(N_d)$} \Comment{$N_d$ has only left child}
                 \State \Return \Call{LabelNode}{$\mathtt{Left}(N_d)$}
-            \ElsIf{$!\mathtt{Left}(N_d)  \& \mathtt{Right}(N_d)$}
+            \ElsIf{$!\mathtt{Left}(N_d)  \& \mathtt{Right}(N_d)$} \Comment{$N_d$ has only right child}
                 \State \Return \Call{LabelNode}{$\mathtt{Right}(N_d)$}
-            \Else
+            \Else \Comment{$N_d$ has both children}
                 \State $\mathit{Label_l} = $ \Call{LabelNode}{$\mathtt{Left}(N_d)$}
                 \State $\mathit{Label_r} = $ \Call{LabelNode}{$\mathtt{Right}(N_d)$}
-                \State \textbf{switch} {$\pair{\mathit{Label_l},\mathit{Label_r}}$}
+                \State \textbf{switch} {$\pair{\mathit{Label_l},\mathit{Label_r}}$} \Comment{The label depends on 2 children}
                     \State \quad \textbf{case} {$\pair{\mathit{W,W}}$}:
                     \State \quad\quad\Return $\mathit{W}$
                         %\State \quad$\mathit{return}$ $\mathit{W}$
