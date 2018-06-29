@@ -91,11 +91,11 @@ Linearizability is an important correctness criterion for concurrent objects. Ex
 %
 \section{Introduction}\label{sec:introduction}
 Localization of concurrency faults has been a hot topic for long time.
-Multiple trials for the same concurrent programs with the same inputs usually result in different outputs.
-This nature of concurrent program executions is known as nondeterminism. Due to it, 
-it is non-trivial to decide whether a concurrent program is potential to go wrong.
-Moreover, even if a concurrent program has been known buggy, 
-it is difficult to reproduce the same fault or address the root cause of the fault.
+Different trials on the same concurrent programs with the same inputs can result in different outputs,
+which is known as nondeterminism. Due to this nature, 
+it is non-trivial to decide whether a concurrent program contains some bugs.
+Moreover, even if a concurrent program is known buggy, 
+it is difficult to reproduce the same fault or address the root cause.
 
 There have been many techniques addressing the problem of localization of concurrency fault. The very basic way is to
 exhaust the \textit{thread scheduling} space to replay and analyze the buggy execution.
@@ -139,7 +139,13 @@ Generally, these techniques emphasize acceleration towards the state space explo
  where each node corresponds to a data race and each path from the root to a leaf node corresponds to a fine-grained trace. 
  We label each node with a pre-defined symbol depending on the linearizability of all the paths passing through the node, and 
  then the existence of CDRSes can be determined by the certain pattern of node sequences in the labeled interleaving tree.
-
+ 
+ 
+\begin{figure}[ht]
+\centering
+\includegraphics[width = 3.5in]{liucheng.pdf}
+\caption{Labels of nodes}\label{fig:liucheng}
+\end{figure}
 
 In order to resolve the state space explosion problem, we divide the localization process into a coarse-grained level and a fine-grained level.
 The coarse-grained level addresses the issue of working out a test case that contains a small number of operations but is sufficient to trigger a linearizability faults \cite{DBLP:conf/seke/ZhangWZ17}. 
@@ -148,11 +154,21 @@ for the fine-grained level localization, the number of memory access instruction
 can be hugely reduced.
 Together with a linearizability checking technique \cite{DBLP:journals/concurrency/Lowe17} and coarse-grained localization \cite{DBLP:conf/seke/ZhangWZ17}, the overall process is illustrated as in Fig.\ref{fig:liucheng}, in which C is the main contribution of this work.
 
-\begin{figure}[!ht]
+Table~\ref{tab:abbreviation} lists the abbreviations that appear frequently throughout the paper.
+
+
+
+
+
+\begin{table}[]
 \centering
-\includegraphics[width = 3.5in]{liucheng.pdf}
-\caption{Labels of nodes}\label{fig:liucheng}
-\end{figure}
+\caption{Abbreviations in this paper}
+\label{tab:abbreviation}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+ CDRS & HLDR &  &  &  &  &  &  &  &  \\
+ \textbf{C}ritical \textbf{D}ara \textbf{R}ace \textbf{S}equence& \textbf{H}igh \textbf{L}evel \textbf{D}ata \textbf{R}ace &  &  &  &  &  &  &  & 
+\end{tabular}
+\end{table}
 
 \noindent\textbf{\textit{Contributions.}}
 The contributions of this paper are as follows:
@@ -671,11 +687,7 @@ Although due to the limitation of space we have omitted many paths, we can still
 the non-linearizability situation in Fig.\ref{fig:pssfinetrace}.
 \end{example}
 
-\begin{wrapfigure}[14]{c}{0.5\textwidth}
-\centering
-\includegraphics[height = 2in, width = 2.3in]{pssinttree.pdf}
-\caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
-\end{wrapfigure}
+
 
 
 
@@ -686,6 +698,12 @@ After building an interleaving tree, we design a symbol system to label the tree
 
 
 Since each leaf $l_f\in N_{lf}$ corresponds to a fine-grained trace from root to itself, we directly apply $\mathtt{L_n}$ to $l_f$ to check the linearizability of the corresponding fine-grained trace. Here, we take a binary interleaving tree built by traces with two threads to illustrate our symbol system.
+
+\begin{wrapfigure}[18]{c}{0.6\textwidth}
+\centering
+\includegraphics[height = 2.5in, width = 3in]{pssinttree.pdf}
+\caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
+\end{wrapfigure}
 
 In our system, a subtree $\mathcal{T}ree(N_{d})$ rooted at $N_d$ and holding a leaf set $N_{lf}$ can be grouped into one of the following categories:
 \begin{itemize}
@@ -713,7 +731,7 @@ Based on the categories of subtrees, a node $N_d$ can be labeled as one of the f
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width = 4.5in]{label.pdf}
+\includegraphics[width = 4.7in]{label.pdf}
 \caption{Labels of nodes}\label{fig:labellabelnodes}
 \end{figure}
 
@@ -823,9 +841,9 @@ Take a look at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree
 
 
 %Note that since the object considers its two memory locations (\texttt{d[0]} and \texttt{d[1]}) as a whole, $\mathit{Var}$ of each data race is composed of the two memory locations rather than one separately. That is reasonable, because an access to any memory location is actually an access to the array \texttt{d} as a whole, during which competitions between two threads exist.
-\begin{wrapfigure}[13]{r}{0.5\textwidth}
+\begin{wrapfigure}[18]{r}{0.6\textwidth}
 \centering
-\includegraphics[height = 2.3in, width = 2.5in]{psslabeltree.pdf}
+\includegraphics[height = 2.5in, width = 3in]{psslabeltree.pdf}
 \caption{Labeled interleaving tree}\label{fig:labeledinterleavingtreepss}
 \end{wrapfigure}
 
@@ -924,6 +942,10 @@ Column 5 lists the relating source code corresponding to the CDRSes. The source 
 This paper proposes the notion of \textit{critical data race sequence} (\textit{CDRS}) that characterizes the root causes of linearizability faults based on a fine-grained trace model. A CDRS is a set of data races that are decisive to trigger linearizability faults. Therefore, the existence of a CDRS implies that a concurrent execution has potential to be non-linearizable. We also present a labeled interleaving tree model to support automated identification of CDRS. A tool called FGVT is then developed to automatically identify CDRSes and localize the causes of linearizability faults. Experiments have well demonstrated its effectiveness and efficiency.
 
 This work reveals the pattern of the data races that are decisive on the linearizability of a trace. These data races can be mapped to certain parts of the source code. It would be interesting to establish a stronger relationship between CDRSes and the source code for the sake of bug analysis and repair.
+
+\section{Acknowledgements}\label{sec:acknowledgement}
+
+We thank the anonymous referees for their valuable comments. This work is partially supported by ERATO HASUO Metamathematics for Systems Design Project (No.~{JPMJER1603}), JST, the National Key Basic Research Program of China under the Grant No. 2014CB340701, the National Key Research and Development Program of China under the Grant No. 2017YFB0801900, and the CAS-INRIA Joint Research Program under the Grant No. GJHZ1844.
 
 % ---- Bibliography ----
 %
