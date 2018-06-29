@@ -460,26 +460,25 @@ Note that this definition speaks only complete traces, neglecting the existence 
 
 \begin{example}
 Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requirements 1 and 2 in Definition \ref{def:linearizability} with respect to the coarse-grained trace shown in Fig~\ref{fig:psscoarsetrace}. However, neither of them satisfies the correctness criteria of \textit{PairSnapShot}, by which the $\mathtt{read}$ operation should not return $\pair{1,2}$, so that neither of them belongs to the specification set of \textit{PairSnapShot}. Therefore we can say that the coarse-grained trace in Fig.~\ref{fig:psscoarsetrace} is non-linearizable.
-
 \end{example}
 
 \begin{figure}
 \centering
-\setlength{\unitlength}{0.5cm}
-    \begin{picture}(17.5,5)
-    \begin{footnotesize}
-	\put(0,4.5){$1: \mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
+%\setlength{\unitlength}{0.5cm}
+\includegraphics[width = 3.5in]{5seqs.pdf}
+  %  \begin{picture}(17.5,5)
+   % \begin{footnotesize}
+%	\put(0,4.5){$1: \mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,3.5){$2: \mathtt{write(0,2)}$\quad $\mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(1,2)}$\quad $\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
+%	\put(0,3.5){$2: \mathtt{write(0,2)}$\quad $\mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(1,2)}$\quad $\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,2.5){$3: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{read\to \pair{1,2}}$\quad  $\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
+%	\put(0,2.5){$3: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{read\to \pair{1,2}}$\quad  $\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,1.5){$4: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$ \quad$\mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,1)}$}
+%	\put(0,1.5){$4: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$ \quad$\mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,0.5){$5: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$ \quad$\mathtt{read\to \pair{1,2}}$}
-	\end{footnotesize}
-    \end{picture}
-
+%	\put(0,0.5){$5: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$ \quad$\mathtt{read\to \pair{1,2}}$}
+%	\end{footnotesize}
+ %   \end{picture}
     \caption{Five possible sequential traces}\label{fig:accounttwoseqtraces}
 \end{figure}
 
@@ -663,28 +662,28 @@ Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \
 From Section \ref{sec:criticaldataraces}, we know that it is the competitions happening in \textit{CDRS}es that trigger the linearizability faults. In order to identify \textit{CDRS}, we propose an approach based on a model called labeled interleaving tree in this section. Firstly, we represent the fine-grained traces in an interleaving tree, and then we label the nodes of the tree with a symbol system. We will show that all \textit{CDRS}es follow a certain pattern and thus we can identify them based on the characteristics of nodes. 
 \subsection{Interleaving tree}
 
-Firstly, we define a projection $\mathtt{F_M}$ mapping a fine-grained trace $S_f$ to a trace $S^M_f$ composed of only memory access events in $S_f$, i.e., $\mathtt{F_M}(S_f) = S_f|_{\mathsf{M}}$. Surely the linearizability of $S^M_f$ is consistent with that of $S_f$.  Besides, we define a state, written as $\mathit{State}$, of an object to be a projection mapping memory locations to their values.
+Firstly, we define a projection $\mathcal{F}_M$ mapping a fine-grained trace $S_f$ to a trace $S^M_f$ composed of only memory access events in $S_f$, i.e., $\mathcal{F}_M(S_f) = S_f|_{\mathsf{M}}$. The linearizability of $S^M_f$ is decided by that of $S_f$, i.e., $\mathcal{L}_n(S^M_f)  = \mathcal{L}_n(S_f)$. We define a state of an object to be a map from a memory locations to its value, which is written as $\mathcal{S}_t$,.
 
 \begin{myDef}[Interleaving Tree]
     An \textit{Interleaving Tree} of $\mathbb{P}$ is a tree, where each node corresponds to a state, and each edge corresponds to a memory access event. A subtree rooted at node $N_d$ is represented as $\mathcal{T}ree(N_d)$. The set of the leaves of the tree is represented as $N_{lf}$.
 \end{myDef}
 
-    Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $State$ is initiated to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $State$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathit{State}$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
+    Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $State$ is initiated to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $State$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
 
 
 
 \begin{algorithm}
     \caption{Building of Interleaving Tree}\label{algo:forminttree}
     \begin{algorithmic}[1]
-        \State $\mathit{State} = \mathit{State}_{init}$
+        \State $\mathcal{S}_t = \mathcal{S}_t^{init}$
         \State $\mathit{enS} = \left\{ e | \forall \epsilon\in \mathsf{M} .(\mathtt{td}(\epsilon)=\mathtt{td}(e)\longrightarrow e\prec \epsilon)\right\}$
-        \Function{BuildTree}{$\mathit{State},\mathit{enS}$}
-            \State \Call{New Node}{$\mathit{State}$}
+        \Function{BuildTree}{$\mathcal{S}_t,\mathit{enS}$}
+            \State \Call{New Node}{$\mathcal{S}_t$}
             \For{$e(addr,v_n)^{\pair{o,t}} \leftarrow \mathit{enS}$}
                 \State \Call{New Edge}{$e$}
-                \State $\mathit{State} \gets \mathit{State[v_n/addr]}$
+                \State $\mathcal{S}_t \gets \mathit{State[v_n/addr]}$
                 \State $\mathit{enS} \gets \mathit{enS}\setminus \set{e} \cup \set{e'}$
-                \State \Call{BuildTree}{$\mathit{State},\mathit{enS}$}
+                \State \Call{BuildTree}{$\mathcal{S}_t,\mathit{enS}$}
             \EndFor
         \EndFunction
     \end{algorithmic}
@@ -807,7 +806,7 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
 
 \end{algorithm}
 
-Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \se,\ce}$. The set $\mathit{Var}$ is a subset of the domain of $\mathit{State}$, where $\mathit{State}$ is represented by the value in a node $N_d$, $\se$ is a prefix composed of events represented by edges from the root to $N_d$, and $\ce$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
+Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \se,\ce}$. The set $\mathit{Var}$ is a subset of the domain of $\mathcal{S}_t$, where $\mathcal{S}_t$ is represented by the value in a node $N_d$, $\se$ is a prefix composed of events represented by edges from the root to $N_d$, and $\ce$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
 
 \begin{myTheo}[Identifying CDRS]\label{theo:idenfycdrs}
     A CDRS is equivalent to a subset of nodes in a root-to-leaf path, satisfying a regular expression form
