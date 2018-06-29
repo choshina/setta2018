@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.9)  29 JUN 2018 14:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.6.9)  29 JUN 2018 14:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -345,9 +345,8 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 80.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Title too long for running head. Please supply
-a shorter form with \titlerunning prior to \maketitle
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 85.
+
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
@@ -375,20 +374,20 @@ Underfull \hbox (badness 7379) in paragraph at lines 229--237
  []
 
 [4] [5]
-Overfull \hbox (28.46307pt too wide) in paragraph at lines 431--435
+Overfull \hbox (28.46307pt too wide) in paragraph at lines 432--436
 []\OT1/cmr/m/n/10 Fig. 3[] shows such a well-formed trace: $\OML/cmm/m/it/10 S 
 \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 c[]c[]r[]c[]r[]c[]r[]c[]r[]r[]$\OT1/cmr/m/n/
 10 ,
  []
 
 [6] [7]
-Overfull \hbox (8.4953pt too wide) in paragraph at lines 544--551
+Overfull \hbox (8.4953pt too wide) in paragraph at lines 545--552
 []\OT1/cmr/m/it/10 Each coarse-grained trace $\OML/cmm/m/it/10 S[]$ \OT1/cmr/m/
 it/10 re-sults from
  []
 
 [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 641--643
+Underfull \hbox (badness 10000) in paragraph at lines 642--644
 
  []
 
@@ -396,72 +395,72 @@ Underfull \hbox (badness 10000) in paragraph at lines 641--643
 <pssinttree.pdf, id=108, 665.47221pt x 597.50786pt>
 File: pssinttree.pdf Graphic file (type pdf)
 <use pssinttree.pdf>
-Package pdftex.def Info: pssinttree.pdf  used on input line 707.
+Package pdftex.def Info: pssinttree.pdf  used on input line 708.
 (pdftex.def)             Requested size: 216.80392pt x 180.67603pt.
 
-Overfull \hbox (8.5277pt too wide) in paragraph at lines 707--708
+Overfull \hbox (8.5277pt too wide) in paragraph at lines 708--709
  [][] 
  []
 
 
-Overfull \hbox (3.34995pt too wide) in paragraph at lines 713--715
+Overfull \hbox (3.34995pt too wide) in paragraph at lines 714--716
 []\OT1/cmr/m/it/10 OK\OT1/cmr/m/n/10 -tree --- all fine-grained
  []
 
 
-Underfull \hbox (badness 6995) in paragraph at lines 715--717
+Underfull \hbox (badness 6995) in paragraph at lines 716--718
 []\OT1/cmr/m/it/10 ERR\OT1/cmr/m/n/10 -tree --- all fine-
  []
 
 
-Underfull \hbox (badness 1107) in paragraph at lines 715--717
+Underfull \hbox (badness 1107) in paragraph at lines 716--718
 \OT1/cmr/m/n/10 grained traces are non-
  []
 
 
-Underfull \hbox (badness 2837) in paragraph at lines 717--719
+Underfull \hbox (badness 2837) in paragraph at lines 718--720
 []\OT1/cmr/m/it/10 MIX\OT1/cmr/m/n/10 -tree --- both lin-
  []
 
 
-Overfull \hbox (15.98627pt too wide) in paragraph at lines 717--719
+Overfull \hbox (15.98627pt too wide) in paragraph at lines 718--720
 \OT1/cmr/m/n/10 eariz-able and non-linearizable
  []
 
 
-Overfull \hbox (21.95747pt too wide) in paragraph at lines 723--724
+Overfull \hbox (21.95747pt too wide) in paragraph at lines 724--725
 []
  []
 
 <label.pdf, id=109, 843.97676pt x 140.02885pt>
 File: label.pdf Graphic file (type pdf)
 <use label.pdf>
-Package pdftex.def Info: label.pdf  used on input line 737.
+Package pdftex.def Info: label.pdf  used on input line 738.
 (pdftex.def)             Requested size: 339.66878pt x 56.35667pt.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 741.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 742.
 [12 <./pssinttree.pdf, page is rotated 270 degrees>]
 <psslabeltree.pdf, id=262, 664.64381pt x 597.50786pt>
 File: psslabeltree.pdf Graphic file (type pdf)
 <use psslabeltree.pdf>
-Package pdftex.def Info: psslabeltree.pdf  used on input line 849.
+Package pdftex.def Info: psslabeltree.pdf  used on input line 850.
 (pdftex.def)             Requested size: 216.80786pt x 180.67603pt.
 
-Overfull \hbox (8.53163pt too wide) in paragraph at lines 849--850
+Overfull \hbox (8.53163pt too wide) in paragraph at lines 850--851
  [][] 
  []
 
 
 Package wrapfig Warning: Stationary wrapfigure forced to float on input line 86
-1.
+2.
 
 [13 <./label.pdf, page is rotated 270 degrees>]
-Underfull \hbox (badness 1231) in paragraph at lines 862--863
+Underfull \hbox (badness 1231) in paragraph at lines 863--864
 \OT1/cmr/m/n/10 CDRS. In this sec-tion, we
  []
 
 
-Underfull \hbox (badness 3250) in paragraph at lines 894--895
+Underfull \hbox (badness 3250) in paragraph at lines 895--896
 \OT1/cmr/m/n/10 Our tool FGVT is based
  []
 
@@ -510,7 +509,7 @@ ist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2018/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2018/texmf-d
 ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (17 pages, 561949 bytes).
+Output written on main.pdf (17 pages, 562312 bytes).
 PDF statistics:
  616 PDF objects out of 1000 (max. 8388607)
  455 compressed objects within 5 object streams

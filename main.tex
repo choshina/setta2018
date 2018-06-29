@@ -59,7 +59,7 @@
 %
 \title{Interleaving-tree Based Localization of Linearizability Faults on the Fine-grained Level}
 %
-%\titlerunning{Abbreviated paper title}
+\titlerunning{Inter.-tree Based Local. of Linear. Faults on the F.-grained Level}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
@@ -412,12 +412,13 @@ Here, our focus is not on how to find this fine-grained executing order, but to 
 In this section, we extend the traditional coarse-grained trace model \cite{DBLP:conf/popl/BouajjaniEEH15}, recalled in Section \ref{sec:coarsegraintm}, to the fine-grained trace model presented in Section \ref{sec:finegraintm}. Compared to the traditional one, our new model includes memory access instructions such as \texttt{read, write} and atomic primitive \textit{compare-and-swap} (\texttt{CAS}). This enables us to reason about the causes of linearizability faults on the fine-grained level.
 
 \subsection{Coarse-grained trace model}\label{sec:coarsegraintm}
-A \textit{trace} $S$ is a finite sequence of events, and each event is in the form $e(\mathit{Arg})^{\left\langle o,t\right\rangle}$, where $e$ is an event symbol ranging over a pre-defined set $E$, $\mathit{Arg}$ represents arguments, $o$ belongs to a set $O$ of operation identifiers and $t$ belongs to a set $T$ of thread identifiers. In our coarse-grained trace model, the set $E$ contains the following subsets:
+A \textit{trace} $S$ is a finite sequence of events $e(\mathit{Arg})^{\left\langle o,t\right\rangle}$, where $e$ is an event symbol ranging over a pre-defined set $E$, $\mathit{Arg}$ represents the list of arguments, $o$ belongs to a set $O$ of operation identifiers and $t$ belongs to a set $T$ of thread identifiers. In the coarse-grained trace model, the set $E$ contains the following subsets:
 \begin{itemize}
   \item $\ecall$ contains symbols that represent operation invocation events. An invocation event is represented as $c(v_a)^{\langle o,t\rangle}$ $(c\in \ecall)$, where $v_a$ is the argument of the operation;
   \item $\eresp$ contains symbols that represent operation response events. A response event is represented as $r(v_r)^{\langle o,t\rangle}$ $(r\in \eresp)$, where $v_r$ is the return value of the operation.
 \end{itemize}
-\noindent We also use $\ecall, \eresp$ to represent the set of corresponding events indiscriminately, and symbol $e\in \ecall\cup \eresp$ to represent an event. The order relation between events in a trace $S$ is written as $\prec_S$ (or $\prec$), i.e., $e_1\prec_S e_2$ if $e_1$ is ordered before $e_2$ in $S$. We denote the operation identifier of an event $e$ as $\mathtt{op}(e)$, and thread identifier as $\mathtt{td}(e)$. An invocation event $c\in \ecall$ and a response event $r\in \eresp$ \textit{match} if $\mathtt{op}(c) = \mathtt{op}(r)$, written as $c\diamond r$. A pair of matching events forms an operation with an operation identifier in $O$, and we represent an operation as $m(v_a)\to v_r$, where $m$ is the operation name.
+\noindent In this paper we also use $\ecall, \eresp$ to represent the set of the corresponding events indiscriminately, and symbol $e\in \ecall\cup \eresp$ to represent an event. The order relation between events in a trace $S$ is written as $\prec_S$ (or $\prec$), i.e., $e_1\prec_S e_2$ if $e_1$ is ordered before $e_2$ in $S$. We denote the operation identifier of an event $e$ as $\mathtt{op}(e)$, and thread identifier as $\mathtt{td}(e)$. An invocation event $c\in \ecall$ and a response event $r\in \eresp$ \textit{match} if $\mathtt{op}(c) = \mathtt{op}(r)$, written as $c\diamond r$. A pair of matching events forms an operation instance with an operation identifier in $O$, and we usually represent an operation as $m(v_a)\to v_r$, where $m$ is the operation name.
+ 
  A trace $S = e_1e_2\cdots e_n$ is \textit{well-formed} if it satisfies that:
 \begin{itemize}
   \item Each response is preceded by a matching invocation:\\
@@ -433,7 +434,7 @@ $S = c_{w1}c_rr_{w1}c_{w2}r_{w2}c_{w3}r_{w3}c_{w4}r_{r}r_{w4}$, where $c_{wi}$ a
 represents the invocation and response events of the $i$-th $\mathtt{write}$ operation respectively, and
 $c_r$ and $r_r$ represent the invocation and response events of the $\mathtt{read}$ operation.
 
-It is obvious that \begin{small}$\wri(0,2)\prec \wri(1,2)\prec \wri(1,1)\prec \wri(0,1)$\end{small}, 
+In this example, it is obvious that \begin{small}$\wri(0,2)\prec \wri(1,2)\prec \wri(1,1)\prec \wri(0,1)$\end{small}, 
 but there is no \hb  
 relation between the $\rea$ operation and any of the $\wri$ operations.
 
@@ -444,7 +445,7 @@ relation between the $\rea$ operation and any of the $\wri$ operations.
 
 A coarse-grained trace $S$ is \textit{sequential} if $\sqsubset_S$ is a total order. 
 We define that a \textit{specification} of an object is the set of all sequential traces that satisfy the correctness criteria of that object. 
-Note that here correctness criterion is specified by concurrent data structures, such as \textit{first-in-first-out} for \textit{FIFO-Queue}, \textit{first-in-last-out} for \textit{Stack}.
+Note that here correctness criterion is specified by concurrent data structures, such as \textit{first-in-first-out} rule for \textit{FIFO-Queue}, \textit{first-in-last-out} rule for \textit{Stack}.
 
 \begin{myDef}[Linearizability]\label{def:linearizability}
 A coarse-grained trace $S$ of an object is linearizable if there exists a sequential trace $S'$ in the specification of the object such that:
@@ -457,7 +458,7 @@ A coarse-grained trace $S$ of an object is linearizable if there exists a sequen
 Note that this definition speaks only complete traces, neglecting the existence of pending operations, that is, the operations without response events. Since this paper focuses on analysis of linearizability faults rather than detection, we consider complete traces only.
 
 \begin{example}
-Fig.~\ref{fig:accounttwoseqtraces} shows five sequential traces that satisfy requirements 1) and 2) in Definition \ref{def:linearizability} with respect to the coarse-grained trace shown in Fig~\ref{fig:psscoarsetrace}. However, neither of them satisfies the correctness criteria of \textit{PairSnapShot}, which means that neither of them belongs to the specification set of \textit{PairSnapShot}, so we can say that the coarse-grained trace in Fig.~\ref{fig:psscoarsetrace} is non-linearizable.
+Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requirements 1 and 2 in Definition \ref{def:linearizability} with respect to the coarse-grained trace shown in Fig~\ref{fig:psscoarsetrace}. However, neither of them satisfies the correctness criteria of \textit{PairSnapShot}, by which the $\mathtt{read}$ operation should not return $\pair{1,2}$, so that neither of them belongs to the specification set of \textit{PairSnapShot}. Therefore we can say that the coarse-grained trace in Fig.~\ref{fig:psscoarsetrace} is non-linearizable.
 
 \end{example}
 
@@ -466,15 +467,15 @@ Fig.~\ref{fig:accounttwoseqtraces} shows five sequential traces that satisfy req
 \setlength{\unitlength}{0.5cm}
     \begin{picture}(17.5,5)
     \begin{footnotesize}
-	\put(0,4.5){$1: \mathtt{read\to \pair{1,2}}$ $\mathtt{write(0,2)}$ $\mathtt{write(1,2)}$ $\mathtt{write(1,1)}$ $\mathtt{write(0,1)}$}
+	\put(0,4.5){$1: \mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,3.5){$2: \mathtt{write(0,2)}$ $\mathtt{read\to \pair{1,2}}$ $\mathtt{write(1,2)}$ $\mathtt{write(1,1)}$ $\mathtt{write(0,1)}$}
+	\put(0,3.5){$2: \mathtt{write(0,2)}$\quad $\mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(1,2)}$\quad $\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,2.5){$3: \mathtt{write(0,2)}$ $\mathtt{write(1,2)}$ $\mathtt{read\to \pair{1,2}}$  $\mathtt{write(1,1)}$ $\mathtt{write(0,1)}$}
+	\put(0,2.5){$3: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{read\to \pair{1,2}}$\quad  $\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,1.5){$4: \mathtt{write(0,2)}$ $\mathtt{write(1,2)}$ $\mathtt{write(1,1)}$ $\mathtt{read\to \pair{1,2}}$ $\mathtt{write(0,1)}$}
+	\put(0,1.5){$4: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$ \quad$\mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,1)}$}
 	
-	\put(0,0.5){$5: \mathtt{write(0,2)}$ $\mathtt{write(1,2)}$ $\mathtt{write(1,1)}$ $\mathtt{write(0,1)}$ $\mathtt{read\to \pair{1,2}}$}
+	\put(0,0.5){$5: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$ \quad$\mathtt{read\to \pair{1,2}}$}
 	\end{footnotesize}
     \end{picture}
 
