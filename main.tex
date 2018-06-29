@@ -32,9 +32,9 @@
 \newcommand{\p}{\mathbb{P} }
 \newcommand{\ft}{S_f}
 \newcommand{\ct}{S_c}
-\newcommand{\se}{\mathit{SE}}
+\newcommand{\se}{\mathit{I_e}}
 \newcommand{\var}{\mathit{Var}}
-\newcommand{\ce}{\mathit{CE}}
+\newcommand{\ce}{\mathit{M_e}}
 \newcommand{\dr}{\mathsf{D}}
 
 \newtheorem{myTheo}{Theorem}
@@ -546,12 +546,12 @@ In this section, we analyze linearizability faults on the fine-grained level, an
 %\noindent Actually, a $\mathbb{U}$ corresponds to a concurrent program whose execution can produce $S_c$, and all possible fine-grained traces resulting from the concurrent program are maintained in $\mathbb{U}$.
 \begin{myDef}[Concurrent program]\label{def:concurrentprogram}
 %Given a coarse-grained trace $S_c$, we define the \textit{concurrent program} that results in $S_c$ as a set $\mathbb{P}$ of fine-grained traces. Each fine-grained trace $S_f\in \mathbb{P}$ can be mapped by $\mathtt{F_c}$ to a coarse-grained trace $S'_c$, and each $S'_c$ should satisfy that:
-Each coarse-grained trace $\ct$ results from a \textit{concurrent program} $\mathbb{P}$.
+Given a coarse-grained trace $\ct$, we define a concurrent program $\p$:
 %Let \ct be a coarse-grained trace.
 %\ct corresponds to a concurrent program \p.
-The concurrent program $\p$ 
- is defined as a set of fine-grained traces.
-Each fine-grained trace $\ft \in \p$ can be mapped to a coarse-grained trace $S'_c$, which satisfies that: 
+$\p$ 
+ is a set of fine-grained traces such that
+every fine-grained trace $\ft \in \p$ can be mapped to a coarse-grained trace $S'_c$, which satisfies that: 
  %such that each coarse-grained trace $S'_c=\mathtt{F_c}(S_f)$ mapped from each fine-grained trace $S_f\in \mathbb{P}$ satisfies that:
 \begin{itemize}
   \item $S'_c = S_c$, i.e., operations in $S'_c$ and $S_c$ are the same;
@@ -564,36 +564,36 @@ Each fine-grained trace $\ft \in \p$ can be mapped to a coarse-grained trace $S'
 Intuitively, a program $\mathbb{P}$ maintains all %possible 
 fine-grained traces that preserve the \textit{happen-before} relation of $S_c$.
 %after an application of $\mathtt{F_c}$. 
-If there is a \textit{happen-before} relation between each pair of operations in $S_c$, we say that the program $\p$ resulting in $S_c$ is a sequential program.
-And, if there exists a fine-grained trace that is not linearizable in a program $\p$, we say that the program $\p$ is non-linearizable.
+If $S_c$ is sequential, then we say the program $\p$ w.r.t. $\ct$ is sequential.
+And, if there exists a non-linearizable fine-grained trace in a program $\p$, we say that $\p$ is non-linearizable.
 
 \begin{myDef}[Linearizability fault]
-Let $\p$ be a non-linearizable concurrent program. Each non-linearizable fine-grained trace $S_f$ in $\p$ defines a \textit{linearizability fault} $\mathcal{F}$.
+Let $\p$ be a non-linearizable concurrent program. A \textit{linearizability fault} $\mathcal{F}$ is defined as a non-linearizable fine-grained trace $S_f$ in $\p$.
 \end{myDef}
 
 %Since a fine-grained trace is a total order of events, we can define a prefix relation $\subseteq_{pre}$ between two fine-grained traces, 
-We define the prefix relation $\subseteq_{pre}$ between two fine-grained trace $S_1$ and $S_2$, that is, $S_1\subseteq_{pre} S_2$ represents that $S_1$ is a prefix of $S_2$. We use $\bullet$ to represent the concatenation of a sequence of events and another sequence of events, that is, if $S_1=e_1\cdots e_n$ and $S_2 = e_{n+1}\cdots e_{n+m}$, then $S_1\bullet S_2 = e_1\cdots e_n e_{n+1}\cdots e_{n+m}$.
+We define the prefix relation $\subseteq_{pre}$ between two fine-grained trace $S_1$ and $S_2$, that is, $S_1\subseteq_{pre} S_2$ says that $S_1$ is a prefix of $S_2$. We use $\cdot$ to represent the concatenation of a sequence of events and another sequence of events, that is, if $S_1=e_1\cdots e_n$ and $S_2 = e_{n+1}\cdots e_{n+m}$, then $S_1\cdot S_2 = e_1\cdots e_n e_{n+1}\cdots e_{n+m}$.
 
 \begin{myDef}[High-level data race \cite{DBLP:journals/stvr/ArthoHB03}]\label{def:datarace}
 Let $\p$ be a concurrent program. 
-A \textit{high-level data race} (\textit{HLDR}) $\mathsf{D}$ in $\mathbb{P}$ is defined as a triple $\left\langle \mathit{Var}, \mathit{SE}, \mathit{CE}\right\rangle$. 
-Here, $\mathit{Var}$ is a set containing one or more shared variables, each corresponding to a memory location. $\mathit{SE}$ is a sequence of events, 
-and the execution of $\mathit{SE}$ leads $\mathit{Var}$ to an initial state.
+A \textit{high-level data race} (\textit{HLDR}) $\mathsf{D}$ in $\mathbb{P}$ is defined as a triple $\left\langle \mathit{Var}, \se, \ce\right\rangle$. 
+Here, $\mathit{Var}$ is a set of one or more shared variables, each corresponding to a memory location. $\se$ is a sequence of events.
+%and the execution of $\se$ leads $\mathit{Var}$ to an initial state.
 %which can give $\mathit{Var}$ an initial state by executing the sequence of events. 
-%$\mathit{SE}$ is also a prefix of some traces in $\mathbb{P}$. 
-$\mathit{CE}$ is a set containing at least two memory access events, such that:
+%$\se$ is also a prefix of some traces in $\mathbb{P}$. 
+$\ce$ is a set of two or more memory access events $e(\mathit{Arg})^{\left\langle o,t\right\rangle}$, such that:
 
 \begin{itemize}
-\item each event belongs to a distinct thread identifier;
-\item each event accesses some shared variables in $\mathit{Var}$;
+\item each event $e$ has a distinct thread identifier $o$;
+\item each event $e$ accesses some shared variables in $\mathit{Var}$;
 \item no temporal relation between each pair of the events;
-\item for any permutation $S_p$ of events in $\ce$, there exists a fine-grained trace $S\in \p$ such that $\se \bullet S_p \subseteq_{pre} S$.
+\item for any permutation $S_p$ of events in $\ce$, there exists a fine-grained trace $S\in \p$ such that $\se \cdot S_p \subseteq_{pre} S$.
 \end{itemize}
-%$\mathit{CE}$ satisfies that:
+%$\ce$ satisfies that:
 
-%$$ \forall P  \exists S (\mathit{SE}\bullet P\subseteq_{pre} S)$$
+%$$ \forall P  \exists S (\se\cdot P\subseteq_{pre} S)$$
 
-%\noindent where $P$ is a permutation of events in $\mathit{CE}$, and $S$ is a fine-grained trace in $\mathbb{P}$.
+%\noindent where $P$ is a permutation of events in $\ce$, and $S$ is a fine-grained trace in $\mathbb{P}$.
 
 
 \end{myDef}
@@ -602,10 +602,10 @@ Note that here the decision of $\mathit{Var}$ depends on the algorithm of the sh
 simultaneously access the same memory location and do some read or modification. 
 However, there also exist other situations, such as \textit{PairSnapShot} in Section \ref{sec:motivatingeg}, in which case several memory locations should be considered as a whole.
 
-Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \mathit{SE}, \mathit{CE}\right\rangle$ where $e_1, e_2\in \mathit{CE}$, we say $e_1$ \textit{wins} $e_2$ with respect to a fine-grained trace $S_f$ if 
- $\mathit{SE}\bullet e_1e_2 \subseteq S_f $.
+Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$ where $e_1, e_2\in \ce$, we say $e_1$ \textit{wins} $e_2$ with respect to a fine-grained trace $S_f$ if 
+ $\se\cdot e_1e_2 \subseteq S_f $.
  
- Given a $\mathbb{P}$, we define a partial order relation $<_{dr}$ between two HLDRs $\mathsf{D}_1=\left\langle \mathit{Var}_1, \mathit{SE}_1, \mathit{CE}_1\right\rangle$ and $\mathsf{D}_2 = \left\langle \mathit{Var}_2, \mathit{SE}_2, \mathit{CE}_2\right\rangle$, that is, if $\mathit{SE}_1\subseteq_{pre}\mathit{SE}_2$, then $\mathsf{D}_1<_{dr}\mathsf{D}_2$. 
+ Given a $\mathbb{P}$, we define a partial order relation $<_{dr}$ between two HLDRs $\mathsf{D}_1=\left\langle \mathit{Var}_1, \se_1, \ce_1\right\rangle$ and $\mathsf{D}_2 = \left\langle \mathit{Var}_2, \se_2, \ce_2\right\rangle$, that is, if $\se_1\subseteq_{pre}\se_2$, then $\mathsf{D}_1<_{dr}\mathsf{D}_2$. 
 
 
 
@@ -616,9 +616,9 @@ Given a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \mathit{SE}, \mathit{CE}\
 
 \begin{proof}
 To prove Theorem \ref{theo:datarace}, it suffices to prove the contrapositive proposition that if there is no high-level data race, 
-then there is no linearizability fault. According to Definition \ref{def:datarace}, the premise, no high-level data race, means that in $\mathit{CE}$:
+then there is no linearizability fault. According to Definition \ref{def:datarace}, the premise, no high-level data race, means that in $\ce$:
 
-$$\exists S_p \forall S ( \mathit{SE}\bullet S_p \nsubseteq_{pre} S)$$
+$$\exists S_p \forall S ( \se\cdot S_p \nsubseteq_{pre} S)$$
 
 Here, if $\mathbb{P}$ is a concurrent program, this condition is not satisfied according to Definition \ref{def:concurrentprogram}. 
 Therefore, the $\mathbb{P}$ that satisfies this condition corresponds to a sequential program, and the sequential trace surely has no linearizability fault.
@@ -630,21 +630,21 @@ Therefore, the $\mathbb{P}$ that satisfies this condition corresponds to a seque
  $\mathcal{F}$ is a total order set of data races $\{\mathsf{D}_1,\mathsf{D}_2,\cdots,\mathsf{D}_n\}$
  \[
 \begin{array}{ccc}
-   \{& \langle\mathit{Var}_1, \mathit{SE}_1, \mathit{CE}_1 = \set{e_{11},e_{12},\cdots,e_{1m_1}}\rangle, & \\
-   & \langle\mathit{Var}_2, \mathit{SE}_2, \mathit{CE}_2 = \set{e_{21},e_{22},\cdots,e_{2m_2}}\rangle, &\\
+   \{& \langle\mathit{Var}_1, \se_1, \ce_1 = \set{e_{11},e_{12},\cdots,e_{1m_1}}\rangle, & \\
+   & \langle\mathit{Var}_2, \se_2, \ce_2 = \set{e_{21},e_{22},\cdots,e_{2m_2}}\rangle, &\\
    & \vdots& \\
-   &\langle \mathit{Var}_n, \mathit{SE}_n, \mathit{CE}_n = \set{e_{n1},e_{n2},\cdots,e_{nm_n}} \rangle&\}
+   &\langle \mathit{Var}_n, \se_n, \ce_n = \set{e_{n1},e_{n2},\cdots,e_{nm_n}} \rangle&\}
 \end{array}
 \]
 
 \noindent where the relation $<_{dr}$ exists as $\mathsf{D}_1 <_{dr} \dr_2 <_{dr} \cdots  <_{dr} \mathsf{D}_n$.
-A CDRS satisfies that there exist two events $e_{i1}, e_{i2}\in \mathit{CE}_i$ ($i\in{1,\dots,n}$)   that $e_{i1}$'s win and
+A CDRS satisfies that there exist two events $e_{i1}, e_{i2}\in \ce_i$ ($i\in{1,\dots,n}$)   that $e_{i1}$'s win and
 $e_{i2}$'s win lead the program to ``inverse'' consequences. Here the meaning of ``inverse'' includes that
 \begin{itemize}
-\item If all the fine-grained traces $S_{f1}$ such that $\mathit{SE}\bullet e_{i1} \subseteq_{pre}$ are linearizable, then there exist fine-grained traces $S_{f2}$ such that 
-$\mathit{SE_i}\bullet e_{i2}$ that are non-linearizable;
-\item If all the fine-grained traces $S_{f1}$ such that $\mathit{SE}\bullet e_{i1} \subseteq_{pre}$ are non-linearizable, then there exist fine-grained traces $S_{f2}$ such that 
-$\mathit{SE_i}\bullet e_{i2}$ that are linearizable.\\
+\item If all the fine-grained traces $S_{f1}$ such that $\se\cdot e_{i1} \subseteq_{pre}$ are linearizable, then there exist fine-grained traces $S_{f2}$ such that 
+$\mathit{SE_i}\cdot e_{i2}$ that are non-linearizable;
+\item If all the fine-grained traces $S_{f1}$ such that $\se\cdot e_{i1} \subseteq_{pre}$ are non-linearizable, then there exist fine-grained traces $S_{f2}$ such that 
+$\mathit{SE_i}\cdot e_{i2}$ that are linearizable.\\
 \end{itemize}
 \end{myDef}
 
@@ -653,7 +653,7 @@ Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the li
 
 \begin{example} 
 
-Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \mathit{SE}, \mathit{CE}\right\rangle$  in \textit{PairSnapShot} in which $\mathit{CE} = \{$\texttt{\#1,\#2}$\}$. If \texttt{\#1} wins, then a non-linearizable trace will never occur; but if \texttt{\#2} like Fig.~\ref{fig:pssfinetrace}, there exists at least such a fine-grained trace that is non-linearizable. In this sense,  $\mathsf{D}$ is included in a CDRS with respect to the linearizability fault $\mathcal{F}$ shown in Fig.~\ref{fig:pssfinetrace}.
+Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \se, \ce\right\rangle$  in \textit{PairSnapShot} in which $\ce = \{$\texttt{\#1,\#2}$\}$. If \texttt{\#1} wins, then a non-linearizable trace will never occur; but if \texttt{\#2} like Fig.~\ref{fig:pssfinetrace}, there exists at least such a fine-grained trace that is non-linearizable. In this sense,  $\mathsf{D}$ is included in a CDRS with respect to the linearizability fault $\mathcal{F}$ shown in Fig.~\ref{fig:pssfinetrace}.
 
 \end{example}
 
@@ -805,7 +805,7 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
 
 \end{algorithm}
 
-Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \mathit{SE},\mathit{CE}}$. The set $\mathit{Var}$ is a subset of the domain of $\mathit{State}$, where $\mathit{State}$ is represented by the value in a node $N_d$, $\mathit{SE}$ is a prefix composed of events represented by edges from the root to $N_d$, and $\mathit{CE}$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
+Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \se,\ce}$. The set $\mathit{Var}$ is a subset of the domain of $\mathit{State}$, where $\mathit{State}$ is represented by the value in a node $N_d$, $\se$ is a prefix composed of events represented by edges from the root to $N_d$, and $\ce$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
 
 \begin{myTheo}[Identifying CDRS]\label{theo:idenfycdrs}
     A CDRS is equivalent to a subset of nodes in a root-to-leaf path, satisfying a regular expression form
