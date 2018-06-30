@@ -191,7 +191,7 @@ Fig.\ref{fig:pairsnapshot} shows a simplified version of PairSnapShot, where it 
 Fig.~\ref{fig:psscoarsetrace} shows a concurrent execution in which the return values of \texttt{read} do not exist at any moment of the execution. 
 In Fig.~\ref{fig:psscoarsetrace}, time moves from left to right; dark lines indicate the time intervals of operations and  
 the short vertical lines at the both ends of a dark line represent the moment when an operation is invoked and returned, respectively.
-A label ${t:(v_0,v_1)}$ indicates that at the moment $t$,  \texttt{d[0]} is $v_0$ and \texttt{d[1]} is $v_1$.
+A label ${t:\langle v_0,v_1\rangle}$ indicates that at the moment $t$,  \texttt{d[0]} is $v_0$ and \texttt{d[1]} is $v_1$.
   The operation \texttt{read} on Thread 2 returns a value $\mathtt{\pair{1,2}}$,
   which is not consistent with value of any moment. 
   
@@ -405,7 +405,7 @@ A \textit{trace} $S$ is a finite sequence of events $e(\mathit{Arg})^{\left\lang
   \item $\ecall$ contains symbols that represent operation invocation events. An invocation event is represented as $c(v_a)^{\langle o,t\rangle}$ $(c\in \ecall)$, where $v_a$ is the argument of the operation;
   \item $\eresp$ contains symbols that represent operation response events. A response event is represented as $r(v_r)^{\langle o,t\rangle}$ $(r\in \eresp)$, where $v_r$ is the return value of the operation.
 \end{itemize}
-\noindent In this paper we also use $\ecall, \eresp$ to represent the set of the corresponding events indiscriminately, and symbol $e\in \ecall\cup \eresp$ to represent an event. The order relation between events in a trace $S$ is written as $\prec_S$ (or $\prec$), i.e., $e_1\prec_S e_2$ if $e_1$ is ordered before $e_2$ in $S$. We denote the operation identifier of an event $e$ as $\mathtt{op}(e)$, and thread identifier as $\mathtt{td}(e)$. An invocation event $c\in \ecall$ and a response event $r\in \eresp$ \textit{match} if $\mathtt{op}(c) = \mathtt{op}(r)$, written as $c\diamond r$. A pair of matching events forms an operation instance with an operation identifier in $O$, and we usually represent an operation as $m(v_a)\to v_r$, where $m$ is the operation name.
+\noindent In this paper we also use $\ecall, \eresp$ to represent the set of the corresponding events indiscriminately, and symbol $e\in \ecall\cup \eresp$ to represent an event. The order relation between events in a trace $S$ is written as $\prec_S$ (or $\prec$), i.e., $e_1\prec_S e_2$ if $e_1$ is ordered before $e_2$ in $S$. We denote the operation identifier of an event $e$ as $\mathtt{op}(e)$, and thread identifier as $\mathtt{td}(e)$. An invocation event $c\in \ecall$ and a response event $r\in \eresp$ \textit{match} if $\mathtt{op}(c) = \mathtt{op}(r)$, written as $c\diamond r$. A pair of matching events forms an operation instance with an operation identifier in $O$, and we usually represent such an operation instance as $m(v_a)\to v_r$, where $m$ is the operation name.
  
  A trace $S = e_1e_2\cdots e_n$ is \textit{well-formed} if it satisfies that:
 \begin{itemize}
@@ -422,7 +422,7 @@ $S = c_{w1}c_rr_{w1}c_{w2}r_{w2}c_{w3}r_{w3}c_{w4}r_{r}r_{w4}$, where $c_{wi}$ a
 represents the invocation and response events of the $i$-th $\mathtt{write}$ operation respectively, and
 $c_r$ and $r_r$ represent the invocation and response events of the $\mathtt{read}$ operation.
 
-In this example, it is obvious that \begin{small}$\wri(0,2)\prec \wri(1,2)\prec \wri(1,1)\prec \wri(0,1)$\end{small}, 
+In this example, it is obvious that \begin{small}$\wri(0,2)\sqsubset_S \wri(1,2)\sqsubset_S \wri(1,1)\sqsubset_S \wri(0,1)$\end{small}, 
 but there is no \hb  
 relation between the $\rea$ operation and any of the $\wri$ operations.
 
@@ -433,7 +433,7 @@ relation between the $\rea$ operation and any of the $\wri$ operations.
 
 A coarse-grained trace $S$ is \textit{sequential} if $\sqsubset_S$ is a total order. 
 We define that a \textit{specification} of an object is the set of all sequential traces that satisfy the correctness criteria of that object. 
-Note that here correctness criterion is specified by concurrent data structures, such as \textit{first-in-first-out} rule for \textit{FIFO-Queue}, \textit{first-in-last-out} rule for \textit{Stack}.
+Note that here correctness criterion is specified by concurrent data structures, such as \textit{first-in-first-out} rule of \textit{FIFO-Queue}, \textit{first-in-last-out} rule of \textit{Stack}.
 
 \begin{myDef}[Linearizability]\label{def:linearizability}
 A coarse-grained trace $S$ of an object is linearizable if there exists a sequential trace $S'$ in the specification of the object such that:
@@ -469,7 +469,7 @@ Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requir
 %	\put(0,0.5){$5: \mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$ \quad$\mathtt{read\to \pair{1,2}}$}
 %	\end{footnotesize}
  %   \end{picture}
-    \caption{Five possible sequential traces}\label{fig:accounttwoseqtraces}
+    \caption{Five possible sequential traces but none of them satisfies the criterion of PairSnapShot}\label{fig:accounttwoseqtraces}
 \end{figure}
 
 \vspace{-1cm}
@@ -496,12 +496,14 @@ We define a projection $\mathcal{F}_{c}$ that maps a fine-grained trace $S_f$ to
 
 \begin{itemize}
   \item $\mathcal{F}_c(S_f)$ is well-formed;
-  \item The operation identifier of any memory access event in $S_f$ is consistent with that of one pair of  matching invocation/response events  in $S_f$, i.e.,
-  %For any memory access event in $S_f$, its operation identifier is one that occurs in an invocation/response event in $\mathcal{F}_c(S_f)$, i.e., 
-      $\forall e_m\exists e_o.(\mathtt{op}(e_m)= \mathtt{op}(e_o))$, where $e_m$ is a memory access event and $e_o$ is either of a pair of matching invocation/response events in $S_f$.
-  \item All the memory access events with operation identifier $o$ lie between the consistent matching invocation/response event pair with the operation identifier $o$, i.e.,
-      $\forall e.((\mathtt{op}(e)=o)\to(c\prec e\prec r))$, where $e$ is a memory access event in $S_f$, and $c,r$ are matching invocation and response events with thread identifier $o$.
+ % \item The operation identifier of any memory access event in $S_f$ is consistent with that of one pair of  matching invocation/response events  in $S_f$, i.e.,
+%      $\forall e_m\exists e_o.(\mathtt{op}(e_m)= \mathtt{op}(e_o))$, where $e_m$ is a memory access event and $e_o$ is either of a pair of matching invocation/response events in $S_f$.
+\item Let $e_m(\mathit{Arg})^{\left\langle o,t\right\rangle}$ be a memory access event in $S_f$. The thread identifier $o$ of $e_m$ must occur in a pair of matching invocation and response events $c(\mathit{Arg})^{\left\langle o,t\right\rangle}, r(\mathit{Arg})^{\left\langle o,t\right\rangle}$ in $S_f$.
+ % \item All the memory access events with operation identifier $o$ lie between the consistent matching invocation/response event pair with the operation identifier $o$, i.e.,
+   %   $\forall e.((\mathtt{op}(e)=o)\to(c\prec e\prec r))$, where $e$ is a memory access event in $S_f$, and $c,r$ are matching invocation and response events with thread identifier $o$.
   %For any matching events $c\in \ecall$ and $r\in \eresp$ such that $\mathtt{op}(c)=\mathtt{op}(r)=o$, then: \\ $\forall e\in \mathsf{M}.( \mathtt{op}(e) = o \longrightarrow c\prec e \prec r)$.
+  \item Let $c(\mathit{Arg})^{\left\langle o,t\right\rangle}, r(\mathit{Arg})^{\left\langle o,t\right\rangle}$ be a pair of matching invocation and response events in $S_f$. 
+  All the memory access events $e$ with thread identifier $o$ in $S_f$ should satisfy $c\prec e\prec r$.
 \end{itemize}
 \noindent We claim that all fine-grained traces in this paper are well-formed.
 
@@ -515,7 +517,7 @@ and the $\prec$ relations between events are obvious.
 Application of $\mathcal{F}_{c}$ to this fine-grained trace results in the coarse-grained trace in Fig.\ref{fig:psscoarsetrace}.
 \end{example}
 
-\begin{myDef}
+\begin{myDef}[Linearizability of fine-grained trace]
 The linearizability of $S_f$ depends on the linearizability of $\mathcal{F}_c(S_f)$, i.e., if $\mathcal{F}_c(S_f)$ is linearizable, then $S_f$ is linearizable. \end{myDef}
 
 We define a predicate $\mathcal{L}_n$ to denote the linearizability of $S_f$, i.e., if $S_f$ is linearizable, then $\mathcal{L}_n(S_f)$ is true.
@@ -635,15 +637,15 @@ $\Set{\begin{array}{ccc}
 A CDRS satisfies that there exist two events $e_{i1}, e_{i2}\in \ce_i$ ($i\in{1,\dots,n}$)   that $e_{i1}$'s win and
 $e_{i2}$'s win lead the program to ``inverse'' consequences. Here, ``inverse'' includes two cases:
 \begin{itemize}
-\item If all the fine-grained traces $S_{f1}$ such that $\se\cdot e_{i1} \subseteq_{pre}$ are linearizable, then there exist fine-grained traces $S_{f2}$ such that 
-$\mathit{\se_i}\cdot e_{i2}$ that are non-linearizable;
-\item If all the fine-grained traces $S_{f1}$ such that $\se\cdot e_{i1} \subseteq_{pre}$ are non-linearizable, then there exist fine-grained traces $S_{f2}$ such that 
-$\mathit{\se_i}\cdot e_{i2}$ that are linearizable.\\
+\item If all the fine-grained traces $S_{f1}$ satisfying $I_{ei}\cdot e_{i1} \subseteq_{pre} S_{f1}$ are linearizable, then there exist non-linearizable fine-grained traces $S_{f2}$ satisfying 
+$\mathit{\se_i}\cdot e_{i2}\subseteq_{pre} S_{f2}$;
+\item If all the fine-grained traces $S_{f1}$ satisfying $I_{ei}\cdot e_{i1} \subseteq_{pre} S_{f1}$ are non-linearizable, then there exist linearizable fine-grained traces $S_{f2}$ satisfying
+$\mathit{\se_i}\cdot e_{i2} \subseteq_{pre} S_{f2}$.
 \end{itemize}
 \end{myDef}
 
 
-Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a program $\mathbb{P}$ may lead to different linearizability faults, what we focus on is just the linearizability of the trace and thus we consider all linearizability faults identical in terms of the aspect to lead the trace non-linearizable.
+Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a program $\mathbb{P}$ may lead to different linearizability faults, what we focus on is just the linearizability of the trace and thus we treat all linearizability faults identical in the sense that they all lead the trace non-linearizable.
 
 \begin{example} 
 
@@ -655,7 +657,7 @@ Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \
 
 
 \section{Identify CDRS on Interleaving Tree}\label{sec:intertree}
-From Section \ref{sec:criticaldataraces}, we know that it is the competitions happening in \textit{CDRS}es that trigger the linearizability faults. In order to identify \textit{CDRS}, we propose an approach based on a model called labeled interleaving tree in this section. Firstly, we represent the fine-grained traces in an interleaving tree, and then we label the nodes of the tree with a symbol system. We will show that all \textit{CDRS}es follow a certain pattern and thus we can identify them based on the characteristics of nodes. 
+From Section \ref{sec:criticaldataraces}, we know that it is the competitions happening in \textit{CDRS}es that trigger the linearizability faults. In order to identify \textit{CDRS}, we propose an approach based on a model called labeled interleaving tree in this section. Firstly, we express the fine-grained traces in an interleaving tree, and then we label the nodes of the tree with a symbol system. We will show that all \textit{CDRS}es follow a certain pattern and thus we can identify them based on the characteristics of the nodes. 
 \subsection{Interleaving tree}
 
 Firstly, we define a projection $\mathcal{F}_M$ mapping a fine-grained trace $S_f$ to a trace $S^M_f$ composed of only memory access events in $S_f$, i.e., $\mathcal{F}_M(S_f) = S_f|_{\mathsf{M}}$. The linearizability of $S^M_f$ is decided by that of $S_f$, i.e., $\mathcal{L}_n(S^M_f)  = \mathcal{L}_n(S_f)$. We define a state $\mathcal{S}_t$ of an object to be a map from a memory locations to its value, e.g., in 
@@ -673,7 +675,7 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
 \caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
 \end{wrapfigure}
 
-    Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $\mathcal{S}_t$ is initialized to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $\mathcal{S}_t$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
+    Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $\mathcal{S}_t$ is initialized to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building the tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $\mathcal{S}_t$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
 
 \vspace{-0.5cm}
 
@@ -818,7 +820,7 @@ The algorithm of labeling an interleaving tree is presented in Algorithm \ref{al
 
 \end{algorithm}
 
-Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \se,\ce}$. The set $\mathit{Var}$ is a subset of the domain of $\mathcal{S}_t$, where $\mathcal{S}_t$ is represented by the value in a node $N_d$, $\se$ is a prefix composed of events represented by edges from the root to $N_d$, and $\ce$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
+Actually, each node $N_d$ of an interleaving tree together with all of its out-edges corresponds to a data race $\mathsf{D} = \pair{\mathit{Var}, \se,\ce}$. The set $\mathit{Var}$ is a subset of the domain of $\mathcal{S}_t$, where $\mathcal{S}_t$ is represented by the value in a node $N_d$ (e.g., Fig.~\ref{fig:interleavingtreeofpairsnapshot}), $\se$ is a prefix composed of events represented by edges from the root to $N_d$, and $\ce$ contains all events $e$ each corresponding to an out-edge of $N_d$. Therefore, we can uniquely identify a data race by a node.
 
 \begin{myTheo}[Identifying CDRS]\label{theo:idenfycdrs}
     A CDRS is equivalent to a subset of nodes in a root-to-leaf path, satisfying a regular expression form
@@ -856,7 +858,7 @@ and $G$-node, which corresponds to the expression in the theorem.
 
 
 \begin{example}
-Take a look at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree according to Definition \ref{def:nodelabel}, resulting in a labeled tree presented in Fig. \ref{fig:labeledinterleavingtreepss}.  As we can see, the thickened path with a red leaf is non-linearizable, the nodes on which include a CDRS. The CDRS is shown by the sequence of yellow nodes, in the form of $\mathit{W_gW_gW_gW_gW_gG}$, which is accepted by the regular expression in Theorem \ref{theo:idenfycdrs}.
+Take a look at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree according to Definition \ref{def:nodelabel}, and get a labeled tree in Fig. \ref{fig:labeledinterleavingtreepss}.  As we can see, the thickened path with a red leaf is non-linearizable, the nodes on which include a CDRS. The CDRS is shown by the sequence of yellow nodes, in the form of $\mathit{W_gW_gW_gW_gW_gG}$, which is accepted by the regular expression in Theorem \ref{theo:idenfycdrs}.
 
 \end{example}
 
@@ -943,9 +945,8 @@ In addition to PairSnapShot, we also do experiments on many other concurrent obj
 
 
 \subsection{Evaluation}
-We evaluate our tool by 6 test cases either from prior work or from real applications.
-The concurrent data structures and how the violations are caused have been introduced in last section. 
-In our experiments, all the concurrent objects are executed by two threads, and the operations being tested with initial states of 
+We evaluate our tool by 6 test cases either from prior work or from real applications as Section~\ref{sec:benchmarks} introduced.
+In our experiments, all the concurrent objects are executed by two threads, and the operations being tested, initial states of 
 each concurrent object and arguments are listed in Columns 2-3 of Table \ref{tab:result}. 
 %The CDRSes founded by our tool are presented in Column 4 of Table \ref{tab:result}.
 
@@ -956,15 +957,15 @@ each concurrent object and arguments are listed in Columns 2-3 of Table \ref{tab
 
 %In Table \ref{tab:result}, Column 1 lists the concurrent objects introduced in Section \ref{sec:benchmarks}. Column 2 and 3 introduce the settings of our test cases, in which all test cases are small-scale but sufficient to trigger linearizability faults.
 
-The node sequence patterns which are found based on the labeled interleaving tree is listed in Column 4 of Table \ref{tab:result}. 
-As we present before, these patterns exactly correspond to the CDRSes of each test case, and here we got some conclusions from this experimental results:
+The node sequence patterns found based on the labeled interleaving tree are listed in Column 4 of Table \ref{tab:result}. 
+As we present before, these patterns exactly correspond to the CDRSes of each test case, and here we got some conclusions from the experimental results:
 \begin{itemize}
 \item All the patterns follow the form of regular expression in Theorem \ref{theo:idenfycdrs}. 
 \item Most of the test cases end with a $G$-node, and \textit{SimpleList} shows us a sequence ending with a $BG$-node.
 \item We can see the case where not only one CDRS exists. 
 \end{itemize}
 
-Column 5 lists the relating source code corresponding to the CDRSes. The source code is acquired from the events participating in the CDRSes, and facilitates the bug repair a lot. For example, we can repair the linearizability faults in \textit{LockFreeList} by transforming \texttt{attemptMark} into \texttt{compareAndSet}, while there also exist other situations, such as \textit{PairSnapShot}, where we cannot point out exactly the modification of which instructions would lead the object linearizable, since all the data races participate in the CDRSes.
+Column 5 lists the relating source code corresponding to the CDRSes. The source code is acquired from the events participating in the CDRSes, and facilitates the bug repair. For example, we can repair the linearizability faults in \textit{LockFreeList} by transforming \texttt{attemptMark} into \texttt{compareAndSet}, while there also exist other situations, such as \textit{PairSnapShot}, where we cannot point out exactly the modification of which instructions would lead the object linearizable, since all the data races participate in the CDRSes.
 
 %Sometimes the source code is the position we should modify when we repair the linearizability faults such as \texttt{attemptMark} in \textit{LockFreeList}, but there also exist other situations, such as \textit{PairSnapShot}, where we cannot point out exactly the source code that leads the object to a non-linearizable state, since all data races participate in the CDRS.
 
@@ -976,7 +977,7 @@ Column 5 lists the relating source code corresponding to the CDRSes. The source 
 \section{Conclusion}\label{sec:conclusion}
 This paper proposes the notion of \textit{critical data race sequence} (\textit{CDRS}) that characterizes the root causes of linearizability faults based on a fine-grained trace model. A CDRS is a set of data races that are decisive to trigger linearizability faults. Therefore, the existence of a CDRS implies that a concurrent execution has potential to be non-linearizable. We also present a labeled interleaving tree model to support automated identification of CDRS. A tool called FGVT is then developed to automatically identify CDRSes and localize the causes of linearizability faults. Experiments have well demonstrated its effectiveness and efficiency.
 
-This work reveals the pattern of the data races that are decisive on the linearizability of a trace. These data races can be mapped to certain parts of the source code. It would be interesting to establish a stronger relationship between CDRSes and the source code for the sake of bug analysis and repair.
+This work reveals the pattern of the data races that are decisive on the linearizability of a trace. These data races can be mapped to certain parts of the source code. In the future work, it would be interesting to establish a stronger relationship between CDRSes and the source code for the sake of bug analysis and repair.
 
 \section*{Acknowledgements}\label{sec:acknowledgement}
 
