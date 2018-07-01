@@ -17,7 +17,8 @@
 \usepackage{todonotes}
 \usepackage{braket}
 \usepackage[misc]{ifsym}
-%\usepackage{times}
+\usepackage{times}
+\frenchspacing
 %\captionsetup{compatibility=false}
 
 
@@ -67,7 +68,7 @@
 % an abbreviated paper title here
 %
 \author{Yang Chen\inst{1,2} \and
-Zhenya Zhang\inst{3}\thanks{The work was partially done when the author was a student at the Institute of Software, Chinese Academy of Sciences} \and
+Zhenya Zhang\inst{3}\thanks{The work was partially done when the author was a student at the Institute of Software, Chinese Academy of Sciences.} \and
 Peng Wu\inst{1,2} \textsuperscript{(\Letter)} \and
 Yu Zhang\inst{1,2}}
 %
@@ -77,7 +78,7 @@ Yu Zhang\inst{1,2}}
 %
 \institute{{State Key Laboratory of Computer Science\\Institute of Software, Chinese Academy of Sciences}\and
 University of Chinese Academy of Sciences\and
-National Institute of Informatics
+National Institute of Informatics, Tokyo, Japan
 }
 %
 \maketitle              % typeset the header of the contribution
@@ -172,7 +173,6 @@ This paper aims at linearizability faults in fine-grained traces. It present a n
 
 \noindent\textbf{\textit{Organization.}} The rest of the paper is organized as follows. Section \ref{sec:motivatingeg} presents an example to illustrate our motivation. Section \ref{sec:fgtracemodel} introduces our fine-grained trace model. Section \ref{sec:criticaldataraces} presents the key notion of CDRS based on our fine-grained trace model. Section \ref{sec:intertree} shows the labeled interleaving tree model, and the patterns of CDRSes. Section \ref{sec:implementation} reports the implementation and experiments about our prototype tool FGVT. Section \ref{sec:conclusion} concludes the paper with future work.
 
-\vspace{-0.2cm}
 
 \section{Motivating Example}\label{sec:motivatingeg}
 
@@ -195,9 +195,9 @@ A label ${t:\langle v_0,v_1\rangle}$ indicates that at the moment $t$,  \texttt{
   The operation \texttt{read} on Thread 2 returns a value $\mathtt{\pair{1,2}}$,
   which is not consistent with value of any moment. 
   
-    \begin{wrapfigure}[14]{r}{0.4\textwidth}
+    \begin{wrapfigure}[14]{r}{0.45\textwidth}
 \centering
-
+\vspace{-0.7cm}
   %  \begin{small}
 % \vspace{-0.8cm}
  %       \begin{verbatim}
@@ -297,7 +297,6 @@ Here, our focus is not on how to find this fine-grained executing order, but to 
 \end{figure}
 
 
-\vspace{-1cm}
 
 \begin{figure}[!ht]
 \centering
@@ -392,7 +391,6 @@ Here, our focus is not on how to find this fine-grained executing order, but to 
 \end{figure}
 
 
-\vspace{-0.8cm}
 
 \section{Preliminary}\label{sec:fgtracemodel}
 
@@ -449,13 +447,11 @@ Note that this definition speaks only complete traces, neglecting the existence 
 Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requirements 1 and 2 in Definition \ref{def:linearizability} with respect to the coarse-grained trace shown in Fig~\ref{fig:psscoarsetrace}. However, neither of them satisfies the correctness criteria of \textit{PairSnapShot}, by which the $\mathtt{read}$ operation should not return $\pair{1,2}$, so that neither of them belongs to the specification set of \textit{PairSnapShot}. Therefore we can say that the coarse-grained trace in Fig.~\ref{fig:psscoarsetrace} is non-linearizable.
 \end{example}
 
-\vspace{-0.5cm}
 
 \begin{figure}
 \centering
 %\setlength{\unitlength}{0.5cm}
 \includegraphics[width = 3.5in]{5seqs.pdf}
-\vspace{-0.2cm}
   %  \begin{picture}(17.5,5)
    % \begin{footnotesize}
 %	\put(0,4.5){$1: \mathtt{read\to \pair{1,2}}$\quad $\mathtt{write(0,2)}$\quad $\mathtt{write(1,2)}$ \quad$\mathtt{write(1,1)}$\quad $\mathtt{write(0,1)}$}
@@ -472,7 +468,6 @@ Fig.~\ref{fig:accounttwoseqtraces} shows 5 sequential traces that satisfy requir
     \caption{Five possible sequential traces but none of them satisfies the criterion of PairSnapShot}\label{fig:accounttwoseqtraces}
 \end{figure}
 
-\vspace{-1cm}
 
 \subsection{Fine-grained trace model}\label{sec:finegraintm}
 
@@ -482,7 +477,7 @@ In the fine-grained trace model,  the symbol set $E$ has other subsets of events
 \begin{itemize}
   \item $\ewrite$ contains symbols that represent the \textit{memory writing} events. An event of memory writing is represented as $wr(addr,v)^{\left\langle o,t\right\rangle}$ $(wr \in \ewrite)$, where $addr$ is the memory location to be modified to a value $v$;
   \item $\eread$ contains symbols that represent the \textit{memory reading} events. An event of memory reading is represented as $rd(addr)^{\left\langle o,t\right\rangle}$ $(rd \in \eread)$, where $addr$ is the memory location to be read;
-  \item $\ecas$ contains symbols that represent the \textit{atomic primitive}, such as \textit{compare-and-swap} (\textit{CAS}) in modern architecture. A \textit{CAS} event can be represented as $cas(addr, v_e, v_n)^{\left\langle o,t\right\rangle}$ $(cas \in \ecas)$, where $addr$ represents a memory location, $v_e$ and $v_n$ are two values. The function of this atomic primitive is that if the value at $addr$ equals to $v_e$, it will be updated to $v_n$ and return $\mathtt{true}$, otherwise it would not do anything but return $\mathtt{false}$.
+  \item $\ecas$ contains symbols that represent some \textit{atomic primitives}, such as \textit{compare-and-swap} (\textit{CAS}), in the modern architecture. A \textit{CAS} event can be represented as $cas(addr, v_e, v_n)^{\left\langle o,t\right\rangle}$ $(cas \in \ecas)$, where $addr$ represents a memory location, $v_e$ and $v_n$ are two values. The functionality of this atomic primitive is that if the value at $addr$ equals to $v_e$, it will be updated to $v_n$ and return $\mathtt{true}$, otherwise it would do nothing but return $\mathtt{false}$.
   %\item $\mathsf{OAI}$ contains symbols that represent other atomic instructions, such as \textit{double-compare-and-swap} (\textit{DCAS}). All these events can be represented as $oai(Arg)^{\left\langle o,t\right\rangle}$ $oai\in \mathsf{OAI}$
 \end{itemize}
 \noindent Similarly, in this paper $\ewrite, \eread, \ecas$ also represent the corresponding sets of events. Let $\mathsf{M} = \ewrite\cup\eread\cup\ecas$, events $e$ such that $e\in \mathsf{M}$ are called \textit{memory access events}.
@@ -498,11 +493,11 @@ We define a projection $\mathcal{F}_{c}$ that maps a fine-grained trace $S_f$ to
   \item $\mathcal{F}_c(S_f)$ is well-formed;
  % \item The operation identifier of any memory access event in $S_f$ is consistent with that of one pair of  matching invocation/response events  in $S_f$, i.e.,
 %      $\forall e_m\exists e_o.(\mathtt{op}(e_m)= \mathtt{op}(e_o))$, where $e_m$ is a memory access event and $e_o$ is either of a pair of matching invocation/response events in $S_f$.
-\item Let $e_m(\mathit{Arg})^{\left\langle o,t\right\rangle}$ be a memory access event in $S_f$. The thread identifier $o$ of $e_m$ must occur in a pair of matching invocation and response events $c(\mathit{Arg})^{\left\langle o,t\right\rangle}, r(\mathit{Arg})^{\left\langle o,t\right\rangle}$ in $S_f$.
+\item Let $e_m(\mathit{Arg})^{\left\langle o,t\right\rangle}$ be a memory access event in $S_f$ with thread identifier $o$. Then $o$ must occur in a pair of matching invocation and response events $c(\mathit{Arg})^{\left\langle o,t\right\rangle}$ and $r(\mathit{Arg})^{\left\langle o,t\right\rangle}$ in $S_f$.
  % \item All the memory access events with operation identifier $o$ lie between the consistent matching invocation/response event pair with the operation identifier $o$, i.e.,
    %   $\forall e.((\mathtt{op}(e)=o)\to(c\prec e\prec r))$, where $e$ is a memory access event in $S_f$, and $c,r$ are matching invocation and response events with thread identifier $o$.
   %For any matching events $c\in \ecall$ and $r\in \eresp$ such that $\mathtt{op}(c)=\mathtt{op}(r)=o$, then: \\ $\forall e\in \mathsf{M}.( \mathtt{op}(e) = o \longrightarrow c\prec e \prec r)$.
-  \item Let $c(\mathit{Arg})^{\left\langle o,t\right\rangle}, r(\mathit{Arg})^{\left\langle o,t\right\rangle}$ be a pair of matching invocation and response events in $S_f$. 
+  \item Let $c(\mathit{Arg})^{\left\langle o,t\right\rangle}, r(\mathit{Arg})^{\left\langle o,t\right\rangle}$ be a pair of matching invocation and response events in $S_f$ with thread identifier $o$. 
   All the memory access events $e$ with thread identifier $o$ in $S_f$ should satisfy $c\prec e\prec r$.
 \end{itemize}
 \noindent We claim that all fine-grained traces in this paper are well-formed.
@@ -522,7 +517,6 @@ The linearizability of $S_f$ depends on the linearizability of $\mathcal{F}_c(S_
 
 We define a predicate $\mathcal{L}_n$ to denote the linearizability of $S_f$, i.e., if $S_f$ is linearizable, then $\mathcal{L}_n(S_f)$ is true.
 
-\vspace{-0.2cm}
 \section{Critical Data Race Sequence}\label{sec:criticaldataraces}
 
 
@@ -645,7 +639,8 @@ $\mathit{\se_i}\cdot e_{i2} \subseteq_{pre} S_{f2}$.
 \end{myDef}
 
 
-Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a program $\mathbb{P}$ may lead to different linearizability faults, what we focus on is just the linearizability of the trace and thus we treat all linearizability faults identical in the sense that they all lead the trace non-linearizable.
+Intuitively, a \textit{CDRS} contains all the HLDRs which are decisive to the linearizability of the trace. Note that although different \textit{CDRS}es in a program $\mathbb{P}$ may lead to different linearizability faults, we only focus on the consequence
+that linearizability is violated and thus we treat all linearizability faults identical in the sense that they all lead the trace non-linearizable.
 
 \begin{example} 
 
@@ -653,7 +648,6 @@ Take a look at the example of a HLDR $\mathsf{D}  = \left\langle \mathit{Var}, \
 
 \end{example}
 
-\vspace{-0.2cm}
 
 
 \section{Identify CDRS on Interleaving Tree}\label{sec:intertree}
@@ -667,17 +661,16 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
     An \textit{Interleaving Tree} of $\mathbb{P}$ is a tree, where each node corresponds to a state, and each edge corresponds to a memory access event. A subtree rooted at node $N_d$ is represented as $\mathcal{T}ree(N_d)$. The set of the leaves of the tree is represented as $N_{lf}$.
 \end{myDef}
 
-\begin{wrapfigure}[15]{c}{0.6\textwidth}
+%\begin{wrapfigure}[15]{c}{0.6\textwidth}
+\begin{figure}
 \centering
-\vspace{-0.2cm}
-\includegraphics[height = 2.2in, width = 2.8in]{pssinttree.pdf}
-\vspace{-0.2cm}
+\includegraphics[width = 3in]{pssinttree.pdf}
 \caption{Interleaving tree of PairSnapShot}\label{fig:interleavingtreeofpairsnapshot}
-\end{wrapfigure}
+%\end{wrapfigure}
+\end{figure}
 
     Algorithm \ref{algo:forminttree} presents how to build an interleaving tree recursively. In line 1, $\mathcal{S}_t$ is initialized to the initial state of the object. The set $\mathit{enS}$ in line 2 initially contains the events which are minimal w.r.t. $\prec$ over the events with the same thread identifier, and thus the number of elements in $\mathit{enS}$ is the same as the number of threads. Line 3-11 is the process of building the tree. Firstly, a node is built as line 4 shows. Then, events in $\mathit{enS}$ are traversed, each accessing a memory location $addr$ as line 5 shows. When an event is accessed, a corresponding edge is built as in line 6. Then the state is updated by substituting the value of $addr$ with $v_n$ as in line 7. Here note that if $e$ is an $\eread$ event, $\mathcal{S}_t$ will not be modified. And $\mathit{enS}$ is updated as line 8 shows, where $e$ will be replaced by its successor w.r.t. $\prec$ over the events with the same thread identifier. Finally, the updated $\mathcal{S}_t$ and $\mathit{enS}$ are applied as arguments to another invocation of \textsc{BuildTree} as line 9 shows to build a subtree recursively.
 
-\vspace{-0.5cm}
 
 
 \begin{algorithm}
@@ -697,7 +690,6 @@ Fig.~\ref{fig:psscoarsetrace}, $\mathcal{S}_t(\mathtt{d}[0]) = 1$, $\mathcal{S}_
     \end{algorithmic}
 \end{algorithm}
 
-\vspace{-0.8cm}
 
 \begin{example} 
 According to Algorithm \ref{algo:forminttree}, we build the interleaving tree of the concurrent program $\mathbb{P}$ corresponding to Fig.\ref{fig:psscoarsetrace} and present it in Fig.\ref{fig:interleavingtreeofpairsnapshot}. Each node represents a state, and each edge represents a memory access event.
@@ -753,7 +745,6 @@ Based on the categories of subtrees, a node $N_d$ can be labeled as one of the f
 
 \begin{figure}[!ht]
 \centering
-\vspace{-0.5cm}
 \includegraphics[width = 4.7in]{label.pdf}
 \caption{Labels of nodes}\label{fig:labellabelnodes}
 \end{figure}
@@ -864,13 +855,13 @@ Take a look at Fig.~\ref{fig:interleavingtreeofpairsnapshot}.  We label the tree
 
 
 %Note that since the object considers its two memory locations (\texttt{d[0]} and \texttt{d[1]}) as a whole, $\mathit{Var}$ of each data race is composed of the two memory locations rather than one separately. That is reasonable, because an access to any memory location is actually an access to the array \texttt{d} as a whole, during which competitions between two threads exist.
-\begin{wrapfigure}[17]{r}{0.6\textwidth}
+%\begin{wrapfigure}[17]{r}{0.6\textwidth}
+\begin{figure}
 \centering
-\vspace{-0.5cm}
-\includegraphics[height = 2.5in, width = 3in]{psslabeltree.pdf}
+\includegraphics[width = 3in]{psslabeltree.pdf}
 \caption{Labeled interleaving tree}\label{fig:labeledinterleavingtreepss}
-\end{wrapfigure}
-
+%\end{wrapfigure}
+\end{figure}
 
 
 
