@@ -949,14 +949,18 @@ each concurrent object and arguments are listed in Columns 2-3 of Table \ref{tab
 %In Table \ref{tab:result}, Column 1 lists the concurrent objects introduced in Section \ref{sec:benchmarks}. Column 2 and 3 introduce the settings of our test cases, in which all test cases are small-scale but sufficient to trigger linearizability faults.
 
 The node sequence patterns found based on the labeled interleaving tree are listed in Column 4 of Table \ref{tab:result}. 
-As we present before, these patterns exactly correspond to the CDRSes of each test case, and here we got some conclusions from the experimental results:
+As we expect, these patterns exactly correspond to the CDRSes of each test case, and here we got some conclusions from the experimental results:
 \begin{itemize}
 \item All the patterns follow the form of regular expression in Theorem \ref{theo:idenfycdrs}. 
 \item Most of the test cases end with a $G$-node, and \textit{SimpleList} shows us a sequence ending with a $BG$-node.
 \item We can see the case where not only one CDRS exists. 
 \end{itemize}
 
-Column 5 lists the relating source code corresponding to the CDRSes. The source code is acquired from the events participating in the CDRSes, and facilitates the bug repair. For example, we can repair the linearizability faults in \textit{LockFreeList} by transforming \texttt{attemptMark} into \texttt{compareAndSet}, while there also exist other situations, such as \textit{PairSnapShot}, where we cannot point out exactly the modification of which instructions would lead the object linearizable, since all the data races participate in the CDRSes.
+In this experiments, the executing time for each example is acceptable. That is because the inputs for the experiments are all small traces containing less than 5 operations 
+obtained by the coarse-grained localization tool \cite{DBLP:conf/seke/ZhangWZ17}  as we introduced in Section~\ref{sec:introduction}, though such tree structures suffer from the state space explosion problem.
+
+Column 5 lists the source code in the original program that causes the data races in the CDRSes. The reason we project the CDRSes to the source code is that we try to locate the critical data races on the code level and find approaches to repair them.
+For example, we can repair the linearizability faults in \textit{LockFreeList} by transforming \texttt{attemptMark} into \texttt{compareAndSet}. However, this is not always feasible such as the situation in \textit{PairSnapShot}, where we cannot point out exactly modifying which lines can lead the object linearizable. Despite such situations, our approach manages to give  helpful information on the location of critical data races that triggering linearizability faults  and further facilitates bug repair.
 
 %Sometimes the source code is the position we should modify when we repair the linearizability faults such as \texttt{attemptMark} in \textit{LockFreeList}, but there also exist other situations, such as \textit{PairSnapShot}, where we cannot point out exactly the source code that leads the object to a non-linearizable state, since all data races participate in the CDRS.
 
