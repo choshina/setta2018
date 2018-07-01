@@ -61,7 +61,7 @@
 
 \begin{document}
 %
-\title{Interleaving-tree Based Fine-grained Linearizability Fault Localization}
+\title{Interleaving-tree Based Fine-grained\\ Linearizability Fault Localization}
 %
 \titlerunning{Interleaving-tree Based Fine-grained Linearizability Fault Localization}
 % If the paper title is too long for the running head, you can set
@@ -960,7 +960,7 @@ In this experiments, the executing time for each example is acceptable. That is 
 obtained by the coarse-grained localization tool \cite{DBLP:conf/seke/ZhangWZ17}  as we introduced in Section~\ref{sec:introduction}, though such tree structures suffer from the state space explosion problem.
 
 Column 5 lists the source code in the original program that causes the data races in the CDRSes. The reason we project the CDRSes to the source code is that we try to locate the critical data races on the code level and find approaches to repair them.
-For example, we can repair the linearizability faults in \textit{LockFreeList} by transforming \texttt{attemptMark} into \texttt{compareAndSet}. However, this is not always feasible such as the situation in \textit{PairSnapShot}, where we cannot point out exactly modifying which lines can lead the object linearizable. Despite such situations, our approach manages to give  helpful information on the location of critical data races that triggering linearizability faults  and further facilitates bug repair.
+For example, we can repair the linearizability faults in \textit{LockFreeList} by transforming \texttt{attemptMark} into \texttt{compareAndSet}. However, this is not always feasible such as the situation in \textit{PairSnapShot}, where we cannot point out exactly modifying which lines can lead the object linearizable. Despite such situations, our approach manages to give  helpful information on the location of critical data races that triggering linearizability faults  and further facilitate bug repair.
 
 %Sometimes the source code is the position we should modify when we repair the linearizability faults such as \texttt{attemptMark} in \textit{LockFreeList}, but there also exist other situations, such as \textit{PairSnapShot}, where we cannot point out exactly the source code that leads the object to a non-linearizable state, since all data races participate in the CDRS.
 
